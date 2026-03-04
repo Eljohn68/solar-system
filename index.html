@@ -6,6 +6,7 @@
 <title>Cosmic Odyssey ULTRA ✨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="Untitled design.svg" type="image/svg+xml">
 <style>
 :root {
   --gold:#ffd700; --neon:#00f7ff; --violet:#a855f7; --pink:#f472b6;
@@ -17,16 +18,13 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Space Grotesk',sans-serif;background:#000008;color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
-
-/* CANVAS LAYER */
+ 
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
-
-/* CURSOR */
+ 
 #cursor{position:fixed;width:22px;height:22px;border:2px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .12s,height .12s,opacity .2s;mix-blend-mode:difference;}
 #cursor.clicking{width:14px;height:14px;}
 #cur-trail{position:fixed;width:7px;height:7px;background:var(--neon);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .06s ease;}
-
-/* HUD OVERLAY */
+ 
 #hud{position:fixed;top:0;left:0;right:0;z-index:300;pointer-events:none;}
 #score-badge{position:fixed;top:14px;right:14px;z-index:301;font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;color:var(--gold);background:rgba(0,0,0,0.85);border:1.5px solid rgba(255,215,0,0.45);padding:6px 14px;border-radius:24px;box-shadow:0 0 20px rgba(255,215,0,0.35),inset 0 0 15px rgba(255,215,0,0.04);white-space:nowrap;pointer-events:none;}
 #xp-ring-wrap{position:fixed;top:50px;right:14px;z-index:301;width:190px;pointer-events:none;}
@@ -43,13 +41,11 @@ body{font-family:'Space Grotesk',sans-serif;background:#000008;color:var(--text)
 .ach-badge{width:38px;height:38px;background:#080820;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem;box-shadow:0 0 14px rgba(255,215,0,0.55);cursor:help;opacity:0;animation:badgeIn .6s cubic-bezier(.34,1.56,.64,1) forwards, badgePulse 2.5s .6s infinite alternate;}
 @keyframes badgeIn{from{opacity:0;transform:scale(0) rotate(-180deg);}to{opacity:1;transform:scale(1) rotate(0);}}
 @keyframes badgePulse{0%{box-shadow:0 0 8px rgba(255,215,0,0.3);}100%{box-shadow:0 0 22px rgba(255,215,0,0.9);}}
-
-/* ORACLE */
+ 
 #oracle{position:fixed;bottom:120px;right:20px;z-index:301;background:rgba(0,0,18,0.95);border:1.5px solid var(--neon);padding:11px 15px;border-radius:18px;max-width:240px;font-size:0.74rem;line-height:1.55;box-shadow:0 0 25px rgba(0,247,255,0.3);cursor:pointer;transition:all .25s;backdrop-filter:blur(15px);}
 #oracle:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(0,247,255,0.55);}
 #oracle strong{color:var(--neon);font-family:'Orbitron',monospace;font-size:0.64rem;letter-spacing:.05em;}
-
-/* NAV */
+ 
 nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(0,0,8,0.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,215,0,0.18);padding:0.5rem 0;}
 nav ul{display:flex;justify-content:center;flex-wrap:wrap;gap:2px;list-style:none;}
 nav a{font-family:'Orbitron',monospace;font-size:0.62rem;font-weight:700;color:var(--dim);text-decoration:none;padding:0.38rem 0.8rem;border-radius:2rem;transition:all .25s;letter-spacing:.05em;position:relative;overflow:hidden;}
@@ -57,26 +53,22 @@ nav a::before{content:'';position:absolute;inset:0;background:linear-gradient(13
 nav a span{position:relative;z-index:1;}
 nav a:hover,nav a.active{color:#000;}
 nav a:hover::before,nav a.active::before{opacity:1;}
-
-/* MAIN */
+ 
 main{position:relative;z-index:10;padding:5.5rem 1.5rem 5rem;max-width:980px;margin:0 auto;}
 .page{display:none;animation:pageIn .4s ease;}
 .page.active{display:block;}
 @keyframes pageIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-
-/* TYPE */
+ 
 h1{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,5vw,2.9rem);font-weight:900;text-align:center;margin-bottom:.7rem;background:linear-gradient(135deg,var(--gold),#fff 50%,var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:titleShimmer 7s ease-in-out infinite;background-size:200%;}
 @keyframes titleShimmer{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
 h2{font-family:'Orbitron',monospace;font-size:clamp(.85rem,3vw,1.2rem);color:var(--gold);margin:2rem 0 .8rem;text-align:center;letter-spacing:.04em;}
 h3{font-family:'Orbitron',monospace;font-size:.85rem;color:var(--neon);margin:1rem 0 .4rem;}
 p{line-height:1.85;font-size:.9rem;color:var(--text);margin-bottom:.7rem;}
 .pill{font-family:'Orbitron',monospace;font-size:.52rem;background:linear-gradient(90deg,var(--violet),var(--pink));color:#fff;padding:3px 9px;border-radius:20px;letter-spacing:.08em;box-shadow:0 0 10px rgba(168,85,247,.4);vertical-align:middle;}
-
-/* GLASS */
+ 
 .glass{background:var(--glass);border:1px solid var(--border);border-radius:18px;padding:1.4rem;backdrop-filter:blur(12px);transition:all .3s;}
 .glass:hover{border-color:rgba(255,215,0,.45);box-shadow:0 0 28px rgba(255,215,0,.1);}
-
-/* HOME GRID */
+ 
 .home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.8rem 0;}
 .home-card{background:var(--glass);border:1px solid var(--border);border-radius:22px;padding:1.8rem 1rem;text-align:center;cursor:pointer;transition:all .4s cubic-bezier(.34,1.56,.64,1);backdrop-filter:blur(10px);position:relative;overflow:hidden;}
 .home-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 120%,rgba(255,215,0,.22),transparent 68%);opacity:0;transition:opacity .4s;}
@@ -85,8 +77,7 @@ p{line-height:1.85;font-size:.9rem;color:var(--text);margin-bottom:.7rem;}
 .home-card span{display:block;font-size:2.8rem;margin-bottom:.5rem;transition:transform .3s;}
 .home-card:hover span{transform:scale(1.25) rotate(12deg);}
 .home-card strong{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--gold);letter-spacing:.05em;}
-
-/* BUTTONS */
+ 
 button{background:linear-gradient(135deg,rgba(255,215,0,.92),#ffe45e);color:#000;border:none;padding:.62rem 1.3rem;margin:.25rem;border-radius:2rem;cursor:pointer;font-weight:700;font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:.04em;transition:all .22s;box-shadow:0 4px 16px rgba(255,215,0,.3);position:relative;overflow:hidden;}
 button:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 28px rgba(255,215,0,.6);}
 button:active{transform:translateY(0) scale(.97);}
@@ -96,20 +87,17 @@ button.violet{background:linear-gradient(135deg,var(--violet),var(--pink));color
 button.ghost{background:transparent;border:1px solid var(--border);color:var(--dim);}
 button.ghost:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,215,0,.06);}
 button.danger{background:linear-gradient(135deg,#ff4444,#ff8800);color:#fff;}
-
-/* QUIZ */
+ 
 .quiz-box{text-align:center;margin:1.8rem 0;padding:1.4rem;background:rgba(0,247,255,.04);border:1px solid rgba(0,247,255,.15);border-radius:18px;}
 .quiz-box p{color:var(--neon);font-family:'Orbitron',monospace;font-size:.78rem;margin-bottom:1rem;}
 .q-result{margin-top:.8rem;min-height:1.4rem;font-weight:700;font-family:'Orbitron',monospace;font-size:.82rem;}
 .correct{color:#4ade80;}.wrong{color:#f87171;}
-
-/* TABLES */
+ 
 .data-table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.84rem;}
 .data-table th{background:rgba(255,215,0,.1);color:var(--gold);font-family:'Orbitron',monospace;font-size:.67rem;padding:.85rem .75rem;border:1px solid rgba(255,215,0,.18);letter-spacing:.05em;}
 .data-table td{padding:.75rem;border:1px solid rgba(255,255,255,.07);text-align:center;transition:background .2s;}
 .data-table tr:hover td{background:rgba(255,215,0,.09);cursor:pointer;}
-
-/* FLIP CARDS */
+ 
 .flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:1rem;margin:1.4rem 0;}
 .flip-card{height:136px;perspective:800px;cursor:pointer;}
 .flip-inner{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d;}
@@ -117,8 +105,7 @@ button.danger{background:linear-gradient(135deg,#ff4444,#ff8800);color:#fff;}
 .flip-front,.flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:.9rem;text-align:center;font-size:.8rem;}
 .flip-front{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.28);font-family:'Orbitron',monospace;color:var(--gold);}
 .flip-back{background:rgba(0,0,40,.9);border:1px solid rgba(0,247,255,.28);transform:rotateY(180deg);color:var(--text);line-height:1.6;}
-
-/* ACCORDION */
+ 
 details.acc{background:rgba(0,0,20,.65);border:1px solid rgba(255,255,255,.1);border-radius:13px;margin:.55rem 0;overflow:hidden;transition:all .3s;}
 details.acc[open]{border-color:rgba(255,215,0,.4);}
 details.acc summary{padding:.95rem 1.2rem;cursor:pointer;font-family:'Orbitron',monospace;font-size:.76rem;color:var(--gold);letter-spacing:.05em;list-style:none;}
@@ -126,11 +113,9 @@ details.acc summary::-webkit-details-marker{display:none;}
 details.acc summary::before{content:'▶ ';color:var(--neon);font-size:.66rem;}
 details.acc[open] summary::before{content:'▼ ';}
 details.acc p{padding:0 1.2rem 1rem;font-size:.87rem;line-height:1.85;}
-
-/* CANVAS */
+ 
 canvas{display:block;margin:1.4rem auto;border:1.5px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(0,0,10,.65);box-shadow:0 0 32px rgba(255,215,0,.12);touch-action:none;max-width:100%;}
-
-/* STAGE CARDS */
+ 
 .stages{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45rem;margin:1.4rem 0;}
 .stage-card{background:rgba(0,0,22,.75);border:1px solid rgba(255,215,0,.2);border-radius:16px;padding:.9rem;text-align:center;cursor:pointer;transition:all .3s;min-width:110px;}
 .stage-card:hover,.stage-card.sel{border-color:var(--gold);background:rgba(255,215,0,.08);box-shadow:0 0 22px rgba(255,215,0,.28);transform:translateY(-5px);}
@@ -139,15 +124,13 @@ canvas{display:block;margin:1.4rem auto;border:1.5px solid rgba(255,255,255,.13)
 .stage-num{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--neon);}
 .stage-arrow{font-size:1.3rem;color:var(--gold);}
 .stage-detail{padding:1.1rem;background:rgba(0,247,255,.04);border:1px solid rgba(0,247,255,.14);border-radius:13px;margin:1rem 0;min-height:76px;line-height:1.85;font-size:.87rem;}
-
-/* PROGRESS */
+ 
 .prog-item{display:flex;align-items:center;gap:1rem;margin:.55rem 0;}
 .prog-label{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--dim);width:110px;flex-shrink:0;}
 .prog-bg{flex:1;height:7px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.34,1.56,.64,1);}
 .prog-pct{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);width:34px;text-align:right;}
-
-/* MEMORY */
+ 
 .mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin:1.4rem 0;max-width:420px;margin-left:auto;margin-right:auto;}
 .mem-card{height:76px;perspective:600px;cursor:pointer;}
 .mem-inner2{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
@@ -156,13 +139,11 @@ canvas{display:block;margin:1.4rem auto;border:1.5px solid rgba(255,255,255,.13)
 .mem-f{background:rgba(0,0,42,.85);border:1px solid rgba(255,255,255,.13);font-size:1.3rem;}
 .mem-b{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.4);transform:rotateY(180deg);font-size:1.5rem;}
 .mem-card.matched .mem-b{background:rgba(74,222,128,.2);border-color:var(--green);}
-
-/* SOLAR CONTROLS */
+ 
 .solar-ctrl{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:1rem;margin:.8rem 0;font-family:'Orbitron',monospace;font-size:.73rem;}
 .solar-ctrl input[type=range]{accent-color:var(--gold);}
 #planet-panel{background:rgba(0,0,20,.88);border:1px solid var(--border);border-radius:16px;padding:1.1rem;margin:1rem 0;min-height:78px;backdrop-filter:blur(12px);}
-
-/* WEIGHT CALC */
+ 
 .weight-calc{background:rgba(0,0,20,.72);border:1px solid var(--border);border-radius:18px;padding:1.4rem;margin:1.4rem 0;text-align:center;}
 .weight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:.7rem;margin-top:1.1rem;}
 .wp{background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:.8rem .4rem;cursor:pointer;transition:all .3s;}
@@ -170,8 +151,7 @@ canvas{display:block;margin:1.4rem auto;border:1.5px solid rgba(255,255,255,.13)
 .wp .wp-e{font-size:1.7rem;display:block;margin-bottom:.3rem;}
 .wp .wp-n{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--gold);}
 .wp .wp-r{font-size:.76rem;color:var(--neon);margin-top:.3rem;}
-
-/* PLANET COMPARE */
+ 
 .compare-tool{background:rgba(0,0,20,.72);border:1px solid var(--border);border-radius:18px;padding:1.4rem;margin:1.4rem 0;}
 .compare-sel{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin:.9rem 0;}
 select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var(--gold);padding:.55rem .9rem;border-radius:12px;font-family:'Orbitron',monospace;font-size:.66rem;cursor:pointer;outline:none;}
@@ -181,8 +161,7 @@ select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var
 .cp-card .cpn{font-family:'Orbitron',monospace;font-size:.72rem;color:var(--gold);margin:.25rem 0;}
 .cp-stat{font-size:.76rem;margin:.18rem 0;color:var(--dim);}
 .cmp-vs{font-family:'Orbitron',monospace;font-size:1.4rem;color:var(--violet);text-align:center;}
-
-/* DRAG DROP */
+ 
 .sort-area{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;min-height:80px;padding:1rem;background:rgba(0,0,20,.55);border:2px dashed rgba(255,215,0,.2);border-radius:16px;}
 .drop-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;width:64px;height:64px;border-radius:12px;border:1px dashed rgba(255,255,255,.14);font-family:'Orbitron',monospace;font-size:.48rem;color:var(--dim);text-align:center;gap:2px;}
 .drop-zone span{font-size:1.1rem;}
@@ -192,8 +171,7 @@ select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var
 .drag-planet{display:flex;flex-direction:column;align-items:center;justify-content:center;width:64px;height:64px;border-radius:12px;cursor:grab;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);font-family:'Orbitron',monospace;font-size:.48rem;color:var(--gold);gap:2px;transition:all .2s;user-select:none;}
 .drag-planet:hover{transform:scale(1.12);box-shadow:0 0 16px rgba(255,215,0,.4);}
 .drag-planet span{font-size:1.2rem;}
-
-/* CONSTELLATION */
+ 
 .color-dots{display:flex;gap:9px;justify-content:center;margin:.9rem 0;}
 .color-dot{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;}
 .color-dot:hover,.color-dot.sel{border-color:#fff;transform:scale(1.25);box-shadow:0 0 12px currentColor;}
@@ -202,15 +180,13 @@ select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var
 .fact-card:hover{border-color:var(--gold);background:rgba(255,215,0,.08);transform:translateY(-4px);}
 .fact-card span{display:block;font-size:1.6rem;margin-bottom:.35rem;}
 .fact-card strong{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);}
-
-/* CONST QUIZ */
+ 
 .cq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:.9rem 0;}
 .cq-btn{background:rgba(0,0,32,.75);border:1px solid rgba(255,255,255,.14)!important;color:var(--text)!important;font-size:.7rem!important;text-align:left;padding:.62rem .85rem!important;border-radius:12px!important;margin:0!important;}
 .cq-btn:hover{border-color:var(--gold)!important;background:rgba(255,215,0,.07);}
 .cq-btn.ok{background:rgba(74,222,128,.2)!important;border-color:var(--green)!important;color:var(--green)!important;}
 .cq-btn.fail{background:rgba(248,113,113,.14)!important;border-color:#f87171!important;color:#f87171!important;}
-
-/* T/F GAME */
+ 
 .tf-game{background:rgba(0,0,20,.72);border:1px solid rgba(0,247,255,.2);border-radius:18px;padding:1.4rem;margin:1.4rem 0;text-align:center;}
 .tf-stmt{font-size:.98rem;color:var(--text);line-height:1.85;margin:1.1rem 0;min-height:3rem;}
 .tf-btns{display:flex;justify-content:center;gap:1rem;margin:.9rem 0;}
@@ -219,8 +195,7 @@ select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var
 .tf-dots{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:.7rem 0;}
 .tf-dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.14);transition:background .3s;}
 .tf-dot.t{background:var(--green);}.tf-dot.f{background:#f87171;}
-
-/* MORSE / ALIEN */
+ 
 .morse-game{background:rgba(0,0,20,.72);border:1px solid rgba(168,85,247,.3);border-radius:18px;padding:1.4rem;margin:1.4rem 0;text-align:center;}
 .morse-sig{font-family:'Orbitron',monospace;font-size:1.55rem;letter-spacing:.2em;color:var(--violet);text-align:center;margin:1rem 0;min-height:2.5rem;}
 #morse-opts{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin:.9rem 0;}
@@ -228,27 +203,23 @@ select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var
 .morse-opt:hover{background:rgba(168,85,247,.25)!important;}
 .morse-opt.ok{background:rgba(74,222,128,.2)!important;border-color:var(--green)!important;color:var(--green)!important;}
 .morse-opt.fail{background:rgba(248,113,113,.14)!important;border-color:#f87171!important;color:#f87171!important;}
-
-/* GALAXY BUILDER */
+ 
 .gal-controls{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;background:rgba(0,0,20,.55);border:1px solid var(--border);border-radius:16px;padding:1rem;}
 .gb-row{display:flex;flex-direction:column;gap:4px;}
 .gb-lbl{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--neon);}
 .gb-row input{accent-color:var(--neon);}
-
-/* ROCKET */
+ 
 .rocket-stage{display:flex;justify-content:center;align-items:flex-end;height:120px;position:relative;overflow:hidden;margin:.9rem 0;}
 #rocket{font-size:3.8rem;position:relative;display:inline-block;transition:transform 3.2s cubic-bezier(.25,.1,.25,1);}
 .fire{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:15px;height:32px;background:linear-gradient(to top,transparent,#ff8800,#ffff00);border-radius:50% 50% 0 0;animation:fireFlick .11s infinite alternate;opacity:0;transition:opacity .3s;}
 @keyframes fireFlick{0%{transform:translateX(-50%) scaleY(.8);}100%{transform:translateX(-50%) scaleY(1.35);}}
-
-/* TIMELINE */
+ 
 .timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:.9rem;margin:1.4rem 0;}
 .tl-event{background:rgba(0,0,20,.72);border:1px solid rgba(0,247,255,.2);border-radius:16px;padding:1rem;text-align:center;cursor:pointer;transition:all .3s;}
 .tl-event:hover{border-color:var(--neon);background:rgba(0,247,255,.08);transform:translateY(-6px);box-shadow:0 0 22px rgba(0,247,255,.22);}
 .tl-event span{display:block;font-family:'Orbitron',monospace;font-size:1.1rem;color:var(--neon);margin-bottom:.35rem;}
 .tl-event strong{font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);}
-
-/* SPEED QUIZ */
+ 
 .sq-wrap{background:rgba(0,0,20,.72);border:1px solid rgba(255,215,0,.2);border-radius:18px;padding:1.4rem;margin:1.4rem 0;}
 .sq-timer-bg{height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;margin-bottom:.9rem;}
 .sq-timer-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:4px;transition:width .12s linear;}
@@ -259,17 +230,14 @@ select{background:rgba(0,0,32,.92);border:1px solid rgba(255,215,0,.3);color:var
 .sq-opt.correct{background:rgba(74,222,128,.22);border-color:var(--green);color:var(--green);}
 .sq-opt.wrong{background:rgba(248,113,113,.14);border-color:#f87171;color:#f87171;}
 .sq-score{font-family:'Orbitron',monospace;font-size:.72rem;color:var(--gold);text-align:center;margin-top:.7rem;}
-
-/* SCRAMBLE */
+ 
 .scramble{background:rgba(0,0,20,.72);border:1px solid var(--border);border-radius:18px;padding:1.4rem;margin:1.4rem 0;}
 .scr-word{font-family:'Orbitron',monospace;font-size:2rem;color:var(--gold);text-align:center;letter-spacing:.28em;margin:1rem 0;text-shadow:0 0 22px rgba(255,215,0,.45);}
 input[type=text]{background:rgba(0,0,22,.85);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;padding:9px 13px;font-family:'Space Mono',monospace;font-size:.84rem;outline:none;transition:border-color .2s;}
 input[type=text]:focus{border-color:var(--gold);}
-
-/* TRIVIA */
+ 
 #trivia-opts button{background:rgba(0,0,32,.75);border:1px solid rgba(255,255,255,.14);color:var(--text);font-size:.68rem;padding:.48rem .82rem;border-radius:12px;margin:.18rem;}
-
-/* MATCH */
+ 
 .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0;}
 .match-col{display:flex;flex-direction:column;gap:.45rem;}
 .match-item{background:rgba(0,0,20,.72);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.65rem 1rem;cursor:pointer;font-size:.78rem;transition:all .2s;text-align:center;}
@@ -277,64 +245,53 @@ input[type=text]:focus{border-color:var(--gold);}
 .match-item.matched{border-color:var(--green);background:rgba(74,222,128,.1);color:var(--green);}
 .match-item.bad{border-color:#f87171;background:rgba(248,113,113,.1);animation:shake .4s ease;}
 @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
-
-/* NEBULA CLOUD */
+ 
 .neb-cloud{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin:1.4rem 0;padding:1rem;background:rgba(0,0,12,.55);border-radius:16px;border:1px solid rgba(168,85,247,.2);}
 .neb-word{font-family:'Orbitron',monospace;cursor:pointer;border-radius:20px;padding:.28rem .75rem;transition:all .3s;font-size:.7rem;border:1px solid transparent;}
 .neb-word:hover{transform:scale(1.18) rotate(-3deg);}
-
-/* ARCADE */
+ 
 .arcade-wrap{background:#000012;border:2px solid rgba(0,247,255,.3);border-radius:18px;padding:1rem;margin:1.4rem 0;text-align:center;box-shadow:0 0 35px rgba(0,247,255,.12);}
 .arcade-hud{display:flex;justify-content:space-between;font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);padding:.35rem .5rem;margin-bottom:.35rem;}
 #invaders-canvas{cursor:none;border-radius:10px;}
-
-/* STAR CLASSIFIER */
+ 
 .star-creator{text-align:center;padding:1.4rem;background:rgba(0,0,0,.45);border-radius:16px;border:1px solid var(--border);}
 .star-creator label{font-size:.8rem;display:block;margin:.75rem 0 .28rem;}
 .star-creator input[type=range]{width:70%;vertical-align:middle;accent-color:var(--gold);}
 #classified-star{font-size:5rem;margin:1.1rem 0;transition:all .6s;}
-
-/* TELESCOPE */
+ 
 .scope-wrap{position:relative;border-radius:50%;overflow:hidden;width:250px;height:250px;margin:1.4rem auto;border:3px solid rgba(255,255,255,.18);box-shadow:0 0 44px rgba(0,247,255,.28);cursor:crosshair;}
 .scope-lens{position:absolute;inset:0;background:radial-gradient(circle at var(--lx,50%) var(--ly,50%),transparent 30px,rgba(0,0,12,.94) 66px);pointer-events:none;}
-
-/* EMOJI SCALE */
+ 
 .emoji-scale{display:flex;align-items:flex-end;justify-content:center;gap:.45rem;margin:1.4rem 0;flex-wrap:wrap;}
 .scale-item{display:flex;flex-direction:column;align-items:center;gap:.28rem;cursor:pointer;transition:all .3s;}
 .scale-item:hover{transform:scale(1.12);}
 .scale-label{font-family:'Orbitron',monospace;font-size:.5rem;color:var(--dim);text-align:center;}
-
-/* SOUNDBOARD */
+ 
 .soundboard{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin:1.4rem 0;}
 .snd-btn{background:rgba(0,0,22,.88)!important;border:1px solid rgba(168,85,247,.4)!important;color:var(--violet)!important;font-size:.66rem!important;padding:.48rem .95rem!important;border-radius:12px!important;margin:0!important;}
 .snd-btn:hover{background:rgba(168,85,247,.15)!important;border-color:var(--violet)!important;transform:translateY(-2px);}
 .snd-btn.playing{border-color:var(--neon)!important;color:var(--neon)!important;background:rgba(0,247,255,.1)!important;animation:sndPulse .5s ease infinite alternate;}
 @keyframes sndPulse{from{box-shadow:0 0 5px rgba(0,247,255,.2);}to{box-shadow:0 0 22px rgba(0,247,255,.65);}}
-
-/* WARP */
+ 
 .warp-wrap{display:flex;justify-content:center;margin:.9rem 0;}
 #warp-btn{background:linear-gradient(135deg,#080824,#18003c)!important;border:2px solid var(--violet)!important;color:var(--violet)!important;font-size:.76rem!important;padding:.72rem 1.7rem!important;transition:all .3s;}
 #warp-btn:hover{background:linear-gradient(135deg,var(--violet),var(--pink))!important;color:#fff!important;box-shadow:0 0 44px rgba(168,85,247,.6)!important;}
-
-/* GALLERY */
+ 
 .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:1rem;margin:1.4rem 0;}
 .gallery figure{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s;}
 .gallery figure:hover{transform:scale(1.05);border-color:var(--gold);box-shadow:0 0 22px rgba(255,215,0,.2);}
 .gallery img{width:100%;height:150px;object-fit:cover;display:block;}
 .gallery figcaption{padding:.45rem;text-align:center;font-size:.7rem;color:var(--dim);}
-
-/* HOF */
+ 
 .hof-list{max-height:175px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;}
 .hof-entry{display:flex;justify-content:space-between;align-items:center;padding:.48rem .75rem;border-bottom:1px solid rgba(255,255,255,.05);font-size:.78rem;}
 .hof-name{color:var(--neon);}
 .hof-pts{color:var(--gold);font-family:'Orbitron',monospace;font-size:.66rem;}
-
-/* SPEED METER */
+ 
 .speed-meter{display:flex;align-items:center;gap:.75rem;justify-content:center;font-family:'Orbitron',monospace;font-size:.7rem;margin:.45rem 0;}
 .speed-dial{width:68px;height:68px;border-radius:50%;border:3px solid rgba(255,215,0,.3);position:relative;display:flex;align-items:center;justify-content:center;background:rgba(0,0,22,.88);}
 .speed-needle{position:absolute;width:3px;height:22px;background:var(--gold);bottom:50%;left:calc(50% - 1.5px);transform-origin:bottom center;border-radius:2px;transition:transform .3s ease;}
-
-/* MODAL */
+ 
 #info-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;align-items:center;justify-content:center;}
 #info-modal.open{display:flex;animation:fadeIn .25s ease;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -345,8 +302,7 @@ input[type=text]:focus{border-color:var(--gold);}
 .close-modal{position:absolute;top:1rem;right:1.2rem;font-size:1.8rem;color:var(--dim);cursor:pointer;transition:color .2s;}
 .close-modal:hover{color:#fff;}
 .demo-icon{margin:.9rem 0;text-align:center;font-size:2.8rem;}
-
-/* LIGHTBOX */
+ 
 #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;align-items:center;justify-content:center;}
 #lightbox.open{display:flex;}
 #lb-img{max-width:90vw;max-height:80vh;border-radius:12px;border:2px solid rgba(255,215,0,.3);}
@@ -354,14 +310,11 @@ input[type=text]:focus{border-color:var(--gold);}
 #lb-prev,#lb-next{position:absolute;background:rgba(255,215,0,.14);border:1px solid rgba(255,215,0,.3)!important;color:var(--gold);font-size:1.4rem;padding:.48rem .95rem!important;border-radius:50%!important;top:50%;transform:translateY(-50%);}
 #lb-prev{left:18px;}#lb-next{right:18px;}
 
-/* STAR NAMING */
 .star-naming{background:rgba(0,0,20,.72);border:1px solid rgba(255,215,0,.2);border-radius:18px;padding:1.4rem;margin:1.4rem 0;text-align:center;}
 .star-name-row{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;margin:.7rem 0;}
 
-/* BLACKHOLE VISUALIZER */
 .bh-viz{text-align:center;background:rgba(0,0,0,.7);border:1px solid rgba(168,85,247,.3);border-radius:18px;padding:1.4rem;margin:1.4rem 0;}
 
-/* PLANET GRAVITY RACE */
 .race-track{background:rgba(0,0,12,.88);border:1px solid rgba(0,247,255,.25);border-radius:18px;padding:1.2rem;margin:1.4rem 0;overflow:hidden;}
 .race-lane{display:flex;align-items:center;gap:.7rem;margin:.4rem 0;height:36px;}
 .race-planet{font-size:1.2rem;flex-shrink:0;width:28px;text-align:center;}
@@ -369,12 +322,10 @@ input[type=text]:focus{border-color:var(--gold);}
 .race-bar{height:100%;border-radius:8px;transition:width 0.05s linear;width:0%;}
 .race-label{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--dim);width:55px;text-align:right;flex-shrink:0;}
 
-/* RANDOM FACT */
 .fact-box{font-style:italic;text-align:center;margin:1.8rem 0;padding:1.3rem;background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.18);border-radius:18px;cursor:pointer;transition:all .3s;line-height:1.85;position:relative;overflow:hidden;}
 .fact-box::before{content:'✨';position:absolute;top:10px;right:13px;}
 .fact-box:hover{background:rgba(255,215,0,.11);box-shadow:0 0 32px rgba(255,215,0,.18);transform:scale(1.02);}
 
-/* RESPONSIVE */
 @media(max-width:600px){
   main{padding:5rem 1rem 4rem;}
   h1{font-size:1.4rem;}
@@ -387,11 +338,6 @@ input[type=text]:focus{border-color:var(--gold);}
 </style>
 </head>
 <body>
-    <audio id="bg-music" loop>
-  <source src="marc.mp3" type="audio/mpeg">
-</audio>
-
-<button id="music-btn" onclick="toggleMusic()" style="position:fixed;bottom:20px;right:20px;z-index:400;border-radius:50%;width:44px;height:44px;padding:0;font-size:1.2rem;">🔇</button>
 <canvas id="bg-canvas"></canvas>
 <div id="cursor"></div>
 <div id="cur-trail"></div>
@@ -416,7 +362,7 @@ input[type=text]:focus{border-color:var(--gold);}
 </nav>
 
 <main>
-<!-- ═══════════ HOME ═══════════ -->
+
 <div id="home" class="page active">
   <h1>Cosmic Odyssey ✦ ULTRA</h1>
   <p style="text-align:center;color:var(--dim);max-width:520px;margin:0 auto 1rem;">The ultimate interactive space adventure. Earn XP, unlock achievements, and explore the cosmos like never before!</p>
@@ -457,7 +403,6 @@ input[type=text]:focus{border-color:var(--gold);}
   </div>
 </div>
 
-<!-- ═══════════ STARS ═══════════ -->
 <div id="stars" class="page">
   <h1>Stars <span class="pill">INTERACTIVE</span></h1>
   <p style="text-align:center">Giant balls of hot plasma undergoing nuclear fusion. Click, classify, and explore!</p>
@@ -546,7 +491,6 @@ input[type=text]:focus{border-color:var(--gold);}
     <div class="scale-item" onclick="addScore(5,mx,my)"><div style="font-size:4.6rem;">💥</div><span class="scale-label">Supergiant</span></div>
   </div>
 
-  <!-- TRUE/FALSE -->
   <h2>✅ Star True or False!</h2>
   <div class="tf-game" id="star-tf-game">
     <div class="tf-stmt" id="star-tf-stmt">Press Start!</div>
@@ -568,7 +512,6 @@ input[type=text]:focus{border-color:var(--gold);}
   <div style="text-align:center;"><button onclick="speakPage('stars')">🔊 Narrate Stars</button></div>
 </div>
 
-<!-- ═══════════ CONSTELLATIONS ═══════════ -->
 <div id="constellations" class="page">
   <h1>Constellations <span class="pill">DRAW + QUIZ</span></h1>
   <div class="color-dots">
@@ -631,7 +574,6 @@ input[type=text]:focus{border-color:var(--gold);}
   <div style="text-align:center;margin-top:1rem;"><button onclick="speakPage('constellations')">🔊 Narrate</button></div>
 </div>
 
-<!-- ═══════════ GALAXIES ═══════════ -->
 <div id="galaxies" class="page">
   <h1>Galaxies 🌌 <span class="pill">BUILD + COLLIDE</span></h1>
   <p style="text-align:center">A galaxy is a massive gravitationally-bound system of stars, gas, dust, and dark matter.</p>
@@ -703,7 +645,6 @@ input[type=text]:focus{border-color:var(--gold);}
   <div style="text-align:center;"><button onclick="speakPage('galaxies')">🔊 Narrate</button></div>
 </div>
 
-<!-- ═══════════ SOLAR SYSTEM ═══════════ -->
 <div id="solarsystem" class="page">
   <h1>Solar Systems <span class="pill">LIVE ORBITS</span></h1>
   <p style="text-align:center">Eight planets orbit our Sun! Click any planet for details.</p>
@@ -766,7 +707,6 @@ input[type=text]:focus{border-color:var(--gold);}
   <div style="text-align:center;"><button onclick="speakPage('solarsystem')">🔊 Narrate</button></div>
 </div>
 
-<!-- ═══════════ EXPEDITIONS ═══════════ -->
 <div id="expeditions" class="page">
   <h1>Human Expeditions <span class="pill">LAUNCH</span></h1>
   <div class="rocket-stage">
@@ -839,12 +779,10 @@ input[type=text]:focus{border-color:var(--gold);}
   <div style="text-align:center;"><button onclick="speakPage('expeditions')">🔊 Narrate</button></div>
 </div>
 
-<!-- ═══════════ GAMES HUB ═══════════ -->
 <div id="games" class="page">
   <h1>🎮 Space Games Hub <span class="pill">MEGA EDITION</span></h1>
   <p style="text-align:center">7 unique mini-games. Play them all, unlock achievements, and dominate the cosmos!</p>
 
-  <!-- GAME 1: Asteroid Defender -->
   <h2>👾 Asteroid Defender!</h2>
   <p style="text-align:center;font-size:.82rem;color:var(--dim);">Move with mouse/touch. Click/tap to shoot! Defend Earth!</p>
   <div class="arcade-wrap">
@@ -861,7 +799,6 @@ input[type=text]:focus{border-color:var(--gold);}
     <div id="inv-result" style="font-family:'Orbitron',monospace;font-size:.8rem;text-align:center;margin-top:.45rem;min-height:1.3rem;color:var(--neon);"></div>
   </div>
 
-  <!-- GAME 2: Cosmic Snake -->
   <h2>🐍 Cosmic Snake!</h2>
   <p style="text-align:center;font-size:.82rem;color:var(--dim);">Use arrow keys or WASD to control your snake. Eat stardust to grow!</p>
   <div class="arcade-wrap">
@@ -878,7 +815,6 @@ input[type=text]:focus{border-color:var(--gold);}
     <div id="snake-result" style="font-family:'Orbitron',monospace;font-size:.8rem;text-align:center;margin-top:.45rem;min-height:1.3rem;color:var(--neon);"></div>
   </div>
 
-  <!-- GAME 3: Planet Match -->
   <h2>🔗 Planet to Fact Match!</h2>
   <p style="text-align:center;font-size:.82rem;color:var(--dim);">Match each planet to its fact!</p>
   <div class="match-grid">
@@ -888,7 +824,6 @@ input[type=text]:focus{border-color:var(--gold);}
   <div id="match-result" style="font-family:'Orbitron',monospace;font-size:.78rem;text-align:center;margin:.75rem 0;min-height:1.3rem;"></div>
   <div style="text-align:center;"><button onclick="initMatch()">🔄 New Round</button></div>
 
-  <!-- GAME 4: Quiz Blitz -->
   <h2>🎯 Quiz Blitz — 20 Questions!</h2>
   <div class="sq-wrap" id="blitz-wrap">
     <div class="sq-timer-bg"><div class="sq-timer-fill" id="blitz-timer" style="width:100%;"></div></div>
@@ -898,13 +833,11 @@ input[type=text]:focus{border-color:var(--gold);}
     <div style="text-align:center;margin-top:.75rem;"><button class="violet" onclick="startBlitz()">🎯 Start Blitz!</button></div>
   </div>
 
-  <!-- GAME 5: Nebula Word Cloud -->
   <h2>🌫️ Nebula Word Explorer</h2>
   <p style="text-align:center;font-size:.82rem;color:var(--dim);">Click any space term to learn about it!</p>
   <div class="neb-cloud" id="neb-cloud"></div>
   <div id="neb-def" style="padding:.9rem;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.2);border-radius:12px;margin:.75rem 0;min-height:46px;font-size:.87rem;line-height:1.85;"></div>
 
-  <!-- GAME 6: Epic True or False -->
   <h2>🚀 Epic Space True or False</h2>
   <div class="tf-game">
     <div class="tf-stmt" id="games-tf-stmt">Press Start!</div>
@@ -918,7 +851,6 @@ input[type=text]:focus{border-color:var(--gold);}
     <div style="text-align:center;margin-top:.75rem;"><button onclick="initTF('games')">▶ Start / Reset</button></div>
   </div>
 
-  <!-- GAME 7: Comet Catch -->
   <h2>☄️ Comet Catch!</h2>
   <p style="text-align:center;font-size:.82rem;color:var(--dim);">Click/tap comets before they escape! Don't click the red asteroids!</p>
   <div class="arcade-wrap">
@@ -937,7 +869,6 @@ input[type=text]:focus{border-color:var(--gold);}
 </div>
 </main>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLB()">
   <span id="lb-close">×</span>
   <button id="lb-prev" onclick="event.stopPropagation();changeLB(-1)">&lt;</button>
@@ -945,7 +876,6 @@ input[type=text]:focus{border-color:var(--gold);}
   <button id="lb-next" onclick="event.stopPropagation();changeLB(1)">&gt;</button>
 </div>
 
-<!-- MODAL -->
 <div id="info-modal" onclick="closeModal()">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="close-modal" onclick="closeModal()">×</span>
@@ -954,23 +884,13 @@ input[type=text]:focus{border-color:var(--gold);}
     <p id="modal-text"></p>
   </div>
 </div>
+  
+  <audio autoplay loop hidden>
+  <source src="AMONG US - OST - MAIN THEME SONG [HQ].mp3" type="audio/mpeg" />
+</audio>
 
 <script>
 
-    function toggleMusic() {
-  const audio = document.getElementById('bg-music');
-  const btn = document.getElementById('music-btn');
-  if (audio.paused) {
-    audio.play();
-    btn.textContent = '🎵';
-  } else {
-    audio.pause();
-    btn.textContent = '🔇';
-  }
-}
-// ═══════════════════════════════════════════════════
-//  GLOBALS
-// ═══════════════════════════════════════════════════
 let mx=0,my=0,tx=0,ty=0;
 const CFG={XP_PER_LEVEL:200,MAX_VISITS:10,COMBO_MS:2500};
 let cosmicScore=0,level=1,comboCount=0,comboTimer=null;
@@ -978,18 +898,12 @@ const sectionVisits={stars:0,constellations:0,galaxies:0,solarsystem:0,expeditio
 const unlockedAch=new Set();
 const achEmoji={'Quiz Master':'🎯','Star Scientist':'🔬','Memory Master':'🃏','Constellation Creator':'🧩','Supernova Witness':'💥','Galaxy Collider':'💫','Solar System Master':'🪐','Space Expert':'🧑‍🚀','First Launch':'🚀','Speed Demon':'⚡','Defender':'🛡️','Match Master':'🔗','Scramble Pro':'🔤','Alien Decoder':'👽','Level 5':'🏅','Level 10':'🥇','Comet Catcher':'☄️','Snake Master':'🐍'};
 
-// ═══════════════════════════════════════════════════
-//  CURSOR
-// ═══════════════════════════════════════════════════
 const cursorEl=document.getElementById('cursor'),trailEl=document.getElementById('cur-trail');
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursorEl.style.left=mx+'px';cursorEl.style.top=my+'px';});
 document.addEventListener('mousedown',()=>cursorEl.classList.add('clicking'));
 document.addEventListener('mouseup',()=>cursorEl.classList.remove('clicking'));
 (function animCursor(){tx+=(mx-tx)*.12;ty+=(my-ty)*.12;trailEl.style.left=tx+'px';trailEl.style.top=ty+'px';requestAnimationFrame(animCursor);})();
 
-// ═══════════════════════════════════════════════════
-//  BACKGROUND CANVAS — LIVE STARFIELD + NEBULA
-// ═══════════════════════════════════════════════════
 (function(){
   const c=document.getElementById('bg-canvas');
   c.width=window.innerWidth;c.height=window.innerHeight;
@@ -1000,18 +914,15 @@ document.addEventListener('mouseup',()=>cursorEl.classList.remove('clicking'));
   buildStars();
   let t=0;
   function drawBG(){ctx.fillStyle='rgba(0,0,8,.55)';ctx.fillRect(0,0,c.width,c.height);
-    // Nebula blobs
+ 
     if(t%2===0){const nc=[`rgba(60,0,120,.012)`,`rgba(0,60,120,.01)`,`rgba(120,0,60,.008)`];nc.forEach((col,i)=>{const g=ctx.createRadialGradient(c.width*.2+Math.sin(t*.001+i)*200,c.height*.3+Math.cos(t*.0008+i)*150,0,c.width*.2+Math.sin(t*.001+i)*200,c.height*.3+Math.cos(t*.0008+i)*150,350);g.addColorStop(0,col);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,c.width,c.height);});}
     stars.forEach(s=>{s.a+=s.da;if(s.a<0||s.a>1)s.da*=-1;const hsl=s.sat>0?`hsla(${s.hue},${s.sat}%,90%,${s.a})`:`rgba(255,255,255,${s.a})`;ctx.fillStyle=hsl;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();});
-    // Meteor
+    
     if(Math.random()<.004){const mx2=Math.random()*c.width*.6,my2=Math.random()*c.height*.4;const len=80+Math.random()*60;const g=ctx.createLinearGradient(mx2,my2,mx2+len,my2+len);g.addColorStop(0,'transparent');g.addColorStop(1,'rgba(255,255,255,.7)');ctx.strokeStyle=g;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(mx2,my2);ctx.lineTo(mx2+len,my2+len);ctx.stroke();}
     t++;requestAnimationFrame(drawBG);}
   drawBG();
 })();
 
-// ═══════════════════════════════════════════════════
-//  SCORE + XP + COMBO
-// ═══════════════════════════════════════════════════
 function saveState(){try{localStorage.setItem('cosmicUltra',JSON.stringify({cosmicScore,level,sectionVisits,achs:[...unlockedAch]}));}catch(e){}}
 function loadState(){try{const raw=localStorage.getItem('cosmicUltra');if(!raw)return;const s=JSON.parse(raw);cosmicScore=s.cosmicScore||0;level=s.level||1;if(s.sectionVisits)Object.assign(sectionVisits,s.sectionVisits);updateScoreDisplay();updateXP();updateProgressBars();(s.achs||[]).forEach(n=>{if(!unlockedAch.has(n)){unlockedAch.add(n);addBadge(n);}});}catch(e){}}
 function addBadge(name){const b=document.createElement('div');b.className='ach-badge';b.innerHTML=achEmoji[name]||'🏆';b.title=name;document.getElementById('achievements-strip').appendChild(b);refreshAchShowcase();}
@@ -1034,87 +945,51 @@ function toast(t){const el=document.getElementById('discovery-toast');el.textCon
 function resetProgress(){cosmicScore=0;level=1;comboCount=0;Object.keys(sectionVisits).forEach(k=>sectionVisits[k]=0);updateXP();updateProgressBars();updateScoreDisplay();toast('Reset!');localStorage.removeItem('cosmicUltra');}
 function updateProgressBars(){[['stars','stars'],['const','constellations'],['gal','galaxies'],['solar','solarsystem'],['exp','expeditions'],['games','games']].forEach(([id,key])=>{const pct=Math.min(100,Math.round((sectionVisits[key]/CFG.MAX_VISITS)*100));const bar=document.getElementById('prog-'+id);const lbl=document.getElementById('pct-'+id);if(bar)bar.style.width=pct+'%';if(lbl)lbl.textContent=pct+'%';});}
 
-// ═══════════════════════════════════════════════════
-//  CONFETTI PARTICLE SYSTEM
-// ═══════════════════════════════════════════════════
 let confWrap=null;
 function launchConfetti(){if(confWrap)confWrap.remove();confWrap=document.createElement('div');confWrap.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;';document.body.appendChild(confWrap);const emojis=['🌟','✨','⭐','☄️','🪐','🚀','💫','🌙','🔭','🌌'];for(let i=0;i<60;i++){const c=document.createElement('div');c.style.cssText=`position:absolute;left:${Math.random()*100}%;top:-32px;font-size:${18+Math.random()*22}px;pointer-events:none;`;c.textContent=emojis[Math.floor(Math.random()*emojis.length)];confWrap.appendChild(c);const dur=1900+Math.random()*1600;c.animate([{transform:'translateY(0) rotate(0) scale(1)',opacity:1},{transform:`translateY(${window.innerHeight+70}px) rotate(${Math.random()*720}deg) scale(.4)`,opacity:0}],{duration:dur,easing:'ease-in',delay:Math.random()*400});setTimeout(()=>c.remove(),dur+500);}setTimeout(()=>confWrap?.remove(),3800);}
 
-// ═══════════════════════════════════════════════════
-//  NAVIGATION
-// ═══════════════════════════════════════════════════
 let solarAF=null,galAF=null,invAF=null,snakeAF=null,cometAF=null,bhAF=null;
 function stopAllAF(){[solarAF,galAF,invAF,snakeAF,cometAF,bhAF].forEach(id=>{if(id)cancelAnimationFrame(id);});solarAF=galAF=invAF=snakeAF=cometAF=bhAF=null;invRunning=false;snakeRunning=false;cometRunning=false;}
 function navigateTo(page){stopAllAF();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('active'));document.getElementById(page).classList.add('active');document.querySelector(`[data-page="${page}"]`)?.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});addScore(5,window.innerWidth/2,window.innerHeight/2);if(sectionVisits[page]!==undefined){sectionVisits[page]++;updateProgressBars();}if(page==='solarsystem'){startSolar();initPlanetSort();comparePlanets();calcWeights();buildRaceLanes();}if(page==='galaxies'){startGalSim();initBlackHole();}if(page==='constellations'){initConstCanvas();initCQ();}if(page==='expeditions'){initTrivia();nextScramble();}if(page==='stars'){initScopeViewer();classifyStar();initStarNameCanvas();}if(page==='games'){initMatch();buildNebCloud();initInvaders();initSnake();initComet();}}
 document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigateTo(a.dataset.page);}));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAllAF();});
 
-// ═══════════════════════════════════════════════════
-//  ORACLE
-// ═══════════════════════════════════════════════════
 const oracleLines=["Every atom in your body was forged in the heart of a dying star. You are stardust.","There are more stars in the universe than grains of sand on all Earth's beaches combined.","The Milky Way is on a collision course with Andromeda — in 4.5 billion years.","Time moves slower near a massive object. Near a black hole, time nearly stops.","The observable universe is 93 billion light-years wide — and expanding every second.","On the Moon, your footprints will remain for millions of years — no wind to erase them.","A neutron star packs the mass of the Sun into a sphere just 20km wide.","Voyager 1 has been travelling since 1977 and is now in interstellar space.","If the universe were 1 year old, humans only appeared in the last 17 seconds of December 31st.","Dark energy makes up 68% of the universe — and we have no idea what it is."];
 let oracleT;function askOracle(){const el=document.getElementById('oracle');const msg=oracleLines[Math.floor(Math.random()*oracleLines.length)];el.innerHTML=`🪐 <strong>Oracle:</strong> ${msg}`;addScore(5,window.innerWidth-140,90);toast('Oracle wisdom!');clearTimeout(oracleT);oracleT=setTimeout(()=>el.innerHTML=`🪐 <strong>Oracle:</strong> Tap for cosmic wisdom!`,9000);}
 
-// ═══════════════════════════════════════════════════
-//  RANDOM FACTS
-// ═══════════════════════════════════════════════════
 const spaceFacts=["A day on Venus is longer than a year on Venus.","Neutron stars are so dense a teaspoon would weigh billions of tons.","Jupiter's Great Red Spot has been raging for over 350 years.","Saturn's rings are mostly ice and only ~10 metres thick on average.","Voyager 1, launched in 1977, has left our solar system.","A pulsar can spin 716 times per second — faster than a blender.","Light from the Sun takes 8 minutes 20 seconds to reach Earth.","There are an estimated 2 trillion galaxies in the observable universe.","The Moon is slowly moving away from Earth at 3.8 cm per year.","Space is completely silent — sound needs a medium to travel through.","A year on Mercury is only 88 Earth days long.","The footprints left by Apollo astronauts will last millions of years."];
 function showRandomFact(){const el=document.getElementById('random-fact');el.textContent=spaceFacts[Math.floor(Math.random()*spaceFacts.length)];const r=el.getBoundingClientRect();addScore(10,r.x+100,r.y);toast('Random fact! +10');}
 
-// ═══════════════════════════════════════════════════
-//  QUIZ HELPERS
-// ═══════════════════════════════════════════════════
 function checkQ(elId,correct,correctAns){const el=document.getElementById(elId);el.className='q-result '+(correct?'correct':'wrong');el.textContent=correct?`✅ Correct!`:`❌ The answer is: ${correctAns}`;if(correct){addScore(20,window.innerWidth/2,window.innerHeight/2);unlockAch('Quiz Master');toast('Correct! +20');}}
 
-// ═══════════════════════════════════════════════════
-//  TRUE / FALSE
-// ═══════════════════════════════════════════════════
 const tfData={star:[{s:"The Sun is a G-type star.",a:true},{s:"Red stars are hotter than blue stars.",a:false},{s:"Betelgeuse is larger than our Sun.",a:true},{s:"The Sun will eventually become a red giant.",a:true},{s:"Sirius is the brightest star as seen from Earth.",a:true},{s:"Stars produce energy through nuclear fission.",a:false},{s:"A white dwarf is a stellar remnant.",a:true},{s:"The hottest stars are classified as type M.",a:false},{s:"Proxima Centauri is closest to Earth after the Sun.",a:true},{s:"A supernova can outshine an entire galaxy.",a:true}],gal:[{s:"The Milky Way is a barred spiral galaxy.",a:true},{s:"Andromeda is moving away from us.",a:false},{s:"Most of a galaxy's mass is visible stars.",a:false},{s:"The Milky Way has 100–400 billion stars.",a:true},{s:"Elliptical galaxies have spiral arms.",a:false},{s:"Sagittarius A* is a supermassive black hole.",a:true},{s:"Our galaxy will merge with Andromeda in 4.5 billion years.",a:true},{s:"IC 1101 is the smallest known galaxy.",a:false},{s:"Irregular galaxies have no defined shape.",a:true},{s:"Dwarf galaxies are the most common type.",a:true}],games:[{s:"Light travels at 299,792 km/s in a vacuum.",a:true},{s:"Mars has two moons.",a:true},{s:"Jupiter is smaller than Saturn.",a:false},{s:"The Great Red Spot on Jupiter is a storm.",a:true},{s:"Neptune was the first planet found with a telescope.",a:false},{s:"A lunar eclipse occurs when Earth's shadow covers the Moon.",a:true},{s:"Venus rotates in the same direction as most planets.",a:false},{s:"The ISS orbits Earth roughly every 90 minutes.",a:true},{s:"Saturn's rings are mostly ice and rock.",a:true},{s:"Sound can travel through space.",a:false},{s:"Pluto was reclassified as a dwarf planet in 2006.",a:true},{s:"The Sun is about halfway through its life.",a:true},{s:"Mercury is both closest to the Sun AND the hottest planet.",a:false},{s:"Astronauts on the ISS see ~16 sunrises per day.",a:true},{s:"Black holes emit no radiation whatsoever.",a:false}]};
 const tfState={};
 function initTF(key){tfState[key]={idx:0,score:0,data:[...tfData[key]].sort(()=>Math.random()-.5)};document.getElementById(key+'-tf-score').textContent='';updateTFDisplay(key);}
 function updateTFDisplay(key){const s=tfState[key];if(!s)return;const item=s.data[s.idx];if(!item){document.getElementById(key+'-tf-stmt').textContent=`Done! Score: ${s.score}/${s.data.length}`;document.getElementById(key+'-tf-score').innerHTML=`<span style="color:var(--gold)">Final: ${s.score}/${s.data.length} 🏆</span>`;if(s.score>=8)unlockAch('Quiz Master');return;}document.getElementById(key+'-tf-stmt').textContent=item.s;document.getElementById(key+'-tf-result').textContent='';const prog=document.getElementById(key+'-tf-progress');if(prog){prog.innerHTML='';for(let i=0;i<Math.min(s.data.length,15);i++){const d=document.createElement('div');d.className='tf-dot'+(i<s.idx?(s.data[i].ac?' t':' f'):'');prog.appendChild(d);}}}
 function answerTF(key,answer){const s=tfState[key];if(!s||s.idx>=s.data.length)return;const item=s.data[s.idx];const ok=item.a===answer;if(ok){s.score++;item.ac=true;document.getElementById(key+'-tf-result').innerHTML='<span class="correct">✅ Correct! +15</span>';addScore(15,mx,my);}else{item.ac=false;document.getElementById(key+'-tf-result').innerHTML=`<span class="wrong">❌ ${item.a?'TRUE':'FALSE'}!</span>`;}document.getElementById(key+'-tf-score').textContent=`Score: ${s.score}/${s.idx+1}`;s.idx++;setTimeout(()=>updateTFDisplay(key),900);}
 
-// ═══════════════════════════════════════════════════
-//  STAR STAGES
-// ═══════════════════════════════════════════════════
 const stageInfo={1:{title:"Nebula",text:"A vast cloud of gas (mostly hydrogen) and dust. Gravity slowly pulls material together, forming denser clumps. Temperature: around -260°C."},2:{title:"Protostar",text:"As material collapses it heats up and spins faster. A protostar glows from gravitational contraction. Fusion hasn't started yet."},3:{title:"Main Sequence",text:"When core temperature hits ~10 million°C, nuclear fusion ignites! Hydrogen fuses into helium. This phase lasts billions of years."},4:{title:"Red Giant",text:"When hydrogen is exhausted, the core contracts while outer layers expand — the star becomes a cool, enormous red giant."},5:{title:"Supernova / White Dwarf",text:"Massive stars explode as supernovae, leaving neutron stars or black holes. Smaller stars shed outer layers and leave a white dwarf."}};
 function selectStage(n){document.querySelectorAll('.stage-card').forEach(c=>c.classList.remove('sel'));document.querySelector(`[data-stage="${n}"]`).classList.add('sel');const d=stageInfo[n];document.getElementById('stage-detail').innerHTML=`<strong style="color:var(--gold);font-family:'Orbitron',monospace;">${d.title}</strong><br><br>${d.text}`;addScore(10,mx,my);toast(`Stage ${n}: ${d.title} +10`);}
 function playStarFormation(){let i=1;selectStage(i);const iv=setInterval(()=>{i++;if(i>5){clearInterval(iv);return;}selectStage(i);},1300);addScore(15,mx,my);}
 function startLifeCycleSim(){const canvas=document.getElementById('lifecycle-canvas');canvas.style.display='block';const ctx=canvas.getContext('2d');const stages=['Nebula','Protostar','Main Seq.','Red Giant','Supernova'];const colors=['#88aaff','#ffcc44','#ffee88','#ff6644','#ffffff'];const emojis=['🌫️','🌟','☀️','🔴','💥'];let s=0,glow=0;function draw(){ctx.fillStyle='#000011';ctx.fillRect(0,0,600,180);glow+=.05;for(let i=0;i<5;i++){const x=50+i*110,active=i===s;ctx.globalAlpha=active?1:.3;ctx.font=active?`${34+Math.sin(glow)*3}px serif`:'22px serif';ctx.textAlign='center';ctx.fillText(emojis[i],x,73);ctx.font=`${active?'bold ':''} ${active?11:9}px Orbitron,monospace`;ctx.fillStyle=colors[i];ctx.fillText(stages[i],x,105);if(active){ctx.globalAlpha=.5;ctx.beginPath();ctx.arc(x,66,28+Math.sin(glow)*2,0,Math.PI*2);ctx.strokeStyle=colors[i];ctx.lineWidth=2;ctx.stroke();}if(i<4){ctx.globalAlpha=.4;ctx.fillStyle='#aaa';ctx.font='18px serif';ctx.fillText('→',x+57,76);}ctx.globalAlpha=1;}}
 const iv=setInterval(()=>{s=(s+1)%5;draw();},900);draw();let lc=setInterval(draw,33);setTimeout(()=>{clearInterval(iv);clearInterval(lc);},6000);addScore(15,mx,my);unlockAch('Star Scientist');}
 
-// ═══════════════════════════════════════════════════
-//  STAR CLASSIFIER
-// ═══════════════════════════════════════════════════
 function classifyStar(){const t=parseInt(document.getElementById('temp-slider').value);const m=parseFloat(document.getElementById('mass-slider').value);document.getElementById('temp-val').textContent=t+' K';document.getElementById('mass-val').textContent=m.toFixed(1)+' M☉';let emoji='⚫',cls='Unknown',detail='';if(t<3700){emoji='🔴';cls='M-Type Red Dwarf';detail='Most common star. Lives trillions of years. Very dim.';}else if(t<5200){emoji='🟠';cls='K-Type Orange Dwarf';detail='Very long-lived. Great candidate for life-bearing planets.';}else if(t<6000){emoji='☀️';cls='G-Type Yellow Dwarf';detail='Like our Sun! Stable for ~10 billion years.';}else if(t<7500){emoji='🌟';cls='F-Type Yellow-White';detail='Slightly hotter and larger than the Sun.';}else if(t<10000){emoji='⚡';cls='A-Type White Star';detail='Bright and hot. Sirius is the most famous A-type.';}else if(t<30000){emoji='💎';cls='B-Type Blue-White';detail='Very luminous. Lives only 10–100 million years.';}else{emoji='🔵';cls='O-Type Blue Supergiant';detail='Rarest and hottest. Lives only a few million years.';}if(m>8&&t>10000){emoji='🌌';cls='Massive Blue Giant';detail='Extremely massive — destined for a supernova.';}if(m<0.3){emoji='🔴';cls='Red Dwarf';detail='Ultra-small and dim, but incredibly long-lived.';}document.getElementById('classified-star').textContent=emoji;document.getElementById('star-class').textContent=cls;document.getElementById('star-class-detail').textContent=detail;}
 const starTypeInfo={O:{title:'O-Type Star',emoji:'🔵',text:'Hottest, most luminous stars. Above 30,000 K. Lifespan: 1–3 million years.'},B:{title:'B-Type Star',emoji:'💎',text:'Hot blue-white stars. 10,000–30,000 K. Examples: Rigel, Spica.'},A:{title:'A-Type Star',emoji:'⚡',text:'White to blue-white. 7,500–10,000 K. Sirius is the brightest night sky star.'},F:{title:'F-Type Star',emoji:'🌟',text:'Yellow-white, 6,000–7,500 K. Examples: Procyon, Canopus.'},G:{title:'G-Type Star',emoji:'☀️',text:'Yellow stars like our Sun. 5,200–6,000 K. Live ~10 billion years.'},K:{title:'K-Type Star',emoji:'🟠',text:'Orange dwarfs, 3,700–5,200 K. Very long-lived. Examples: Arcturus.'},M:{title:'M-Type Star',emoji:'🔴',text:'Red dwarfs — most common (70%+). Below 3,700 K. Can live trillions of years.'}};
 function showStarInfo(type){const d=starTypeInfo[type];openModal(d.title,d.emoji,d.text);addScore(10,mx,my);}
 
-// ═══════════════════════════════════════════════════
-//  STAR NAMING
-// ═══════════════════════════════════════════════════
 let starNameCtx,clickedStar=null,namedStars=[];
 function initStarNameCanvas(){const c=document.getElementById('star-name-canvas');if(c._init)return;c._init=true;starNameCtx=c.getContext('2d');const W=400,H=200;starNameCtx.fillStyle='#000010';starNameCtx.fillRect(0,0,W,H);const stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.5+.5,glow:Math.random()>.7,named:null}));c._stars=stars;c._namedStars=[];function draw(){starNameCtx.fillStyle='rgba(0,0,12,.85)';starNameCtx.fillRect(0,0,W,H);stars.forEach(s=>{const a=.4+Math.sin(Date.now()/1000+s.x)*.3;starNameCtx.globalAlpha=Math.max(0.2,a);const col=s.named?s.named.color:'#fff';starNameCtx.fillStyle=col;if(s.glow||s.named){starNameCtx.shadowColor=col;starNameCtx.shadowBlur=s.named?14:6;}starNameCtx.beginPath();starNameCtx.arc(s.x,s.y,s.named?s.r+1:s.r,0,Math.PI*2);starNameCtx.fill();starNameCtx.shadowBlur=0;starNameCtx.globalAlpha=1;if(s.named){starNameCtx.fillStyle=s.named.color;starNameCtx.font='6px Orbitron,monospace';starNameCtx.textAlign='center';starNameCtx.fillText(s.named.name,s.x,s.y-s.r-5);}});requestAnimationFrame(draw);}draw();c.addEventListener('click',e=>{const r=c.getBoundingClientRect();const cx=e.clientX-r.left,cy=e.clientY-r.top;let nearest=null,nd=Infinity;stars.forEach(s=>{const d=Math.sqrt((cx-s.x)**2+(cy-s.y)**2);if(d<d&&d<20){nd=d;nearest=s;}stars.forEach(s2=>{const d2=Math.sqrt((cx-s2.x)**2+(cy-s2.y)**2);if(d2<nd){nd=d2;nearest=s2;}});});clickedStar=nearest;if(nearest)document.getElementById('star-name-input').focus();});}
 function nameStar(){const name=document.getElementById('star-name-input').value.trim();if(!name)return;const colors=['#ffd700','#00f7ff','#f472b6','#4ade80','#a855f7','#fb923c'];const color=colors[Math.floor(Math.random()*colors.length)];const c=document.getElementById('star-name-canvas');const stars=c._stars||[];if(clickedStar){clickedStar.named={name,color};}else if(stars.length>0){stars[Math.floor(Math.random()*stars.length)].named={name,color};}addScore(20,mx,my);toast(`Star "${name}" named! +20`);document.getElementById('star-name-result').innerHTML=`<span style="color:var(--gold)">✨ "${name}" added to the cosmos!</span>`;document.getElementById('star-name-input').value='';}
 
-// ═══════════════════════════════════════════════════
-//  TELESCOPE VIEWER
-// ═══════════════════════════════════════════════════
 function initScopeViewer(){const w=document.getElementById('scope-wrap');if(w._init)return;w._init=true;randomTelescopeScene();w.addEventListener('mousemove',e=>{const r=w.getBoundingClientRect();const lx=((e.clientX-r.left)/r.width*100).toFixed(1);const ly=((e.clientY-r.top)/r.height*100).toFixed(1);document.getElementById('scope-lens').style.setProperty('--lx',lx+'%');document.getElementById('scope-lens').style.setProperty('--ly',ly+'%');});}
 function randomTelescopeScene(){const c=document.getElementById('scope-canvas');if(!c)return;const ctx=c.getContext('2d');const W=250,H=250;ctx.fillStyle='#000010';ctx.fillRect(0,0,W,H);const nc=['rgba(80,0,180,.28)','rgba(0,80,180,.22)','rgba(180,0,80,.22)','rgba(0,130,90,.18)','rgba(180,80,0,.18)'];const g=ctx.createRadialGradient(W/2+(Math.random()-.5)*80,H/2+(Math.random()-.5)*80,10,W/2,H/2,115);g.addColorStop(0,nc[Math.floor(Math.random()*nc.length)]);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);for(let i=0;i<220;i++){const x=Math.random()*W,y=Math.random()*H,r=Math.random()*1.9,b=Math.random();ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${b})`;ctx.fill();if(b>.8){ctx.beginPath();ctx.arc(x,y,r+3.5,0,Math.PI*2);ctx.fillStyle='rgba(200,200,255,.1)';ctx.fill();}}if(Math.random()>.35){const ox=30+Math.random()*190,oy=30+Math.random()*190;const og=ctx.createRadialGradient(ox,oy,0,ox,oy,18);og.addColorStop(0,'rgba(255,240,200,.9)');og.addColorStop(1,'rgba(255,200,100,0)');ctx.fillStyle=og;ctx.beginPath();ctx.ellipse(ox,oy,18,10,Math.random()*Math.PI,0,Math.PI*2);ctx.fill();}addScore(5,mx,my);toast('New telescope scene! +5');}
 
-// ═══════════════════════════════════════════════════
-//  MEMORY MATCH
-// ═══════════════════════════════════════════════════
 const memPairs=['🌟','☀️','🔴','🔵','💥','🌌','⭐','🪐'];
 let mFirst=null,mSecond=null,mLock=false,mMatched=0,mFlips=0;
 function initMemory(){mFirst=null;mSecond=null;mLock=false;mMatched=0;mFlips=0;const items=[...memPairs,...memPairs].sort(()=>Math.random()-.5);const grid=document.getElementById('mem-grid');grid.innerHTML='';items.forEach(emoji=>{const card=document.createElement('div');card.className='mem-card';card.dataset.emoji=emoji;card.innerHTML=`<div class="mem-inner2"><div class="mem-f">⭐</div><div class="mem-b">${emoji}</div></div>`;card.addEventListener('click',()=>flipMem(card));grid.appendChild(card);});document.getElementById('mem-status').textContent='Match all pairs!';}
 function flipMem(card){if(mLock||card.classList.contains('flipped')||card.classList.contains('matched'))return;card.classList.add('flipped');mFlips++;if(!mFirst){mFirst=card;return;}mSecond=card;mLock=true;if(mFirst.dataset.emoji===mSecond.dataset.emoji){mFirst.classList.add('matched');mSecond.classList.add('matched');mMatched+=2;mFirst=mSecond=null;mLock=false;addScore(15,mx,my);if(mMatched===memPairs.length*2){document.getElementById('mem-status').textContent=`🎉 All matched in ${mFlips} flips!`;unlockAch('Memory Master');addScore(50,mx,my);launchConfetti();}}else{setTimeout(()=>{mFirst.classList.remove('flipped');mSecond.classList.remove('flipped');mFirst=mSecond=null;mLock=false;},850);}document.getElementById('mem-status').textContent=`Flips: ${mFlips} | Pairs: ${mMatched/2}`;}
 
-// ═══════════════════════════════════════════════════
-//  CONSTELLATION CANVAS
-// ═══════════════════════════════════════════════════
 let ccCtx,ccCanvas,drawing=false,lx2=0,ly2=0,drawColor='#ffd700',strokes=[],curStroke=[];
 const constFacts=["A star is a massive ball of plasma powered by nuclear fusion.","Meteors are space rocks that burn up in our atmosphere — shooting stars!","Stars are born in nebulae — giant clouds of gas and dust.","Massive stars live millions of years; red dwarfs can live trillions.","When a massive star dies, it explodes as a supernova.","Constellations are imaginary patterns — stars are often thousands of light-years apart!"];
 const myths=["Long ago, the ancients saw hunters and heroes in the stars. Your constellation tells a new story.","The gods placed warriors and creatures among the stars as eternal monuments.","Ancient navigators used star patterns to cross vast oceans. Could yours guide explorers?","Every constellation has a soul — born from dreams of those who drew lines between distant suns."];
@@ -1133,23 +1008,16 @@ function renderHOF(){const list=document.getElementById('hof-list');list.innerHT
 function downloadConst(){const a=document.createElement('a');a.download='my-constellation.png';a.href=document.getElementById('const-canvas').toDataURL();a.click();}
 function showConstFact(i){document.getElementById('const-fact-display').textContent=constFacts[i];addScore(5,mx,my);}
 
-// CQ Quiz
 const cqData=[{name:'Big Dipper',pts:[[100,190],[150,170],[210,165],[260,175],[310,190],[290,230],[250,250]],opts:['Big Dipper','Orion','Cassiopeia','Leo']},{name:'Orion',pts:[[150,90],[190,90],[170,130],[170,175],[135,215],[205,215],[170,175]],opts:['Scorpius','Orion','Leo','Big Dipper']},{name:'Cassiopeia',pts:[[40,140],[100,110],[160,155],[220,110],[280,145]],opts:['Cassiopeia','Perseus','Andromeda','Draco']},{name:'Southern Cross',pts:[[150,70],[150,190],[90,135],[210,135]],opts:['Southern Cross','Triangulum','Libra','Corvus']}];
 let cqIdx=0,cqScore=0,cqTotal=0;
 function initCQ(){cqIdx=0;cqScore=0;cqTotal=0;document.getElementById('cqs').textContent='0';document.getElementById('cqt').textContent='0';loadCQ();}
 function loadCQ(){const q=cqData[cqIdx%cqData.length];document.getElementById('cq-question').textContent='Which constellation is this?';const c=document.getElementById('cq-canvas'),ctx=c.getContext('2d');ctx.fillStyle='#000010';ctx.fillRect(0,0,300,200);for(let i=0;i<60;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.35})`;ctx.beginPath();ctx.arc(Math.random()*300,Math.random()*200,.8+Math.random()*1.2,0,Math.PI*2);ctx.fill();}ctx.strokeStyle='#ffd700';ctx.lineWidth=1.5;ctx.shadowColor='#ffd700';ctx.shadowBlur=7;ctx.beginPath();q.pts.forEach((p,i)=>i===0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));ctx.stroke();q.pts.forEach(p=>{ctx.fillStyle='#fff';ctx.shadowBlur=13;ctx.beginPath();ctx.arc(p[0],p[1],3.5,0,Math.PI*2);ctx.fill();});ctx.shadowBlur=0;const opts=document.getElementById('cq-opts');opts.innerHTML='';[...q.opts].sort(()=>Math.random()-.5).forEach(o=>{const b=document.createElement('button');b.className='cq-btn';b.textContent=o;b.onclick=()=>{cqTotal++;if(o===q.name){b.classList.add('ok');cqScore++;addScore(25,mx,my);}else{b.classList.add('fail');document.querySelectorAll('.cq-btn').forEach(btn=>{if(btn.textContent===q.name)btn.classList.add('ok');});}document.getElementById('cqs').textContent=cqScore;document.getElementById('cqt').textContent=cqTotal;document.querySelectorAll('.cq-btn').forEach(btn=>btn.disabled=true);setTimeout(()=>{cqIdx=(cqIdx+1)%cqData.length;loadCQ();},1500);};opts.appendChild(b);});}
 
-// ═══════════════════════════════════════════════════
-//  ALIEN SIGNAL
-// ═══════════════════════════════════════════════════
 const morseWords=[{signal:'🔵🟡🔴🔵●●●',word:'SIRIUS',opts:['SIRIUS','VEGA','DENEB','ALTAIR']},{signal:'●🔴●●🟣●',word:'NEBULA',opts:['NEBULA','QUASAR','PULSAR','METEOR']},{signal:'🔵●●●🟠●●',word:'APOLLO',opts:['APOLLO','ORBIT','SATURN','COSMOS']},{signal:'🟢●🔵●🟡●',word:'ORION',opts:['ORION','HYDRA','LYRA','DRACO']},{signal:'●🔴🔵●●🟡●●',word:'NEPTUNE',opts:['NEPTUNE','MERCURY','JUPITER','URANUS']},{signal:'🔵●●●🟡●🔴●',word:'QUASAR',opts:['QUASAR','PULSAR','BLAZER','KAISER']},{signal:'🟢●●🔴●🔵',word:'COSMOS',opts:['COSMOS','COMETS','CLUSTER','CORONA']}];
 let mIdx=0,mScore=0,mTotal=0;
 function startMorse(){mIdx=0;mScore=0;mTotal=0;document.getElementById('morse-score').textContent='Score: 0 / 0';loadMorse();}
 function loadMorse(){if(mIdx>=morseWords.length){document.getElementById('morse-signal').textContent='Mission complete!';document.getElementById('morse-score').textContent=`Final: ${mScore}/${morseWords.length} 🎉`;if(mScore>=5)unlockAch('Alien Decoder');return;}const item=morseWords[mIdx];document.getElementById('morse-signal').textContent=item.signal;const opts=document.getElementById('morse-opts');opts.innerHTML='';[...item.opts].sort(()=>Math.random()-.5).forEach(o=>{const b=document.createElement('button');b.className='morse-opt';b.textContent=o;b.onclick=()=>{mTotal++;if(o===item.word){b.classList.add('ok');mScore++;addScore(20,mx,my);}else{b.classList.add('fail');document.querySelectorAll('.morse-opt').forEach(btn=>{if(btn.textContent===item.word)btn.classList.add('ok');});}document.getElementById('morse-score').textContent=`Score: ${mScore} / ${mTotal}`;document.querySelectorAll('.morse-opt').forEach(btn=>btn.disabled=true);mIdx++;setTimeout(loadMorse,1200);};opts.appendChild(b);});}
 
-// ═══════════════════════════════════════════════════
-//  GALAXY SIM
-// ═══════════════════════════════════════════════════
 let galCtx,galStars=[],galType=0,galTheme='gold';
 const galThemeColors={gold:{a:220,b:180,c:80},blue:{a:100,b:160,c:255},pink:{a:255,b:140,c:200},green:{a:100,b:230,c:140}};
 const galTypes=['spiral','elliptical','irregular'];
@@ -1163,9 +1031,6 @@ function triggerSupernova(){cancelAnimationFrame(galAF);const cx=300,cy=180;let 
 function switchGalType(){galType=(galType+1)%3;cancelAnimationFrame(galAF);rebuildGalaxy();toast(`Switched to ${galTypes[galType]}! +10`);addScore(10,mx,my);}
 function startGalCollision(){cancelAnimationFrame(galAF);const n=parseInt(document.getElementById('gc-count').value)||300;const g1=generateGalaxy('spiral',Math.floor(n/2));const g2=generateGalaxy('spiral',Math.floor(n/2));g2.forEach(s=>{s.x+=200;s.y+=80;s.speed*=-1;s.r=Math.min(255,s.r+80);s.b=Math.min(255,s.b+80);});let phase=0;function collide(){phase+=.01;const spd=parseFloat(document.getElementById('galaxy-speed').value)||1;galCtx.fillStyle='rgba(0,0,8,.18)';galCtx.fillRect(0,0,600,360);[...g1,...g2].forEach(s=>{s.x+=(300-s.x)*.0003*phase*spd;s.y+=(180-s.y)*.0003*phase*spd;const sa=Math.atan2(s.y-180,s.x-300);s.x+=Math.cos(sa+Math.PI/2)*s.speed*spd*30;s.y+=Math.sin(sa+Math.PI/2)*s.speed*spd*12;galCtx.beginPath();galCtx.arc(s.x,s.y,s.size,0,Math.PI*2);galCtx.fillStyle=`rgba(${s.r},${s.g},${s.b},${s.a})`;galCtx.fill();});if(phase<8)galAF=requestAnimationFrame(collide);else{galStars=[...g1,...g2];animateGal();}}collide();unlockAch('Galaxy Collider');addScore(40,mx,my);toast('Galaxy Collision! +40');}
 
-// ═══════════════════════════════════════════════════
-//  BLACK HOLE VISUALIZER
-// ═══════════════════════════════════════════════════
 let bhActive=false,bhMass=4,bhParticles=[];
 function initBlackHole(){const c=document.getElementById('bh-canvas');if(!c||c._init)return;c._init=true;const ctx=c.getContext('2d');bhParticles=Array.from({length:150},()=>createBHParticle());function drawBH(){ctx.fillStyle='rgba(0,0,5,.22)';ctx.fillRect(0,0,400,280);const cx=200,cy=140;// Accretion disk
 if(bhActive){const grad=ctx.createRadialGradient(cx,cy,bhMass*3,cx,cy,bhMass*3+80);grad.addColorStop(0,'rgba(255,140,0,.6)');grad.addColorStop(.5,'rgba(255,60,0,.3)');grad.addColorStop(1,'transparent');ctx.fillStyle=grad;ctx.beginPath();ctx.ellipse(cx,cy,bhMass*3+80,30,0,0,Math.PI*2);ctx.fill();}// Update particles
@@ -1176,9 +1041,6 @@ function createBHParticle(){return{angle:Math.random()*Math.PI*2,r:80+Math.rando
 function toggleBlackHole(){bhActive=!bhActive;addScore(15,mx,my);toast(bhActive?'Black hole activated! ⚫':'Black hole deactivated');}
 function addBHMass(){bhMass=Math.min(50,bhMass+5);addScore(5,mx,my);toast(`Mass: ${bhMass} solar masses`);}
 
-// ═══════════════════════════════════════════════════
-//  SOLAR SYSTEM
-// ═══════════════════════════════════════════════════
 let sCtx,sPaused=false,sTime=0,sSpeed=1,warpMode=false,showTrails=false,clickedPlanet=null;
 const planets=[
   {name:'Mercury',r:5,dist:52,period:.24,color:'#aaa',g:.38,info:"Smallest planet. 88-day year. No atmosphere — temperatures from -180°C to 430°C."},
@@ -1195,9 +1057,9 @@ const pMoons={2:[{r:13,period:2}],4:[{r:28,period:1.8},{r:40,period:3.5}],5:[{r:
 function startSolar(){const c=document.getElementById('solar-canvas');sCtx=c.getContext('2d');cancelAnimationFrame(solarAF);sTime=0;c.addEventListener('click',handlePlanetClick);animateSolar();}
 function drawSolar(){const W=600,H=380,cx=W/2,cy=H/2;if(!showTrails){sCtx.fillStyle=warpMode?'rgba(0,0,8,.07)':'#000008';sCtx.fillRect(0,0,W,H);}else{sCtx.fillStyle='rgba(0,0,8,.06)';sCtx.fillRect(0,0,W,H);}if(warpMode)for(let i=0;i<18;i++){const angle=Math.random()*Math.PI*2;const sx=cx+Math.cos(angle)*Math.random()*280,sy=cy+Math.sin(angle)*Math.random()*180;sCtx.beginPath();sCtx.moveTo(sx,sy);sCtx.lineTo(sx+Math.cos(angle)*28,sy+Math.sin(angle)*14);sCtx.strokeStyle='rgba(255,255,255,.07)';sCtx.lineWidth=1;sCtx.stroke();}// Sun
 const sunG=sCtx.createRadialGradient(cx,cy,0,cx,cy,32);sunG.addColorStop(0,'rgba(255,248,192,.92)');sunG.addColorStop(.6,'rgba(255,215,0,.4)');sunG.addColorStop(1,'rgba(255,100,0,0)');sCtx.beginPath();sCtx.arc(cx,cy,32,0,Math.PI*2);sCtx.fillStyle=sunG;sCtx.fill();sCtx.beginPath();sCtx.arc(cx,cy,18,0,Math.PI*2);sCtx.fillStyle='#ffd700';sCtx.fill();
-// Orbits
+
 planets.forEach(p=>{sCtx.beginPath();sCtx.arc(cx,cy,p.dist,0,Math.PI*2);sCtx.strokeStyle='rgba(255,255,255,.06)';sCtx.lineWidth=1;sCtx.stroke();});
-// Planets
+
 planets.forEach((p,idx)=>{const angle=(sTime/p.period)*2*Math.PI;const px=cx+Math.cos(angle)*p.dist,py=cy+Math.sin(angle)*p.dist;p._px=px;p._py=py;const pG=sCtx.createRadialGradient(px,py,0,px,py,p.r+8);pG.addColorStop(0,p.color);pG.addColorStop(1,'rgba(0,0,0,0)');sCtx.beginPath();sCtx.arc(px,py,p.r+8,0,Math.PI*2);sCtx.fillStyle=pG;sCtx.fill();sCtx.beginPath();sCtx.arc(px,py,p.r,0,Math.PI*2);sCtx.fillStyle=p.color;sCtx.fill();if(p.name==='Saturn'){sCtx.beginPath();sCtx.ellipse(px,py,p.r+14,4.5,angle+Math.PI*.3,0,Math.PI*2);sCtx.strokeStyle='rgba(224,208,144,.6)';sCtx.lineWidth=4.5;sCtx.stroke();}if(pMoons[idx])pMoons[idx].forEach(m=>{const ma=(sTime/m.period)*2*Math.PI;const mx2=px+Math.cos(ma)*m.r,my2=py+Math.sin(ma)*m.r;sCtx.beginPath();sCtx.arc(mx2,my2,2.5,0,Math.PI*2);sCtx.fillStyle='rgba(255,255,255,.7)';sCtx.fill();});sCtx.fillStyle='rgba(255,255,255,.6)';sCtx.font='7.5px Orbitron,monospace';sCtx.textAlign='center';sCtx.fillText(p.name,px,py+p.r+11);if(clickedPlanet===p.name){sCtx.beginPath();sCtx.arc(px,py,p.r+6,0,Math.PI*2);sCtx.strokeStyle='#ffd700';sCtx.lineWidth=2;sCtx.setLineDash([4,3]);sCtx.stroke();sCtx.setLineDash([]);}});}
 function animateSolar(){if(!sPaused)sTime+=.003*sSpeed;drawSolar();solarAF=requestAnimationFrame(animateSolar);}
 function handlePlanetClick(e){const c=document.getElementById('solar-canvas');const r=c.getBoundingClientRect();const ex=e.clientX-r.left,ey=e.clientY-r.top;planets.forEach((p,idx)=>{if(p._px&&Math.sqrt((ex-p._px)**2+(ey-p._py)**2)<p.r+15){clickedPlanet=p.name;const panel=document.getElementById('planet-panel');panel.innerHTML=`<h3 style="color:var(--gold);">${pEmojis[idx]} ${p.name}</h3><p style="font-size:.87rem;line-height:1.85;">${p.info}</p>`;addScore(15,e.clientX,e.clientY);toast(`${p.name} info! +15`);}});}
@@ -1207,22 +1069,18 @@ function toggleTrails(){showTrails=!showTrails;toast(showTrails?'Trails ON!':'Tr
 function resetSolar(){sTime=0;sPaused=false;sSpeed=1;warpMode=false;showTrails=false;document.getElementById('speed-slider').value=1;document.getElementById('speed-val').textContent='1.0';document.getElementById('speed-needle').style.transform='rotate(-130deg)';}
 function toggleWarp(){warpMode=!warpMode;const btn=document.getElementById('warp-btn');if(warpMode){sSpeed=8;document.getElementById('speed-slider').value=8;document.getElementById('speed-val').textContent='8.0';btn.textContent='⚡ DISENGAGE WARP';addScore(20,mx,my);toast('WARP SPEED! 🚀');}else{sSpeed=1;document.getElementById('speed-slider').value=1;document.getElementById('speed-val').textContent='1.0';btn.textContent='🚀 ENGAGE WARP SPEED';}updateSolarSpeed();}
 
-// ─── WEIGHT CALC ───
 const pgData=[{n:'Mercury',e:'☿',g:.38},{n:'Venus',e:'♀',g:.91},{n:'Earth',e:'🌍',g:1},{n:'Mars',e:'🔴',g:.38},{n:'Jupiter',e:'♃',g:2.34},{n:'Saturn',e:'🪐',g:.93},{n:'Uranus',e:'⛢',g:.89},{n:'Neptune',e:'♆',g:1.12},{n:'Moon',e:'🌙',g:.17},{n:'Sun',e:'☀️',g:27.9}];
 function calcWeights(){const w=parseInt(document.getElementById('earth-weight')?.value)||70;document.getElementById('weight-display').textContent=w+' kg';const grid=document.getElementById('weight-grid');if(!grid)return;grid.innerHTML='';pgData.forEach(p=>{const wt=(w*p.g).toFixed(1);const div=document.createElement('div');div.className='wp';div.innerHTML=`<span class="wp-e">${p.e}</span><div class="wp-n">${p.n}</div><div class="wp-r">${wt} kg</div>`;div.onclick=()=>{addScore(3,mx,my);openModal(`Weight on ${p.n}`,p.e,`On ${p.n}, gravity is ${p.g}× Earth's. You'd weigh ${wt}kg!`);};grid.appendChild(div);});}
 
-// ─── GRAVITY RACE ───
 const raceData=[{n:'Moon',e:'🌙',g:1.62},{n:'Mercury',e:'☿',g:3.7},{n:'Mars',e:'🔴',g:3.72},{n:'Venus',e:'♀',g:8.87},{n:'Earth',e:'🌍',g:9.81},{n:'Saturn',e:'🪐',g:10.44},{n:'Uranus',e:'⛢',g:8.87},{n:'Neptune',e:'♆',g:11.15},{n:'Jupiter',e:'♃',g:24.79}];
 let raceRunning=false,raceTimers=[],racePcts=[];
 function buildRaceLanes(){const el=document.getElementById('race-lanes');if(!el||el._built)return;el._built=true;el.innerHTML='';raceData.forEach((p,i)=>{const lane=document.createElement('div');lane.className='race-lane';lane.innerHTML=`<div class="race-planet">${p.e}</div><div class="race-bar-bg"><div class="race-bar" id="race-bar-${i}" style="background:hsl(${i*38},70%,60%);"></div></div><div class="race-label" id="race-lbl-${i}">${p.n}</div>`;el.appendChild(lane);});}
 function startGravityRace(){if(raceRunning)return;raceRunning=true;raceTimers.forEach(clearInterval);raceTimers=[];racePcts=raceData.map(()=>0);document.getElementById('race-result').textContent='';raceData.forEach((p,i)=>{const t=setInterval(()=>{racePcts[i]+=p.g*.4;if(racePcts[i]>=100){racePcts[i]=100;clearInterval(t);const lbl=document.getElementById('race-lbl-'+i);if(lbl)lbl.textContent=`${p.n} 🏁`;if(racePcts.every(v=>v>=100)){raceRunning=false;document.getElementById('race-result').innerHTML=`<span style="color:var(--green)">Race over! Jupiter wins (strongest gravity: 24.79 m/s²)</span>`;addScore(20,mx,my);}}const bar=document.getElementById('race-bar-'+i);if(bar)bar.style.width=racePcts[i]+'%';},50);raceTimers.push(t);});}
 function resetRace(){raceRunning=false;raceTimers.forEach(clearInterval);raceTimers=[];racePcts=raceData.map(()=>0);raceData.forEach((_,i)=>{const bar=document.getElementById('race-bar-'+i);const lbl=document.getElementById('race-lbl-'+i);if(bar)bar.style.width='0%';if(lbl)lbl.textContent=raceData[i].n;});document.getElementById('race-result').textContent='';}
 
-// ─── PLANET COMPARE ───
 const planetData=[{n:'Mercury',e:'☿',d:'4,879 km',m:0,day:'1407 hrs',t:'-180°C to 430°C'},{n:'Venus',e:'♀',d:'12,104 km',m:0,day:'5832 hrs',t:'465°C avg'},{n:'Earth',e:'🌍',d:'12,742 km',m:1,day:'24 hrs',t:'-88°C to 58°C'},{n:'Mars',e:'🔴',d:'6,779 km',m:2,day:'24.6 hrs',t:'-125°C to 20°C'},{n:'Jupiter',e:'♃',d:'139,820 km',m:95,day:'9.9 hrs',t:'-110°C avg'},{n:'Saturn',e:'🪐',d:'116,460 km',m:146,day:'10.7 hrs',t:'-140°C avg'},{n:'Uranus',e:'⛢',d:'50,724 km',m:28,day:'17.2 hrs',t:'-195°C avg'},{n:'Neptune',e:'♆',d:'49,244 km',m:16,day:'16.1 hrs',t:'-200°C avg'}];
 function comparePlanets(){const a=parseInt(document.getElementById('pa-select')?.value)||2;const b=parseInt(document.getElementById('pb-select')?.value)||4;const pa=planetData[a],pb=planetData[b];const res=document.getElementById('cmp-result');if(!res)return;function card(p){return`<div class="cp-card"><div class="cpe">${p.e}</div><div class="cpn">${p.n}</div><div class="cp-stat">⬤ ${p.d}</div><div class="cp-stat">🌙 ${p.m} moon${p.m!==1?'s':''}</div><div class="cp-stat">⏱ ${p.day}</div><div class="cp-stat">🌡 ${p.t}</div></div>`;}res.innerHTML=card(pa)+'<div class="cmp-vs">VS</div>'+card(pb);addScore(3,mx,my);}
 
-// ─── PLANET SORT ───
 const correctOrder=['Mercury','Venus','Earth','Mars','Jupiter','Saturn','Uranus','Neptune'];
 const pEmojiMap={Mercury:'☿',Venus:'♀',Earth:'🌍',Mars:'🔴',Jupiter:'♃',Saturn:'🪐',Uranus:'⛢',Neptune:'♆'};
 let sortAns=[];
@@ -1230,72 +1088,58 @@ function initPlanetSort(){sortAns=Array(8).fill(null);const pool=document.getEle
 function dropToZone(zone,planet,i){if(sortAns[i]){const old=sortAns[i];sortAns[i]=null;const el=document.querySelector(`#planet-pool [data-planet="${old}"]`)||document.querySelector(`#sort-targets [data-planet="${old}"]`);if(el&&el.className.includes('drag-planet'))document.getElementById('planet-pool').appendChild(el);}sortAns[i]=planet;zone.innerHTML=`<span>${pEmojiMap[planet]}</span>${planet.substring(0,4)}`;zone.dataset.planet=planet;zone.classList.add('filled');const poolEl=document.querySelector(`#planet-pool [data-planet="${planet}"]`);if(poolEl)poolEl.remove();}
 function checkPlanetOrder(){const zones=document.querySelectorAll('#sort-targets .drop-zone');let correct=0;zones.forEach((z,i)=>{const p=sortAns[i];if(!p)return;if(p===correctOrder[i]){z.classList.add('correct');z.classList.remove('wrong');correct++;}else{z.classList.add('wrong');z.classList.remove('correct');}});const res=document.getElementById('sort-result');if(correct===8){res.innerHTML='<span style="color:var(--green)">🎉 PERFECT! All 8 correct!</span>';addScore(80,mx,my);unlockAch('Solar System Master');launchConfetti();}else res.innerHTML=`<span style="color:var(--neon)">${correct}/8 correct!</span>`;}
 
-// ═══════════════════════════════════════════════════
-//  SOUNDBOARD — RICHER AUDIO
-// ═══════════════════════════════════════════════════
 let audioCtx=null;
 function getAC(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
 const activeSounds={};
 function playSound(type){const ctx=getAC();const btn=document.getElementById('snd-'+type);if(activeSounds[type]){try{activeSounds[type].forEach(n=>n.stop&&n.stop());}catch(e){}delete activeSounds[type];btn?.classList.remove('playing');return;}btn?.classList.add('playing');const nodes=[];const t=ctx.currentTime;
 
-if(type==='countdown'){// 5-4-3-2-1 beeps with rising pitch
+if(type==='countdown'){
   [0,1,2,3,4].forEach(i=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type=i<4?'sine':'square';o.frequency.value=i<4?440+i*80:1200;g.gain.setValueAtTime(0,t+i*.9);g.gain.linearRampToValueAtTime(.35,t+i*.9+.05);g.gain.exponentialRampToValueAtTime(.001,t+i*.9+.5);o.connect(g);g.connect(ctx.destination);o.start(t+i*.9);o.stop(t+i*.9+.55);nodes.push(o);});setTimeout(()=>{btn?.classList.remove('playing');},5000);}
 
-else if(type==='launch'){// Deep rumble + whistle
+else if(type==='launch'){
   const buf=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,.4);const s=ctx.createBufferSource(),g=ctx.createGain(),f=ctx.createBiquadFilter();s.buffer=buf;f.type='lowpass';f.frequency.value=450;g.gain.setValueAtTime(.55,t);g.gain.linearRampToValueAtTime(.02,t+2);s.connect(f);f.connect(g);g.connect(ctx.destination);s.start();const o=ctx.createOscillator(),og=ctx.createGain();o.type='sawtooth';o.frequency.setValueAtTime(60,t);o.frequency.exponentialRampToValueAtTime(600,t+1.8);og.gain.setValueAtTime(.1,t);og.gain.linearRampToValueAtTime(0,t+2);o.connect(og);og.connect(ctx.destination);o.start();o.stop(t+2);nodes.push(s,o);setTimeout(()=>{btn?.classList.remove('playing');},2200);}
 
-else if(type==='beep'){// Sputnik morse-style
+else if(type==='beep'){
   let tt=t;for(let i=0;i<12;i++){const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=840;o.type='sine';g.gain.setValueAtTime(0,tt);g.gain.linearRampToValueAtTime(.2,tt+.04);g.gain.linearRampToValueAtTime(0,tt+.22);o.connect(g);g.connect(ctx.destination);o.start(tt);o.stop(tt+.25);nodes.push(o);tt+=.48;}setTimeout(()=>btn?.classList.remove('playing'),6000);}
 
-else if(type==='pulse'){// Pulsar — rhythmic pulse with frequency modulation
+else if(type==='pulse'){
   const o=ctx.createOscillator(),g=ctx.createGain(),lfo=ctx.createOscillator(),lg=ctx.createGain();o.type='sawtooth';o.frequency.value=55;lfo.type='sine';lfo.frequency.value=.7;lg.gain.value=40;lfo.connect(lg);lg.connect(o.frequency);const dist=ctx.createWaveShaper();const curve=new Float32Array(256);for(let i=0;i<256;i++){const x=i*2/256-1;curve[i]=x<0?-1:1;}dist.curve=curve;g.gain.value=.08;o.connect(dist);dist.connect(g);g.connect(ctx.destination);o.start();lfo.start();nodes.push(o,lfo);setTimeout(()=>{try{o.stop();lfo.stop();}catch(e){}btn?.classList.remove('playing');delete activeSounds[type];},4500);}
 
-else if(type==='cosmic'){// Deep cosmic hum with harmonics
+else if(type==='cosmic'){
   const buf=ctx.createBuffer(1,ctx.sampleRate*4,ctx.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.03*Math.sin(i*.0005);const s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),f2=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=buf;s.loop=true;f.type='bandpass';f.frequency.value=180;f.Q.value=.4;f2.type='highshelf';f2.frequency.value=2000;f2.gain.value=-15;g.gain.value=.35;s.connect(f);f.connect(f2);f2.connect(g);g.connect(ctx.destination);s.start();nodes.push(s);setTimeout(()=>{try{s.stop();}catch(e){}btn?.classList.remove('playing');delete activeSounds[type];},5500);}
 
-else if(type==='alarm'){// Mission alert — urgent
+else if(type==='alarm'){
   let tt=t;for(let i=0;i<8;i++){const o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.setValueAtTime(i%2===0?880:1100,tt);g.gain.setValueAtTime(.12,tt);g.gain.linearRampToValueAtTime(0,tt+.28);o.connect(g);g.connect(ctx.destination);o.start(tt);o.stop(tt+.3);nodes.push(o);tt+=.36;}setTimeout(()=>btn?.classList.remove('playing'),3200);}
 
-else if(type==='warp'){// Warp drive — rising sweep
+else if(type==='warp'){
   const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain();o.type='sawtooth';o2.type='sine';o.frequency.setValueAtTime(40,t);o.frequency.exponentialRampToValueAtTime(8000,t+2.5);o2.frequency.setValueAtTime(45,t);o2.frequency.exponentialRampToValueAtTime(8100,t+2.5);g.gain.setValueAtTime(.06,t);g.gain.linearRampToValueAtTime(.18,t+.5);g.gain.linearRampToValueAtTime(0,t+2.6);o.connect(g);o2.connect(g);g.connect(ctx.destination);o.start();o2.start();o.stop(t+2.7);o2.stop(t+2.7);nodes.push(o,o2);setTimeout(()=>btn?.classList.remove('playing'),2900);}
 
-else if(type==='alien'){// Weird alien signal
+else if(type==='alien'){
   let tt=t;for(let i=0;i<20;i++){const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';const f=200+Math.sin(i*1.7)*300+Math.cos(i*2.3)*200;o.frequency.value=f;o.frequency.linearRampToValueAtTime(f*1.5,tt+.1);g.gain.setValueAtTime(.07,tt);g.gain.linearRampToValueAtTime(0,tt+.2);o.connect(g);g.connect(ctx.destination);o.start(tt);o.stop(tt+.22);nodes.push(o);tt+=.14;}setTimeout(()=>btn?.classList.remove('playing'),3200);}
 
 if(nodes.length)activeSounds[type]=nodes;}
 
-// ═══════════════════════════════════════════════════
-//  EXPEDITIONS
-// ═══════════════════════════════════════════════════
 function launchRocket(){const r=document.getElementById('rocket'),fire=document.getElementById('rocket-fire');r.style.transform='translateY(-200px) rotate(-35deg)';fire.style.opacity=1;addScore(50,mx,my);launchConfetti();toast('Mission launched! +50');unlockAch('First Launch');setTimeout(()=>{r.style.transform='translateY(0) rotate(0)';fire.style.opacity=0;},3500);}
 const timelineData=[{year:1957,title:'Sputnik 1',text:'The Soviet Union launched Sputnik 1 on October 4, 1957 — the first artificial satellite. The Space Race began.'},{year:1961,title:'Yuri Gagarin',text:"April 12, 1961. Yuri Gagarin became the first human in space aboard Vostok 1. His orbit lasted 108 minutes. He said: 'The Earth is blue.'"},{year:1969,title:'Moon Landing',text:'July 20, 1969. Neil Armstrong and Buzz Aldrin landed on the Moon. Over 600 million people watched. Armstrong: "One small step..."'},{year:1998,title:'ISS Begins',text:'The International Space Station has been continuously inhabited since November 2000. It travels at 28,000 km/h, orbiting every 90 minutes.'},{year:2020,title:'Commercial Crew',text:"SpaceX Crew Dragon transported NASA astronauts to the ISS — the first crewed launch from US soil since 2011. A new era of commercial spaceflight."},{year:2024,title:'Artemis Era',text:"NASA's Artemis program aims to return humans to the Moon, including the first woman and first person of color, as a gateway to Mars."}];
 function showTimeline(i){const d=timelineData[i];document.getElementById('timeline-detail').innerHTML=`<strong style="color:var(--neon);font-family:'Orbitron',monospace;">${d.year}: ${d.title}</strong><br><br>${d.text}`;addScore(10,mx,my);toast(`${d.year}: ${d.title} +10`);}
 
-// ─── TRIVIA ───
 const triviaData=[{q:"Who was the first human to walk on the Moon?",opts:["Buzz Aldrin","Neil Armstrong","Yuri Gagarin","Alan Shepard"],a:1},{q:"What was the first artificial satellite?",opts:["Explorer 1","Vostok 1","Sputnik 1","Luna 1"],a:2},{q:"How long does sunlight take to reach Earth?",opts:["3 seconds","8 minutes","2 hours","1 day"],a:1},{q:"Which Mars rover is currently active?",opts:["Curiosity","Opportunity","Spirit","Perseverance"],a:3},{q:"The ISS orbits Earth at approximately:",opts:["1,000 km/h","8,000 km/h","28,000 km/h","100,000 km/h"],a:2},{q:"Which company built Falcon 9?",opts:["NASA","Boeing","SpaceX","Blue Origin"],a:2},{q:"How many humans have walked on the Moon?",opts:["6","12","18","24"],a:1},{q:"What year did the first Space Shuttle fly?",opts:["1969","1975","1981","1986"],a:2}];
 let triviaIdx=0,triviaScore=0;
 function initTrivia(){triviaIdx=0;triviaScore=0;document.getElementById('trivia-num').textContent='0';document.getElementById('trivia-max').textContent=triviaData.length;loadTrivia();}
 function loadTrivia(){if(triviaIdx>=triviaData.length){document.getElementById('trivia-q').textContent=`🎉 Complete! Score: ${triviaScore}/${triviaData.length}`;document.getElementById('trivia-opts').innerHTML='';if(triviaScore>=6)unlockAch('Space Expert');return;}const q=triviaData[triviaIdx];document.getElementById('trivia-q').textContent=q.q;document.getElementById('trivia-num').textContent=triviaIdx+1;document.getElementById('trivia-result').textContent='';const opts=document.getElementById('trivia-opts');opts.innerHTML='';q.opts.forEach((o,i)=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{document.querySelectorAll('#trivia-opts button').forEach(btn=>btn.disabled=true);if(i===q.a){b.style.cssText='background:rgba(74,222,128,.2);border:1px solid #4ade80;color:#4ade80;';triviaScore++;addScore(25,mx,my);document.getElementById('trivia-result').innerHTML='<span style="color:#4ade80">✅ Correct!</span>';}else{b.style.cssText='background:rgba(248,113,113,.15);color:#f87171;';document.querySelectorAll('#trivia-opts button')[q.a].style.cssText='background:rgba(74,222,128,.15);';document.getElementById('trivia-result').innerHTML='<span style="color:#f87171">❌ Not quite!</span>';}};opts.appendChild(b);});}
 function nextTrivia(){triviaIdx++;loadTrivia();}
 
-// ─── SPEED QUIZ ───
 const speedQData=[{q:"Speed of light in km/s?",opts:["150,000","299,792","400,000","1,000,000"],a:1},{q:"Which planet has the most moons?",opts:["Jupiter","Saturn","Uranus","Neptune"],a:1},{q:"How old is the universe?",opts:["4.6 billion yrs","10 billion yrs","13.8 billion yrs","20 billion yrs"],a:2},{q:"Name of our galaxy?",opts:["Andromeda","Milky Way","Triangulum","Whirlpool"],a:1},{q:"Force that keeps planets in orbit?",opts:["Magnetism","Nuclear force","Gravity","Electromagnetism"],a:2},{q:"Which planet is the Red Planet?",opts:["Mercury","Jupiter","Mars","Saturn"],a:2},{q:"What is a light-year?",opts:["A unit of time","A unit of distance","A type of star","Brightness"],a:1},{q:"Sun is primarily made of?",opts:["Helium & oxygen","Hydrogen & helium","Carbon & nitrogen","Iron & nickel"],a:1},{q:"Earth days in a Mars year?",opts:["365","500","687","900"],a:2},{q:"Black hole's event horizon?",opts:["Its centre","Point of no return","Accretion disk","Photon sphere"],a:1}];
 let sqIdx=0,sqScore=0,sqStreak=0,sqBest=0,sqTimer=null,sqTimeLeft=0;
 function startSpeedQuiz(){sqIdx=0;sqScore=0;sqStreak=0;document.getElementById('sq-score').textContent='0';document.getElementById('sq-streak').textContent='0';loadSQ();}
 function loadSQ(){clearInterval(sqTimer);if(sqIdx>=speedQData.length){document.getElementById('sq-q').textContent=`🏁 Done! Score: ${sqScore}/${speedQData.length}`;document.getElementById('sq-opts').innerHTML='';if(sqStreak>=5)unlockAch('Speed Demon');return;}const q=speedQData[sqIdx];document.getElementById('sq-q').textContent=q.q;const opts=document.getElementById('sq-opts');opts.innerHTML='';sqTimeLeft=15;document.getElementById('sq-timer').style.width='100%';document.getElementById('sq-timer').style.background='linear-gradient(90deg,var(--green),var(--gold))';q.opts.forEach((o,i)=>{const b=document.createElement('div');b.className='sq-opt';b.textContent=o;b.onclick=()=>answerSQ(i,q.a,b);opts.appendChild(b);});sqTimer=setInterval(()=>{sqTimeLeft--;document.getElementById('sq-timer').style.width=(sqTimeLeft/15*100)+'%';if(sqTimeLeft<=5)document.getElementById('sq-timer').style.background='linear-gradient(90deg,#f87171,#ff8800)';if(sqTimeLeft<=0){clearInterval(sqTimer);document.querySelectorAll('.sq-opt').forEach((b,i)=>{if(i===q.a)b.classList.add('correct');b.onclick=null;});sqStreak=0;document.getElementById('sq-streak').textContent='0';sqIdx++;setTimeout(loadSQ,1200);}},1000);}
 function answerSQ(i,correct,el){clearInterval(sqTimer);document.querySelectorAll('.sq-opt').forEach((b,idx)=>{b.onclick=null;if(idx===correct)b.classList.add('correct');});if(i===correct){el.classList.add('correct');sqScore++;sqStreak++;if(sqStreak>sqBest){sqBest=sqStreak;document.getElementById('sq-best').textContent=sqBest;}const bonus=Math.max(5,Math.round(sqTimeLeft*2));addScore(bonus,mx,my);}else{el.classList.add('wrong');sqStreak=0;}document.getElementById('sq-score').textContent=sqScore;document.getElementById('sq-streak').textContent=sqStreak;sqIdx++;setTimeout(loadSQ,1000);}
 
-// ─── WORD SCRAMBLE ───
 const scrambleWords=[{word:'NEBULA',hint:'A cloud of gas and dust in space',scramble:'ABLEUN'},{word:'JUPITER',hint:'Largest planet in our solar system',scramble:'REUTIPJ'},{word:'COMET',hint:'Has a nucleus, coma, and tail',scramble:'OMTCE'},{word:'SATURN',hint:'Famous for its ring system',scramble:'RUSTAN'},{word:'GALAXY',hint:'A massive system of billions of stars',scramble:'YXAGAL'},{word:'SUPERNOVA',hint:'A massive stellar explosion',scramble:'OVNSARUPE'},{word:'ASTEROID',hint:'Rocky body orbiting the Sun',scramble:'DETSROIA'},{word:'NEUTRON',hint:'Type of star left after a supernova',scramble:'RONTUNE'},{word:'ECLIPSE',hint:'When one object blocks another\'s light',scramble:'SECIPLE'},{word:'GRAVITY',hint:'The force that keeps planets in orbit',scramble:'TIARVGY'}];
 let scrIdx=0,scrStreak=0;
 function nextScramble(){scrIdx=Math.floor(Math.random()*scrambleWords.length);const w=scrambleWords[scrIdx];document.getElementById('scr-word').textContent=w.scramble;document.getElementById('scr-hint').textContent='Hint: '+w.hint;document.getElementById('scr-result').textContent='';document.getElementById('scr-input').value='';document.getElementById('scr-input').focus();}
 function checkScramble(){const inp=document.getElementById('scr-input').value.toUpperCase().trim();const w=scrambleWords[scrIdx];if(inp===w.word){document.getElementById('scr-result').innerHTML='<span class="correct">✅ Correct!</span>';scrStreak++;document.getElementById('scr-streak').textContent=`🔥 Streak: ${scrStreak}`;addScore(20,mx,my);if(scrStreak>=5)unlockAch('Scramble Pro');setTimeout(nextScramble,1200);}else{document.getElementById('scr-result').innerHTML='<span class="wrong">❌ Try again!</span>';scrStreak=0;document.getElementById('scr-streak').textContent='';}}
 
-// ═══════════════════════════════════════════════════
-//  GAMES HUB
-// ═══════════════════════════════════════════════════
-
-// ─── ASTEROID DEFENDER ───
 let invCtx2,invRunning=false,invScore2=0,invWave2=1,invLives2=3;
 let ship={x:300,y:340},bullets2=[],asteroids2=[],particles2=[];
 function initInvaders(){const c=document.getElementById('invaders-canvas');if(!c)return;invCtx2=c.getContext('2d');c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();ship.x=Math.max(20,Math.min(580,e.clientX-r.left));});c.addEventListener('touchmove',e=>{e.preventDefault();const r=c.getBoundingClientRect();ship.x=Math.max(20,Math.min(580,e.touches[0].clientX-r.left));},{passive:false});c.addEventListener('click',shootBullet2);c.addEventListener('touchstart',e=>{e.preventDefault();shootBullet2(e);},{passive:false});drawInvStatic();}
@@ -1307,26 +1151,25 @@ function shootBullet2(){if(!invRunning)return;bullets2.push({x:ship.x,y:ship.y-1
 function playBulletSfx(){try{const ctx=getAC();const o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.value=880;o.frequency.exponentialRampToValueAtTime(200,ctx.currentTime+.08);g.gain.setValueAtTime(.06,ctx.currentTime);g.gain.linearRampToValueAtTime(0,ctx.currentTime+.09);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.1);}catch(e){}}
 function updateInvHUD(){document.getElementById('inv-score').textContent=invScore2;document.getElementById('inv-wave').textContent=invWave2;document.getElementById('inv-lives').textContent='❤️'.repeat(Math.max(0,invLives2));}
 function runInvaders(){invCtx2.fillStyle='#000010';invCtx2.fillRect(0,0,600,360);
-// Stars
+
 for(let i=0;i<25;i++){invCtx2.fillStyle='rgba(255,255,255,.28)';invCtx2.fillRect(Math.sin(i*337.7)*300+300,Math.sin(i*211.3)*180+180,1,1);}
-// Ship — animated glow
+
 const t=Date.now()/500;invCtx2.shadowColor=`hsl(${180+Math.sin(t)*20},100%,70%)`;invCtx2.shadowBlur=15;invCtx2.font='22px serif';invCtx2.textAlign='center';invCtx2.fillText('🚀',ship.x,ship.y);invCtx2.shadowBlur=0;
-// Bullets
+
 bullets2.forEach((b,i)=>{b.y+=b.vy;const g=invCtx2.createLinearGradient(b.x,b.y,b.x,b.y+16);g.addColorStop(0,'#ffd700');g.addColorStop(1,'rgba(0,247,255,0)');invCtx2.strokeStyle=g;invCtx2.lineWidth=2.5;invCtx2.beginPath();invCtx2.moveTo(b.x,b.y);invCtx2.lineTo(b.x,b.y+16);invCtx2.stroke();if(b.y<-12)bullets2.splice(i,1);});
-// Asteroids
+
 for(let ai=asteroids2.length-1;ai>=0;ai--){const a=asteroids2[ai];a.x+=a.vx;a.y+=a.vy;a.angle+=a.spin;if(a.x<5||a.x>595)a.vx*=-1;invCtx2.save();invCtx2.translate(a.x,a.y);invCtx2.rotate(a.angle);invCtx2.font=`${a.r*2}px serif`;invCtx2.textAlign='center';invCtx2.fillText('🪨',0,a.r*.5);invCtx2.restore();
-// Bullet hits
+
 for(let bi=bullets2.length-1;bi>=0;bi--){if(Math.sqrt((bullets2[bi].x-a.x)**2+(bullets2[bi].y-a.y)**2)<a.r+5){bullets2.splice(bi,1);a.hp--;if(a.hp<=0){for(let p=0;p<10;p++)particles2.push({x:a.x,y:a.y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,life:35,emoji:['✨','⚡','💫','🌟'][Math.floor(Math.random()*4)]});asteroids2.splice(ai,1);invScore2+=10*invWave2;updateInvHUD();addScore(3,mx,my);}break;}}
-// Ground hit
+
 if(a.y>365){asteroids2.splice(ai,1);invLives2--;updateInvHUD();playExplosionSfx();if(invLives2<=0){invRunning=false;document.getElementById('inv-result').textContent=`💥 Game Over! Score: ${invScore2} — Wave ${invWave2}`;unlockAch('Defender');addScore(Math.floor(invScore2/3),mx,my);return;}}}
-// Particles
+
 for(let pi=particles2.length-1;pi>=0;pi--){const p=particles2[pi];p.x+=p.vx;p.y+=p.vy;p.life--;invCtx2.globalAlpha=p.life/35;invCtx2.font='13px serif';invCtx2.textAlign='center';invCtx2.fillText(p.emoji,p.x,p.y);invCtx2.globalAlpha=1;if(p.life<=0)particles2.splice(pi,1);}
-// Wave complete
+
 if(asteroids2.length===0&&invRunning){invWave2++;updateInvHUD();toast(`Wave ${invWave2}! +${invWave2*25}`);addScore(invWave2*25,mx,my);spawnWave2();}
 if(invRunning)invAF=requestAnimationFrame(runInvaders);}
 function playExplosionSfx(){try{const ctx=getAC();const buf=ctx.createBuffer(1,ctx.sampleRate*.3,ctx.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,.7);const s=ctx.createBufferSource(),g=ctx.createGain(),f=ctx.createBiquadFilter();s.buffer=buf;f.type='lowpass';f.frequency.value=800;g.gain.value=.4;s.connect(f);f.connect(g);g.connect(ctx.destination);s.start();}catch(e){}}
 
-// ─── COSMIC SNAKE ───
 let snakeRunning=false,snakeCtx,snakeGrid=20,snakeW=30,snakeH=18,snakeArr=[],snakeDir={x:1,y:0},snakeFood=null,snakeScore2=0,snakeHi=0,snakeGrowth=0;
 function initSnake(){const c=document.getElementById('snake-canvas');if(!c)return;snakeCtx=c.getContext('2d');drawSnakeStatic();}
 function drawSnakeStatic(){snakeCtx.fillStyle='#000010';snakeCtx.fillRect(0,0,600,360);snakeCtx.fillStyle='rgba(0,247,255,.5)';snakeCtx.font='14px Orbitron,monospace';snakeCtx.textAlign='center';snakeCtx.fillText('Press Start for Cosmic Snake!',300,180);}
@@ -1334,35 +1177,31 @@ function startSnake(){snakeRunning=true;snakeDir={x:1,y:0};snakeArr=[{x:5,y:9},{
 function resetSnake(){snakeRunning=false;cancelAnimationFrame(snakeAF);drawSnakeStatic();}
 function placeSnakeFood(){snakeFood={x:Math.floor(Math.random()*snakeW),y:Math.floor(Math.random()*snakeH),type:Math.random()>.8?'💎':'⭐'};}
 function runSnake(){const GS=snakeGrid;snakeCtx.fillStyle='rgba(0,0,12,.85)';snakeCtx.fillRect(0,0,600,360);
-// Grid
+
 for(let x=0;x<snakeW;x++)for(let y=0;y<snakeH;y++){snakeCtx.fillStyle='rgba(0,247,255,.02)';snakeCtx.fillRect(x*GS,y*GS,GS-1,GS-1);}
-// Food
+
 if(snakeFood){const t=Date.now()/400;snakeCtx.font=`${GS*.8+Math.sin(t)*2}px serif`;snakeCtx.textAlign='center';snakeCtx.fillText(snakeFood.type,snakeFood.x*GS+GS/2,snakeFood.y*GS+GS*.8);}
-// Snake
+
 snakeArr.forEach((seg,i)=>{const hue=160+i*3;snakeCtx.fillStyle=i===0?'#00f7ff':`hsla(${hue},90%,60%,.9)`;snakeCtx.shadowColor=i===0?'#00f7ff':'transparent';snakeCtx.shadowBlur=i===0?12:0;snakeCtx.fillRect(seg.x*GS+1,seg.y*GS+1,GS-2,GS-2);snakeCtx.shadowBlur=0;if(i===0){snakeCtx.fillStyle='#fff';snakeCtx.beginPath();snakeCtx.arc(seg.x*GS+GS*.35,seg.y*GS+GS*.4,2,0,Math.PI*2);snakeCtx.arc(seg.x*GS+GS*.65,seg.y*GS+GS*.4,2,0,Math.PI*2);snakeCtx.fill();}});
-// Move
+
 if(snakeRunning){const head={x:snakeArr[0].x+snakeDir.x,y:snakeArr[0].y+snakeDir.y};if(head.x<0||head.x>=snakeW||head.y<0||head.y>=snakeH||snakeArr.some(s=>s.x===head.x&&s.y===head.y)){snakeRunning=false;if(snakeScore2>snakeHi){snakeHi=snakeScore2;document.getElementById('snake-hi').textContent=snakeHi;}document.getElementById('snake-result').innerHTML=`💥 Game Over! Score: ${snakeScore2}`;unlockAch('Snake Master');addScore(snakeScore2,mx,my);launchConfetti();return;}snakeArr.unshift(head);if(snakeFood&&head.x===snakeFood.x&&head.y===snakeFood.y){const pts=snakeFood.type==='💎'?30:10;snakeScore2+=pts;snakeGrowth+=snakeFood.type==='💎'?3:1;addScore(pts,mx,my);document.getElementById('snake-score').textContent=snakeScore2;placeSnakeFood();}else if(snakeGrowth>0){snakeGrowth--;}else{snakeArr.pop();}document.getElementById('snake-len').textContent=snakeArr.length;}
 snakeAF=requestAnimationFrame(()=>{setTimeout(runSnake,snakeRunning?100:99999);});}
 document.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)&&snakeRunning)e.preventDefault();});
 
-// ─── PLANET MATCH ───
 const matchPairs=[{planet:'Jupiter 🪐',fact:'Has 95 known moons'},{planet:'Venus ♀',fact:'Hottest planet'},{planet:'Saturn 🪐',fact:'Famous ring system'},{planet:'Neptune 🔵',fact:'Windiest: 2,100 km/h'},{planet:'Mars 🔴',fact:'Home to Olympus Mons'},{planet:'Mercury ☿',fact:'Closest to the Sun'}];
 let matchSel=null,matchMatched2=0;
 function initMatch(){matchSel=null;matchMatched2=0;const left=document.getElementById('match-left'),right=document.getElementById('match-right');left.innerHTML='';right.innerHTML='';document.getElementById('match-result').textContent='';const shP=[...matchPairs].sort(()=>Math.random()-.5);const shF=[...matchPairs].sort(()=>Math.random()-.5);shP.forEach(p=>{const el=document.createElement('div');el.className='match-item';el.textContent=p.planet;el.dataset.id=matchPairs.findIndex(x=>x.planet===p.planet);el.dataset.type='planet';el.onclick=()=>handleMatch(el);left.appendChild(el);});shF.forEach(p=>{const el=document.createElement('div');el.className='match-item';el.textContent=p.fact;el.dataset.id=matchPairs.findIndex(x=>x.fact===p.fact);el.dataset.type='fact';el.onclick=()=>handleMatch(el);right.appendChild(el);});}
 function handleMatch(el){if(el.classList.contains('matched'))return;if(!matchSel){matchSel=el;el.classList.add('sel');return;}if(matchSel===el){matchSel.classList.remove('sel');matchSel=null;return;}if(matchSel.dataset.id===el.dataset.id){matchSel.classList.remove('sel');matchSel.classList.add('matched');el.classList.add('matched');matchMatched2++;addScore(15,mx,my);if(matchMatched2===matchPairs.length){document.getElementById('match-result').innerHTML='<span style="color:var(--green)">🎉 All matched! +50</span>';addScore(50,mx,my);unlockAch('Match Master');launchConfetti();}matchSel=null;}else{el.classList.add('bad');matchSel.classList.add('bad');const prev=matchSel;matchSel=null;setTimeout(()=>{el.classList.remove('bad');prev.classList.remove('sel','bad');},600);}}
 
-// ─── QUIZ BLITZ ───
 const blitzData=[{q:"Planets in our solar system?",opts:["7","8","9","10"],a:1},{q:"Largest planet?",opts:["Saturn","Jupiter","Neptune","Uranus"],a:1},{q:"Distance Earth to Moon (avg)?",opts:["100,000 km","384,400 km","1 million km","4 million km"],a:1},{q:"What causes a solar eclipse?",opts:["Moon blocks the Sun","Earth blocks Sun","Sun goes dark","Asteroid passes"],a:0},{q:"Sun is classified as?",opts:["Red giant","Neutron star","Yellow dwarf","White dwarf"],a:2},{q:"Earth's orbital period around Sun?",opts:["24 hours","30 days","365.25 days","100 days"],a:2},{q:"Which planet spins on its side?",opts:["Saturn","Neptune","Venus","Uranus"],a:3},{q:"Closest star to Earth?",opts:["Sirius","Betelgeuse","Proxima Centauri","Vega"],a:2},{q:"Saturn's rings are mainly?",opts:["Rock and iron","Ice and rock","Gas","Dust"],a:1},{q:"How many moons does Mars have?",opts:["0","1","2","3"],a:2},{q:"Hottest planet?",opts:["Mercury","Earth","Venus","Mars"],a:2},{q:"Year humans first landed on the Moon?",opts:["1965","1967","1969","1972"],a:2},{q:"Milky Way is?",opts:["A nebula","Our solar system","Our galaxy","A black hole"],a:2},{q:"How long is a day on Jupiter?",opts:["24 hours","10 hours","48 hours","100 hours"],a:1},{q:"A nebula is?",opts:["A dead star","Gas and dust cloud","A type of planet","A black hole"],a:1},{q:"Planet with Great Red Spot?",opts:["Saturn","Mars","Jupiter","Neptune"],a:2},{q:"Hubble is?",opts:["A planet","A space telescope","A rocket","An asteroid"],a:1},{q:"What does NASA stand for?",opts:["Nat. Air Space Admin.","Nat. Aeronautics & Space Admin.","N. American Space Agency","New Astronomy & Space Admin."],a:1},{q:"A light-year measures?",opts:["Time","Speed","Distance","Brightness"],a:2},{q:"ISS first inhabited?",opts:["1995","1998","2000","2003"],a:2}];
 let blitzIdx=0,blitzScore=0,blitzStreak=0,blitzTimer=null,blitzTime=0;
 function startBlitz(){blitzIdx=0;blitzScore=0;blitzStreak=0;document.getElementById('blitz-score').textContent='0';document.getElementById('blitz-streak').textContent='0';loadBlitz();}
 function loadBlitz(){clearInterval(blitzTimer);if(blitzIdx>=blitzData.length){document.getElementById('blitz-q').textContent=`🏆 Blitz Complete! Score: ${blitzScore}/20`;document.getElementById('blitz-opts').innerHTML='';if(blitzScore>=15)unlockAch('Quiz Master');return;}const q=blitzData[blitzIdx];document.getElementById('blitz-q').textContent=`Q${blitzIdx+1}/20: ${q.q}`;const opts=document.getElementById('blitz-opts');opts.innerHTML='';blitzTime=12;document.getElementById('blitz-timer').style.width='100%';document.getElementById('blitz-timer').style.background='linear-gradient(90deg,var(--green),var(--gold))';q.opts.forEach((o,i)=>{const b=document.createElement('div');b.className='sq-opt';b.textContent=o;b.onclick=()=>answerBlitz(i,q.a,b);opts.appendChild(b);});blitzTimer=setInterval(()=>{blitzTime--;document.getElementById('blitz-timer').style.width=(blitzTime/12*100)+'%';if(blitzTime<=4)document.getElementById('blitz-timer').style.background='linear-gradient(90deg,#f87171,#ff8800)';if(blitzTime<=0){clearInterval(blitzTimer);document.querySelectorAll('#blitz-opts .sq-opt').forEach((b,i)=>{if(i===q.a)b.classList.add('correct');b.onclick=null;});blitzStreak=0;document.getElementById('blitz-streak').textContent='0';blitzIdx++;setTimeout(loadBlitz,1000);}},1000);}
 function answerBlitz(i,correct,el){clearInterval(blitzTimer);document.querySelectorAll('#blitz-opts .sq-opt').forEach((b,idx)=>{b.onclick=null;if(idx===correct)b.classList.add('correct');});if(i===correct){el.classList.add('correct');blitzScore++;blitzStreak++;const bonus=Math.max(5,blitzTime*2);addScore(bonus,mx,my);}else{el.classList.add('wrong');blitzStreak=0;}document.getElementById('blitz-score').textContent=blitzScore;document.getElementById('blitz-streak').textContent=blitzStreak;blitzIdx++;setTimeout(loadBlitz,900);}
 
-// ─── NEBULA WORD CLOUD ───
 const nebWords=[{w:'QUASAR',def:'An extremely luminous active galactic nucleus powered by a supermassive black hole.',c:'#a855f7'},{w:'PULSAR',def:'A rapidly rotating neutron star emitting electromagnetic beams — like a cosmic lighthouse.',c:'#00f7ff'},{w:'PARSEC',def:'A unit of distance equal to about 3.26 light-years. Used for interstellar distances.',c:'#ffd700'},{w:'MAGNETAR',def:'A neutron star with an extremely powerful magnetic field — strongest known in the universe.',c:'#f472b6'},{w:'ACCRETION',def:'Matter spiraling into a massive object like a black hole, releasing enormous energy.',c:'#fb923c'},{w:'REDSHIFT',def:'Lengthening of light wavelengths as objects move away — key evidence the universe is expanding.',c:'#4ade80'},{w:'DARK MATTER',def:'Invisible matter that exerts gravity but emits no light — making up ~27% of the universe.',c:'#c084fc'},{w:'DARK ENERGY',def:'A mysterious force driving the accelerating expansion of the universe — ~68% of the cosmos.',c:'#60a5fa'},{w:'SINGULARITY',def:'A point of infinite density — at the center of a black hole or at the Big Bang.',c:'#818cf8'},{w:'PERIHELION',def:"The point in a planet's orbit closest to the Sun. Earth reaches perihelion in early January.",c:'#34d399'},{w:'EVENT HORIZON',def:'The boundary around a black hole beyond which nothing — not even light — can escape.',c:'#f87171'},{w:'INFLATION',def:'A period of extremely rapid expansion just after the Big Bang.',c:'#fbbf24'}];
 function buildNebCloud(){const cloud=document.getElementById('neb-cloud');if(!cloud||cloud._built)return;cloud._built=true;nebWords.forEach(item=>{const el=document.createElement('div');el.className='neb-word';el.textContent=item.w;el.style.color=item.c;el.style.borderColor=item.c+'44';el.style.fontSize=(.62+Math.random()*.42)+'rem';el.onclick=()=>{document.getElementById('neb-def').innerHTML=`<strong style="color:${item.c};font-family:'Orbitron',monospace;">${item.w}</strong> — ${item.def}`;addScore(5,mx,my);toast(`${item.w} explored! +5`);};cloud.appendChild(el);});}
 
-// ─── COMET CATCH ───
 let cometRunning=false,cometCtx,comets=[],cometScore2=0,cometMisses=0,cometTime=30,cometTimerInt=null;
 function initComet(){const c=document.getElementById('comet-canvas');if(!c)return;cometCtx=c.getContext('2d');drawCometStatic();}
 function drawCometStatic(){cometCtx.fillStyle='#000010';cometCtx.fillRect(0,0,600,360);cometCtx.fillStyle='rgba(0,247,255,.5)';cometCtx.font='14px Orbitron,monospace';cometCtx.textAlign='center';cometCtx.fillText('Press Start to Catch Comets! (Don\'t click asteroids!)',300,175);}
@@ -1372,9 +1211,6 @@ function spawnComet(){const isAsteroid=Math.random()<.25;comets.push({x:Math.ran
 function runComet(){cometCtx.fillStyle='rgba(0,0,12,.88)';cometCtx.fillRect(0,0,600,360);for(let i=0;i<20;i++){cometCtx.fillStyle='rgba(255,255,255,.18)';cometCtx.fillRect(Math.sin(i*337.7)*300+300,Math.sin(i*211.3)*180+180,1,1);}if(cometRunning&&Math.random()<.04)spawnComet();for(let i=comets.length-1;i>=0;i--){const c=comets[i];c.y+=c.vy;c.x+=Math.sin(c.y*.02)*1.5;c.scale=c.clicked?c.scale*.85:1;if(c.y>380||c.scale<.05){comets.splice(i,1);continue;}cometCtx.save();cometCtx.translate(c.x,c.y);cometCtx.scale(c.scale,c.scale);cometCtx.font='28px serif';cometCtx.textAlign='center';if(c.type==='comet'){cometCtx.shadowColor='#00f7ff';cometCtx.shadowBlur=10;}cometCtx.fillText(c.emoji,0,0);cometCtx.shadowBlur=0;cometCtx.restore();}if(cometRunning)cometAF=requestAnimationFrame(runComet);}
 document.getElementById('comet-canvas').addEventListener('click',e=>{if(!cometRunning)return;const r=document.getElementById('comet-canvas').getBoundingClientRect();const cx=e.clientX-r.left,cy=e.clientY-r.top;for(let i=comets.length-1;i>=0;i--){const c=comets[i];if(!c.clicked&&Math.sqrt((cx-c.x)**2+(cy-c.y)**2)<22){c.clicked=true;if(c.type==='comet'){cometScore2++;addScore(10,e.clientX,e.clientY);document.getElementById('comet-score').textContent=cometScore2;}else{cometMisses++;document.getElementById('comet-misses').textContent=`${cometMisses}/5`;if(cometMisses>=5){clearInterval(cometTimerInt);cometRunning=false;document.getElementById('comet-result').innerHTML=`❌ Too many asteroids hit! Score: ${cometScore2}`;}}break;}}});
 
-// ═══════════════════════════════════════════════════
-//  MODAL + LIGHTBOX
-// ═══════════════════════════════════════════════════
 function openModal(title,icon,text){document.getElementById('modal-title').textContent=title;document.getElementById('modal-icon').textContent=icon;document.getElementById('modal-text').textContent=text;document.getElementById('info-modal').classList.add('open');}
 function closeModal(){document.getElementById('info-modal').classList.remove('open');}
 const lbImages=['https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/internal_resources/371/Spiral_Galaxy-1.jpeg?w=800','https://assets.science.nasa.gov/dynamicimage/assets/science/astro/universe/2023/09/swift_M31_mosaic_1600.webp','https://canadiangeographic.ca/wp-content/uploads/2022/07/STScI-01G7ETNMR8CBHQQ64R4CVA1E6T-1440x834.jpg'];
@@ -1384,19 +1220,10 @@ function closeLB(){document.getElementById('lightbox').classList.remove('open');
 function changeLB(d){lbCurrent=(lbCurrent+d+lbImages.length)%lbImages.length;document.getElementById('lb-img').src=lbImages[lbCurrent];}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
 
-// ═══════════════════════════════════════════════════
-//  SPEECH
-// ═══════════════════════════════════════════════════
 function speakPage(page){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const texts={home:"Welcome to Cosmic Odyssey Ultra! Embark on an epic voyage through the universe. Earn XP, unlock achievements, and explore stars, galaxies, the solar system, and much more!",stars:"Stars are giant balls of hot plasma undergoing nuclear fusion. They come in many types, from tiny red dwarfs to brilliant blue supergiants. Try the telescope, classify your own star, name a star, and play the memory game!",constellations:"Constellations are patterns of stars named by ancient civilizations. Draw your own, learn the myths, decode alien signals, and test yourself in the identification quiz!",galaxies:"Galaxies are massive systems containing billions of stars. Build your own galaxy, trigger supernovas, watch collisions, explore the black hole visualizer, and test your knowledge!",solarsystem:"Our solar system contains eight planets orbiting the Sun. Discover your weight on other planets, watch the gravity drop race, compare planets side by side, and drag them into the correct order!",expeditions:"Humanity has been exploring space since 1957. Launch the rocket, experience the soundboard with eight rich sounds, race the clock in the speed quiz, unscramble space words, and complete the trivia challenge!"};const u=new SpeechSynthesisUtterance(texts[page]||'Welcome to the cosmos!');u.rate=.92;u.pitch=1;speechSynthesis.speak(u);}
 
-// ═══════════════════════════════════════════════════
-//  KEYBOARD
-// ═══════════════════════════════════════════════════
 document.addEventListener('keydown',e=>{if(e.key==='/')askOracle();if(e.key==='Escape'){closeModal();closeLB();}});
 
-// ═══════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════
 window.addEventListener('load',()=>{
   classifyStar();
   initMemory();
@@ -1404,9 +1231,7 @@ window.addEventListener('load',()=>{
   document.getElementById('speed-needle').style.transform='rotate(-130deg)';
   toast('Welcome, Explorer! Click anything to earn Cosmic Score ✨');
   loadState();
-  // Touch on mobile for oracle
   document.getElementById('oracle').addEventListener('touchstart',e=>{e.preventDefault();askOracle();});
-  // Snake touch controls
   let touchStartX=0,touchStartY=0;
   document.addEventListener('touchstart',e=>{if(e.target.closest('#snake-canvas')){touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;}});
   document.addEventListener('touchend',e=>{if(!snakeRunning||!e.target.closest('#snake-canvas'))return;const dx=e.changedTouches[0].clientX-touchStartX;const dy=e.changedTouches[0].clientY-touchStartY;if(Math.abs(dx)>Math.abs(dy)){snakeDir=dx>0?{x:1,y:0}:{x:-1,y:0};}else{snakeDir=dy>0?{x:0,y:1}:{x:0,y:-1};}});
