@@ -2109,7 +2109,11 @@ nav a{font-size:.6rem;}
     <p id="modal-text"></p>
   </div>
 </div>
+<audio id="bg-music" loop>
+  <source src="AMONG US - OST - MAIN THEME SONG [HQ].mp3" type="audio/mpeg">
+</audio>
 
+<button id="music-btn" onclick="toggleMusic()" style="position:fixed;bottom:20px;right:20px;z-index:400;border-radius:50%;width:44px;height:44px;padding:0;font-size:1.2rem;">🔇</button>
 
 <!-- AI COSMOS CHATBOT -->
 <button id="ai-cosmos-btn" onclick="toggleAIPanel()" title="Ask the Cosmos AI">🤖</button>
@@ -2117,7 +2121,7 @@ nav a{font-size:.6rem;}
   <div class="ai-panel-header">
     <span style="font-size:1.1rem;">🌌</span>
     <strong>ASK THE COSMOS</strong>
-    <span style="font-size:.6rem;color:var(--dim);flex:1;">Powered by MarcaSnabb AI</span>
+    <span style="font-size:.6rem;color:var(--dim);flex:1;">Powered by Claude AI</span>
     <button class="ai-close-btn" onclick="toggleAIPanel()">✕</button>
   </div>
   <div id="ai-chat-messages">
@@ -2991,33 +2995,9 @@ document.addEventListener('keydown',e=>{if(e.key==='/')askOracle();if(e.key==='E
     });
   }
 
-  let current=0, phase=0;
-  const phaseTargets=[22,45,62,81,99];
-  const speeds=[0.055,0.038,0.028,0.018,0.01];
-
-  function tickLoader(){
-    if(phase<phaseTargets.length && current>=phaseTargets[phase]-1.5){
-      phase++;
-      if(msgEl && msgs[phase]){
-        msgEl.textContent=msgs[phase];
-        msgEl.style.animation='none';
-        void msgEl.offsetWidth;
-        msgEl.style.animation='msgFade .4s ease';
-      }
-    }
-    const target = phase<phaseTargets.length ? phaseTargets[phase] : 99;
-    current += (target - current) * (speeds[Math.min(phase,speeds.length-1)]);
-    setLoaderPct(Math.min(current,99.5));
-    if(current < 99) setTimeout(tickLoader, 38);
-    else {
-      setTimeout(()=>{
-        setLoaderPct(100);
-        if(msgEl) msgEl.textContent='🚀 All systems go! Launching…';
-        setTimeout(finishLoader, 850);
-      }, 250);
-    }
-  }
-  setTimeout(tickLoader, 350);
+  setLoaderPct(100);
+  if(msgEl) msgEl.textContent='🚀 All systems go! Launching…';
+  setTimeout(finishLoader, 1000);
 })();
 
 function finishLoader(){
@@ -5443,4 +5423,3 @@ const BgMusic = (() => {
 </script>
 </body>
 </html>
-
