@@ -2109,11 +2109,7 @@ nav a{font-size:.6rem;}
     <p id="modal-text"></p>
   </div>
 </div>
-<audio id="bg-music" loop>
-  <source src="AMONG US - OST - MAIN THEME SONG [HQ].mp3" type="audio/mpeg">
-</audio>
 
-<button id="music-btn" onclick="toggleMusic()" style="position:fixed;bottom:20px;right:20px;z-index:400;border-radius:50%;width:44px;height:44px;padding:0;font-size:1.2rem;">🔇</button>
 
 <!-- AI COSMOS CHATBOT -->
 <button id="ai-cosmos-btn" onclick="toggleAIPanel()" title="Ask the Cosmos AI">🤖</button>
@@ -5004,6 +5000,445 @@ window.addEventListener('load',()=>{
     'Word Wizard':'📝','Mining Baron':'⛏️','Xenobiologist':'👽','Space Tourist':'🎴'
   });
 });
+
+const CosmicSound = (() => {
+  let ctx = null;
+  let enabled = true;
+
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  function play(type, opts = {}) {
+    if (!enabled) return;
+    try {
+      const ac = getCtx();
+      const { freq = 440, freq2, duration = 0.18, vol = 0.22, wave = 'sine', detune = 0, attack = 0.005, decay = 0.08, sustain = 0.4, release = 0.12 } = opts;
+
+      const osc = ac.createOscillator();
+      const gain = ac.createGain();
+      const now = ac.currentTime;
+
+      osc.type = wave;
+      osc.frequency.setValueAtTime(freq, now);
+      if (freq2) osc.frequency.exponentialRampToValueAtTime(freq2, now + duration);
+      if (detune) osc.detune.setValueAtTime(detune, now);
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(vol, now + attack);
+      gain.gain.linearRampToValueAtTime(vol * sustain, now + attack + decay);
+      gain.gain.linearRampToValueAtTime(0, now + duration + release);
+
+      osc.connect(gain);
+      gain.connect(ac.destination);
+      osc.start(now);
+      osc.stop(now + duration + release + 0.02);
+    } catch(e) {}
+  }
+
+  function chord(freqs, opts = {}) {
+    freqs.forEach((f, i) => play('tone', { ...opts, freq: f, vol: (opts.vol || 0.15) / freqs.length * 1.8, attack: 0.005 + i * 0.01 }));
+  }
+
+  const sounds = {
+    click:      () => play('tone', { freq: 880, freq2: 1100, duration: 0.07, vol: 0.15, wave: 'sine', attack: 0.002, decay: 0.03, release: 0.05 }),
+    nav:        () => play('tone', { freq: 660, freq2: 880, duration: 0.1, vol: 0.14, wave: 'triangle', attack: 0.003, release: 0.08 }),
+    button:     () => play('tone', { freq: 520, freq2: 700, duration: 0.12, vol: 0.18, wave: 'sine', attack: 0.004, release: 0.09 }),
+    success:    () => { play('tone', { freq: 523, duration: 0.14, vol: 0.2, wave: 'sine' }); setTimeout(() => play('tone', { freq: 784, duration: 0.16, vol: 0.2, wave: 'sine' }), 100); setTimeout(() => play('tone', { freq: 1047, duration: 0.2, vol: 0.2, wave: 'sine' }), 200); },
+    wrong:      () => play('tone', { freq: 220, freq2: 110, duration: 0.25, vol: 0.2, wave: 'sawtooth', attack: 0.01, decay: 0.1, release: 0.15 }),
+    warp:       () => { play('tone', { freq: 80, freq2: 40, duration: 0.6, vol: 0.25, wave: 'sawtooth', attack: 0.03, release: 0.4 }); play('tone', { freq: 200, freq2: 2000, duration: 0.5, vol: 0.12, wave: 'sine', attack: 0.01, release: 0.3 }); },
+    score:      () => play('tone', { freq: 1200, freq2: 1600, duration: 0.1, vol: 0.12, wave: 'sine', attack: 0.002, release: 0.07 }),
+    achieve:    () => { chord([523, 659, 784, 1047], { duration: 0.4, vol: 0.15, wave: 'sine', attack: 0.01, release: 0.3 }); },
+    toggle:     () => play('tone', { freq: 750, freq2: 900, duration: 0.09, vol: 0.14, wave: 'square', attack: 0.002, release: 0.06, sustain: 0.2 }),
+    slider:     () => play('tone', { freq: 600 + Math.random() * 400, duration: 0.06, vol: 0.08, wave: 'sine', attack: 0.001, release: 0.04 }),
+    modal:      () => play('tone', { freq: 440, freq2: 660, duration: 0.2, vol: 0.18, wave: 'sine', attack: 0.01, release: 0.15 }),
+    close:      () => play('tone', { freq: 660, freq2: 330, duration: 0.15, vol: 0.15, wave: 'triangle', attack: 0.003, release: 0.1 }),
+    space:      () => play('tone', { freq: 300 + Math.random() * 500, freq2: 100, duration: 0.3, vol: 0.1, wave: 'sine', attack: 0.05, release: 0.25 }),
+    download:   () => { play('tone', { freq: 400, freq2: 800, duration: 0.15, vol: 0.18, wave: 'sine' }); setTimeout(() => play('tone', { freq: 1000, duration: 0.12, vol: 0.15, wave: 'sine' }), 130); },
+    type:       () => play('tone', { freq: 1400 + Math.random() * 200, duration: 0.04, vol: 0.06, wave: 'square', attack: 0.001, release: 0.03, sustain: 0.1 }),
+    soundboard: () => play('tone', { freq: 150 + Math.random() * 800, freq2: 80 + Math.random() * 400, duration: 0.35, vol: 0.2, wave: ['sine','triangle','sawtooth'][Math.floor(Math.random()*3)], attack: 0.01, release: 0.25 }),
+    nebula:     () => play('tone', { freq: 200 + Math.random() * 300, freq2: 800 + Math.random() * 400, duration: 0.4, vol: 0.16, wave: 'sine', attack: 0.02, release: 0.3 }),
+    planet:     () => { play('tone', { freq: 120 + Math.random()*60, freq2: 80, duration: 0.5, vol: 0.18, wave: 'sine', attack: 0.02, release: 0.35 }); play('tone', { freq: 800, freq2: 1600, duration: 0.15, vol: 0.1, wave: 'triangle', attack: 0.005, release: 0.1 }); },
+  };
+
+  function routeClick(el) {
+    const tag = el.tagName.toLowerCase();
+    const cls = el.className || '';
+    const id  = el.id || '';
+    const txt = (el.textContent || '').trim().toLowerCase();
+
+    if (id === 'warp-btn' || txt.includes('warp')) return sounds.warp();
+    if (tag === 'a' && el.closest('nav')) return sounds.nav();
+    if (cls.includes('close') || txt === '✕' || txt === '×' || id.includes('close') || id.includes('lb-close')) return sounds.close();
+    if (id.includes('modal') || cls.includes('modal')) return sounds.modal();
+    if (txt.includes('download') || id.includes('download')) return sounds.download();
+    if (cls.includes('snd-btn') || cls.includes('soundboard')) return sounds.soundboard();
+    if (cls.includes('sq-opt') || cls.includes('match-item') || cls.includes('neb-word')) return sounds.button();
+    if (cls.includes('correct')) return sounds.success();
+    if (cls.includes('wrong') || cls.includes('bad')) return sounds.wrong();
+    if (cls.includes('scale-item') || cls.includes('orbit') || cls.includes('planet')) return sounds.planet();
+    if (tag === 'figure' || el.closest('figure')) return sounds.space();
+    if (cls.includes('ach-badge') || cls.includes('score')) return sounds.achieve();
+    if (tag === 'a') return sounds.nav();
+    if (tag === 'button' || cls.includes('btn') || cls.includes('button')) return sounds.button();
+    if (el.style.cursor === 'pointer' || getComputedStyle(el).cursor === 'pointer') return sounds.click();
+    return sounds.click();
+  }
+
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('button, a, [onclick], .btn, .sq-opt, .match-item, .neb-word, .snd-btn, .scale-item, figure, .gallery figure, .ach-badge, .close-modal, #lb-close, #lb-prev, #lb-next') || e.target;
+    routeClick(el);
+  }, true);
+
+  document.addEventListener('input', (e) => {
+    if (!enabled) return;
+    if (e.target.type === 'range') sounds.slider();
+    else if (e.target.type === 'text' || e.target.tagName === 'TEXTAREA') sounds.type();
+  }, true);
+
+  function addToggle() {
+    const btn = document.createElement('button');
+    btn.id = 'sound-toggle';
+    btn.title = 'Toggle sound effects';
+    btn.textContent = '🔊';
+    btn.style.cssText = `
+      position:fixed;bottom:20px;left:20px;z-index:9999;
+      background:rgba(0,0,18,0.88);border:1.5px solid rgba(0,247,255,0.4);
+      color:#00f7ff;font-size:1rem;width:38px;height:38px;border-radius:50%;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 14px rgba(0,247,255,0.25);transition:all 0.2s;
+      line-height:1;padding:0;
+    `;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      enabled = !enabled;
+      btn.textContent = enabled ? '🔊' : '🔇';
+      btn.style.borderColor = enabled ? 'rgba(0,247,255,0.4)' : 'rgba(255,255,255,0.15)';
+      btn.style.color = enabled ? '#00f7ff' : 'rgba(255,255,255,0.3)';
+    });
+    document.body.appendChild(btn);
+  }
+
+  const _origAddScore = typeof addScore === 'function' ? addScore : null;
+  if (_origAddScore) {
+    window.addScore = function(pts, x, y) {
+      sounds.score();
+      return _origAddScore(pts, x, y);
+    };
+  }
+
+  const _origUnlockAch = typeof unlockAch === 'function' ? unlockAch : null;
+  if (_origUnlockAch) {
+    window.unlockAch = function(name) {
+      sounds.achieve();
+      return _origUnlockAch(name);
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', addToggle);
+  if (document.readyState !== 'loading') addToggle();
+
+  return { play: sounds, toggle: () => { enabled = !enabled; } };
+})();
+
+// ── BACKGROUND MUSIC ENGINE ──────────────────────────────────
+const BgMusic = (() => {
+  let ac = null, playing = false, nodes = [], masterGain = null;
+  let currentPreset = 'ambient';
+  let tempoInterval = null;
+
+  const presets = {
+    ambient: { label: '🌌 Deep Space', bpm: 0, baseFreqs: [55, 82.4, 110], wave: 'sine', lfoRate: 0.05, lfoDepth: 20, reverb: 0.9, detune: 5 },
+    lofi:    { label: '🪐 Cosmic Lo-fi', bpm: 72, baseFreqs: [130.8, 196, 261.6, 329.6], wave: 'triangle', lfoRate: 0.2, lfoDepth: 8, reverb: 0.6, detune: 12 },
+    epic:    { label: '🚀 Epic Orchestral', bpm: 90, baseFreqs: [65.4, 98, 130.8, 174.6], wave: 'sawtooth', lfoRate: 0.4, lfoDepth: 15, reverb: 0.75, detune: 3 },
+    synthwave: { label: '⚡ Synthwave', bpm: 110, baseFreqs: [110, 146.8, 220, 293.6], wave: 'square', lfoRate: 0.8, lfoDepth: 30, reverb: 0.4, detune: 0 },
+  };
+
+  function getAc() {
+    if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state === 'suspended') ac.resume();
+    return ac;
+  }
+
+  function makeReverb(ac, duration = 2) {
+    const len = ac.sampleRate * duration;
+    const buf = ac.createBuffer(2, len, ac.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = buf.getChannelData(c);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+    }
+    const conv = ac.createConvolver();
+    conv.buffer = buf;
+    return conv;
+  }
+
+  function stop() {
+    nodes.forEach(n => { try { n.stop && n.stop(); n.disconnect && n.disconnect(); } catch(e){} });
+    nodes = [];
+    if (tempoInterval) { clearInterval(tempoInterval); tempoInterval = null; }
+    playing = false;
+  }
+
+  function start(presetKey, vol, tempo) {
+    stop();
+    const a = getAc();
+    const p = presets[presetKey] || presets.ambient;
+    currentPreset = presetKey;
+
+    masterGain = a.createGain();
+    masterGain.gain.setValueAtTime(vol, a.currentTime);
+
+    const reverb = makeReverb(a, 2.5);
+    const dryGain = a.createGain(); dryGain.gain.value = 1 - p.reverb * 0.5;
+    const wetGain = a.createGain(); wetGain.gain.value = p.reverb * 0.6;
+
+    reverb.connect(wetGain); wetGain.connect(masterGain);
+    dryGain.connect(masterGain);
+    masterGain.connect(a.destination);
+    nodes.push(reverb, dryGain, wetGain, masterGain);
+
+    const bpm = tempo || p.bpm;
+
+    p.baseFreqs.forEach((freq, i) => {
+      const osc = a.createOscillator();
+      const g = a.createGain();
+      const lfo = a.createOscillator();
+      const lfoG = a.createGain();
+
+      osc.type = p.wave;
+      osc.frequency.value = freq;
+      osc.detune.value = (i % 2 === 0 ? 1 : -1) * p.detune;
+
+      lfo.type = 'sine';
+      lfo.frequency.value = p.lfoRate + i * 0.02;
+      lfoG.gain.value = p.lfoDepth;
+      lfo.connect(lfoG); lfoG.connect(osc.frequency);
+
+      g.gain.setValueAtTime(0, a.currentTime);
+      g.gain.linearRampToValueAtTime(0.07 / p.baseFreqs.length, a.currentTime + 1.5 + i * 0.4);
+
+      osc.connect(g); g.connect(dryGain); g.connect(reverb);
+      lfo.start(); osc.start();
+      nodes.push(osc, g, lfo, lfoG);
+    });
+
+    if (bpm > 0) {
+      const beatLen = 60 / bpm;
+      const rhythmFreqs = [p.baseFreqs[0] * 2, p.baseFreqs[1] * 1.5, p.baseFreqs[2] || p.baseFreqs[0] * 3];
+      let beat = 0;
+      tempoInterval = setInterval(() => {
+        if (!playing) return;
+        const now = a.currentTime;
+        const rf = rhythmFreqs[beat % rhythmFreqs.length];
+        const o = a.createOscillator();
+        const g = a.createGain();
+        o.type = p.wave === 'square' ? 'square' : 'triangle';
+        o.frequency.value = rf;
+        g.gain.setValueAtTime(0.06, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + beatLen * 0.6);
+        o.connect(g); g.connect(dryGain); g.connect(reverb);
+        o.start(now); o.stop(now + beatLen * 0.65);
+        beat++;
+      }, beatLen * 1000);
+    }
+
+    playing = true;
+  }
+
+  let audioEl = null;
+
+  function setVolume(v) {
+    if (masterGain) masterGain.gain.setTargetAtTime(v, getAc().currentTime, 0.1);
+    if (audioEl) audioEl.volume = v;
+  }
+
+  function stopMp3() {
+    if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; audioEl = null; }
+  }
+
+  function playMp3(filename, vol, onError) {
+    stop(); stopMp3();
+    audioEl = new Audio(filename);
+    audioEl.loop = true;
+    audioEl.volume = vol;
+    audioEl.play().catch(onError);
+    playing = true;
+  }
+
+  function buildUI() {
+    const p2 = presets;
+    const panel = document.createElement('div');
+    panel.id = 'bg-music-panel';
+    panel.style.cssText = `
+      position:fixed;bottom:66px;left:20px;z-index:9999;
+      background:rgba(0,0,18,0.95);border:1.5px solid rgba(168,85,247,0.5);
+      border-radius:16px;padding:12px 14px;width:222px;
+      box-shadow:0 0 22px rgba(168,85,247,0.25);
+      font-family:'Orbitron',monospace;font-size:0.6rem;color:#e2e8ff;
+      display:none;backdrop-filter:blur(12px);
+    `;
+
+    const title = document.createElement('div');
+    title.textContent = '♪ BG MUSIC';
+    title.style.cssText = 'color:#a855f7;letter-spacing:.1em;margin-bottom:8px;font-size:0.58rem;';
+
+    // ── MP3 section ──
+    const mp3Label = document.createElement('div');
+    mp3Label.textContent = 'YOUR MP3 FILENAME';
+    mp3Label.style.cssText = 'color:#a855f7;margin-bottom:4px;letter-spacing:.07em;font-size:0.55rem;';
+
+    const mp3Row = document.createElement('div');
+    mp3Row.style.cssText = 'display:flex;gap:5px;margin-bottom:4px;';
+
+    const mp3Input = document.createElement('input');
+    mp3Input.type = 'text';
+    mp3Input.placeholder = 'e.g. mysong.mp3';
+    mp3Input.style.cssText = `
+      flex:1;background:rgba(0,0,30,0.9);border:1px solid rgba(168,85,247,0.4);
+      border-radius:8px;color:#e2e8ff;padding:5px 8px;font-size:0.56rem;
+      font-family:'Space Mono',monospace;outline:none;
+    `;
+
+    const mp3PlayBtn = document.createElement('button');
+    mp3PlayBtn.textContent = '▶';
+    mp3PlayBtn.style.cssText = `
+      background:rgba(168,85,247,0.25);border:1px solid rgba(168,85,247,0.5);
+      color:#c084fc;border-radius:8px;padding:5px 10px;
+      font-family:'Orbitron',monospace;cursor:pointer;transition:all .2s;font-size:0.7rem;
+    `;
+
+    const mp3Status = document.createElement('div');
+    mp3Status.style.cssText = 'font-size:0.51rem;color:#6b7280;margin-bottom:8px;min-height:13px;letter-spacing:.03em;';
+    mp3Status.textContent = '📁 Put MP3 in same folder as this HTML file';
+
+    mp3Row.append(mp3Input, mp3PlayBtn);
+
+    const divider = document.createElement('div');
+    divider.style.cssText = 'border-top:1px solid rgba(168,85,247,0.2);margin:8px 0 6px;';
+
+    const synthLabel = document.createElement('div');
+    synthLabel.textContent = 'OR SYNTH PRESETS';
+    synthLabel.style.cssText = 'color:#a855f7;margin-bottom:6px;letter-spacing:.07em;font-size:0.55rem;';
+
+    // ── Preset buttons ──
+    const presetWrap = document.createElement('div');
+    presetWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;';
+    Object.entries(p2).forEach(([key, pr]) => {
+      const btn = document.createElement('button');
+      btn.textContent = pr.label;
+      btn.dataset.key = key;
+      btn.style.cssText = `
+        background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.35);
+        color:#c084fc;border-radius:8px;padding:4px 7px;font-size:0.51rem;
+        font-family:'Orbitron',monospace;cursor:pointer;transition:all .2s;
+      `;
+      btn.onmouseenter = () => btn.style.background = 'rgba(168,85,247,0.25)';
+      btn.onmouseleave = () => btn.style.background = currentPreset === key ? 'rgba(168,85,247,0.3)' : 'rgba(168,85,247,0.1)';
+      btn.onclick = () => {
+        stopMp3(); mp3Status.textContent = '📁 Put MP3 in same folder as this HTML file'; mp3Status.style.color = '#6b7280';
+        currentPreset = key;
+        presetWrap.querySelectorAll('button').forEach(b => b.style.background = 'rgba(168,85,247,0.1)');
+        btn.style.background = 'rgba(168,85,247,0.3)';
+        if (playing) start(key, +volSlider.value / 100, +tempoSlider.value);
+      };
+      presetWrap.appendChild(btn);
+    });
+
+    // ── Volume ──
+    const volLabel = document.createElement('div');
+    volLabel.style.cssText = 'display:flex;justify-content:space-between;margin-bottom:3px;color:#a855f7;font-size:0.55rem;';
+    volLabel.innerHTML = '<span>VOLUME</span><span id="bm-vol-val">60%</span>';
+
+    const volSlider = document.createElement('input');
+    volSlider.type = 'range'; volSlider.min = 0; volSlider.max = 100; volSlider.value = 60;
+    volSlider.style.cssText = 'width:100%;accent-color:#a855f7;margin-bottom:8px;';
+    volSlider.oninput = () => {
+      document.getElementById('bm-vol-val').textContent = volSlider.value + '%';
+      setVolume(+volSlider.value / 100);
+    };
+
+    // ── Tempo ──
+    const tempoLabel = document.createElement('div');
+    tempoLabel.style.cssText = 'display:flex;justify-content:space-between;margin-bottom:3px;color:#a855f7;font-size:0.55rem;';
+    tempoLabel.innerHTML = '<span>TEMPO</span><span id="bm-tempo-val">auto</span>';
+
+    const tempoSlider = document.createElement('input');
+    tempoSlider.type = 'range'; tempoSlider.min = 40; tempoSlider.max = 160; tempoSlider.value = 90;
+    tempoSlider.style.cssText = 'width:100%;accent-color:#a855f7;margin-bottom:10px;';
+    tempoSlider.oninput = () => {
+      document.getElementById('bm-tempo-val').textContent = tempoSlider.value + ' BPM';
+      if (playing && !audioEl) start(currentPreset, +volSlider.value / 100, +tempoSlider.value);
+    };
+
+    // ── Play/Stop ──
+    const playBtn = document.createElement('button');
+    playBtn.textContent = '▶ PLAY SYNTH';
+    playBtn.style.cssText = `
+      width:100%;background:linear-gradient(135deg,rgba(168,85,247,0.3),rgba(244,114,182,0.2));
+      border:1px solid rgba(168,85,247,0.6);color:#c084fc;border-radius:10px;
+      padding:7px;font-family:'Orbitron',monospace;font-size:0.58rem;cursor:pointer;
+      letter-spacing:.07em;transition:all .2s;
+    `;
+
+    function resetPlayBtn() {
+      playBtn.textContent = '▶ PLAY SYNTH';
+      playBtn.style.borderColor = 'rgba(168,85,247,0.6)';
+      playBtn.style.boxShadow = 'none';
+    }
+
+    mp3PlayBtn.onclick = () => {
+      const fname = mp3Input.value.trim();
+      if (!fname) { mp3Status.textContent = '⚠ Enter a filename first'; mp3Status.style.color = '#f87171'; return; }
+      playMp3(fname, +volSlider.value / 100, () => {
+        mp3Status.textContent = '⚠ File not found in same folder'; mp3Status.style.color = '#f87171'; audioEl = null; playing = false;
+      });
+      mp3Status.textContent = '♪ Playing: ' + fname; mp3Status.style.color = '#4ade80';
+      resetPlayBtn();
+    };
+
+    playBtn.onclick = () => {
+      if (playing) {
+        stop(); stopMp3(); resetPlayBtn();
+        mp3Status.textContent = '📁 Put MP3 in same folder as this HTML file'; mp3Status.style.color = '#6b7280';
+      } else {
+        stopMp3();
+        start(currentPreset, +volSlider.value / 100, +tempoSlider.value);
+        playBtn.textContent = '⏹ STOP'; playBtn.style.borderColor = '#a855f7'; playBtn.style.boxShadow = '0 0 14px rgba(168,85,247,0.4)';
+      }
+    };
+
+    panel.append(title, mp3Label, mp3Row, mp3Status, divider, synthLabel, presetWrap, volLabel, volSlider, tempoLabel, tempoSlider, playBtn);
+    document.body.appendChild(panel);
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.id = 'bg-music-toggle';
+    toggleBtn.textContent = '♪';
+    toggleBtn.title = 'Background Music';
+    toggleBtn.style.cssText = `
+      position:fixed;bottom:66px;left:66px;z-index:9999;
+      background:rgba(0,0,18,0.88);border:1.5px solid rgba(168,85,247,0.4);
+      color:#a855f7;font-size:1rem;width:38px;height:38px;border-radius:50%;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 14px rgba(168,85,247,0.25);transition:all 0.2s;
+      line-height:1;padding:0;
+    `;
+    toggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      const open = panel.style.display === 'block';
+      panel.style.display = open ? 'none' : 'block';
+      toggleBtn.style.borderColor = open ? 'rgba(168,85,247,0.4)' : '#a855f7';
+      toggleBtn.style.boxShadow = open ? '0 0 14px rgba(168,85,247,0.25)' : '0 0 22px rgba(168,85,247,0.6)';
+    };
+    document.body.appendChild(toggleBtn);
+  }
+
+  document.addEventListener('DOMContentLoaded', buildUI);
+  if (document.readyState !== 'loading') buildUI();
+
+  return { start, stop, setVolume };
+})();
 
 </script>
 </body>
