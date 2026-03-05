@@ -92,7 +92,7 @@ body{font-family:'Space Grotesk',sans-serif;background:#000008;color:var(--text)
 }
 @keyframes msgFade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
  
-.loader-track-wrap{width:min(420px,80vw);position:relative;}
+.loader-track-wrap{width:min(260px,60vw);position:relative;}
 
 .loader-track{
   width:100%;height:14px;
@@ -725,6 +725,216 @@ nav a{font-size:.6rem;}
 }
 .mission-badge.success{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);color:var(--green);}
 .mission-badge.ongoing{background:rgba(0,247,255,.15);border:1px solid rgba(0,247,255,.3);color:var(--neon);}
+
+/* ══════════════════════════════════════════
+   LIVE DATA PAGE
+══════════════════════════════════════════ */
+.apod-wrap{border-radius:18px;overflow:hidden;border:1px solid rgba(255,215,0,.2);margin:1.2rem 0;position:relative;}
+.apod-img{width:100%;max-height:420px;object-fit:cover;display:block;cursor:zoom-in;}
+.apod-caption{padding:1rem 1.2rem;background:rgba(0,0,15,.95);border-top:1px solid rgba(255,215,0,.12);}
+.apod-title{font-family:'Orbitron',monospace;font-size:.82rem;color:var(--gold);margin-bottom:.4rem;}
+.apod-date{font-size:.65rem;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-bottom:.5rem;}
+.apod-explanation{font-size:.8rem;line-height:1.8;color:var(--text);max-height:120px;overflow-y:auto;}
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.2rem 0;}
+.live-card{background:rgba(5,5,22,.95);border:1px solid rgba(0,247,255,.18);border-radius:16px;padding:1.2rem;position:relative;overflow:hidden;}
+.live-card::after{content:'';position:absolute;top:0;right:0;width:40px;height:40px;background:radial-gradient(circle,rgba(0,247,255,.1),transparent);pointer-events:none;}
+.live-card h3{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);margin-bottom:.6rem;}
+.live-val{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--gold);margin:.3rem 0;}
+.live-sub{font-size:.72rem;color:var(--dim);line-height:1.6;}
+.iss-map{background:#000510;border-radius:14px;overflow:hidden;border:1px solid rgba(0,247,255,.2);position:relative;margin:1rem 0;}
+.iss-map canvas{display:block;width:100%;}
+.iss-coords{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--neon);text-align:center;padding:.5rem;}
+.asteroid-list{display:flex;flex-direction:column;gap:.5rem;max-height:320px;overflow-y:auto;}
+.asteroid-item{display:flex;align-items:center;gap:.8rem;padding:.6rem .9rem;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06);cursor:pointer;transition:all .2s;}
+.asteroid-item:hover{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);}
+.asteroid-name{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--text);flex:1;}
+.asteroid-dist{font-family:'JetBrains Mono',monospace;font-size:.68rem;}
+.asteroid-hazard{font-size:.55rem;font-family:'Orbitron',monospace;padding:2px 7px;border-radius:8px;}
+.hazard-yes{background:rgba(248,113,113,.2);border:1px solid rgba(248,113,113,.4);color:var(--red);}
+.hazard-no{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--green);}
+.solar-activity{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem;margin:.8rem 0;}
+.solar-stat{background:rgba(255,119,0,.06);border:1px solid rgba(255,119,0,.2);border-radius:12px;padding:.8rem;text-align:center;}
+.solar-stat-num{font-family:'JetBrains Mono',monospace;font-size:1.3rem;color:var(--orange);font-weight:700;}
+.solar-stat-label{font-size:.62rem;color:var(--dim);font-family:'Orbitron',monospace;margin-top:.2rem;}
+
+/* ══════════════════════════════════════════
+   EXOPLANET EXPLORER
+══════════════════════════════════════════ */
+.exo-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0;}
+.exo-filter{font-family:'Orbitron',monospace;font-size:.55rem;padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
+.exo-filter.active,.exo-filter:hover{background:rgba(168,85,247,.2);border-color:rgba(168,85,247,.5);color:var(--violet);}
+.exo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;margin:1rem 0;}
+.exo-card{background:rgba(5,5,22,.95);border-radius:16px;padding:1.1rem;border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.exo-card:hover{transform:translateY(-3px);box-shadow:0 10px 35px rgba(0,0,0,.5);}
+.exo-planet-visual{width:60px;height:60px;border-radius:50%;margin:0 auto .8rem;display:flex;align-items:center;justify-content:center;font-size:1.8rem;position:relative;}
+.exo-planet-visual::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid currentColor;opacity:.3;}
+.exo-name{font-family:'Orbitron',monospace;font-size:.68rem;color:var(--gold);text-align:center;margin-bottom:.5rem;}
+.exo-stat-row{display:flex;justify-content:space-between;font-size:.65rem;padding:.18rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.exo-stat-row span:first-child{color:var(--dim);}
+.exo-stat-row span:last-child{font-family:'JetBrains Mono',monospace;color:var(--text);}
+.habitability-bar{height:6px;border-radius:3px;margin-top:.6rem;background:rgba(255,255,255,.1);overflow:hidden;}
+.habitability-fill{height:100%;border-radius:3px;transition:width 1s ease;}
+.exo-hz{font-size:.55rem;font-family:'Orbitron',monospace;padding:2px 8px;border-radius:8px;margin-top:.4rem;display:inline-block;}
+.hz-yes{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);color:var(--green);}
+.hz-maybe{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:#fbbf24;}
+.hz-no{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--red);}
+.exo-detail-panel{background:rgba(2,2,20,.98);border:1px solid rgba(168,85,247,.3);border-radius:18px;padding:1.4rem;margin:1rem 0;display:none;}
+.exo-detail-panel.open{display:block;}
+.exo-comparison-bar{display:flex;align-items:center;gap:.5rem;margin:.25rem 0;}
+.exo-comparison-label{font-size:.65rem;color:var(--dim);width:100px;flex-shrink:0;}
+.exo-bar-track{flex:1;height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;}
+.exo-bar-fill{height:100%;border-radius:4px;transition:width 1s ease;}
+.exo-bar-val{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--gold);width:70px;text-align:right;}
+.hr-diagram{position:relative;margin:1rem 0;}
+#hr-canvas{border-radius:14px;cursor:crosshair;}
+
+/* ══════════════════════════════════════════
+   CREATIVE STUDIO
+══════════════════════════════════════════ */
+.studio-tabs{display:flex;gap:.4rem;margin:1rem 0;flex-wrap:wrap;}
+.studio-tab{font-family:'Orbitron',monospace;font-size:.58rem;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
+.studio-tab.active{background:linear-gradient(135deg,var(--violet),var(--pink));border-color:transparent;color:#fff;}
+.studio-panel{display:none;}
+.studio-panel.active{display:block;}
+.cosmic-address{font-family:'JetBrains Mono',monospace;margin:1rem 0;}
+.ca-level{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;border-left:3px solid;margin:.4rem 0;border-radius:0 10px 10px 0;background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;}
+.ca-level:hover{background:rgba(255,255,255,.06);}
+.ca-icon{font-size:1.4rem;}
+.ca-label{font-size:.65rem;color:var(--dim);}
+.ca-value{font-size:.82rem;color:var(--text);font-weight:600;}
+.ca-scale{font-size:.58rem;color:var(--dim);margin-top:.1rem;}
+.bday-result{background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.2);border-radius:14px;padding:1.1rem;margin:.8rem 0;display:none;}
+.bday-star{font-size:1.8rem;text-align:center;margin-bottom:.5rem;}
+.planet-age-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;margin:1rem 0;}
+.planet-age-card{background:rgba(5,5,22,.9);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.8rem;text-align:center;}
+.planet-age-icon{font-size:1.4rem;display:block;margin-bottom:.3rem;}
+.planet-age-name{font-family:'Orbitron',monospace;font-size:.58rem;color:var(--dim);margin-bottom:.2rem;}
+.planet-age-val{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--gold);font-weight:700;}
+.mission-patch-canvas{border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 30px rgba(255,215,0,.3);cursor:crosshair;}
+.patch-controls{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0;justify-content:center;}
+.patch-btn{font-size:.75rem;padding:.4rem .9rem;}
+.golden-record{background:linear-gradient(135deg,rgba(255,215,0,.06),rgba(255,165,0,.04));border:1px solid rgba(255,215,0,.25);border-radius:18px;padding:1.4rem;margin:1rem 0;}
+.record-slot{display:flex;align-items:center;gap:.8rem;padding:.7rem;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;transition:all .2s;}
+.record-slot:hover{background:rgba(255,215,0,.05);}
+.record-slot-num{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--gold);width:28px;}
+.record-slot-type{font-size:.7rem;color:var(--dim);width:80px;}
+.record-slot-input{flex:1;background:transparent;border:none;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:.82rem;outline:none;}
+.cosmic-calendar-wrap{position:relative;margin:1rem 0;}
+#cosmic-cal-canvas{width:100%;border-radius:14px;cursor:crosshair;}
+.mars-builder{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0;}
+.mars-crew-slot{background:rgba(5,5,22,.9);border:1px solid rgba(255,120,50,.25);border-radius:14px;padding:1rem;}
+.mars-crew-slot h4{font-family:'Orbitron',monospace;font-size:.65rem;color:var(--orange);margin-bottom:.7rem;}
+.crew-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem .7rem;color:var(--text);font-size:.8rem;font-family:'Space Grotesk',sans-serif;outline:none;margin:.3rem 0;}
+.crew-input:focus{border-color:var(--orange);}
+.crew-role-sel{width:100%;background:rgba(0,0,15,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem;color:var(--text);font-size:.78rem;outline:none;margin:.3rem 0;}
+
+/* ══════════════════════════════════════════
+   NEW GAMES
+══════════════════════════════════════════ */
+.slingshot-wrap{background:#000510;border:1px solid rgba(0,247,255,.2);border-radius:16px;overflow:hidden;margin:1rem 0;}
+#slingshot-canvas{display:block;width:100%;cursor:crosshair;}
+.planet-builder-wrap{background:#000010;border:1px solid rgba(168,85,247,.2);border-radius:16px;padding:1.2rem;margin:1rem 0;}
+.element-palette{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0;}
+.element-chip{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:5px 12px;border-radius:8px;cursor:pointer;border:1px solid;transition:all .2s;}
+.element-chip:hover{transform:scale(1.08);}
+.planet-result{text-align:center;margin:1rem 0;}
+#planet-result-visual{font-size:4rem;display:block;animation:planetFloat 3s ease-in-out infinite;}
+@keyframes planetFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-10px) rotate(3deg);}}
+.leaderboard-wrap{background:rgba(5,5,22,.95);border:1px solid rgba(255,215,0,.2);border-radius:16px;overflow:hidden;}
+.lb-header{background:linear-gradient(90deg,rgba(255,215,0,.1),rgba(0,247,255,.05));padding:.8rem 1.1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(255,215,0,.12);}
+.lb-title{font-family:'Orbitron',monospace;font-size:.72rem;color:var(--gold);}
+.lb-row{display:flex;align-items:center;gap:.8rem;padding:.6rem 1.1rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.lb-rank{font-family:'Orbitron',monospace;font-size:.7rem;color:var(--dim);width:24px;}
+.lb-rank.gold{color:var(--gold);}
+.lb-rank.silver{color:#c0c0c0;}
+.lb-rank.bronze{color:#cd7f32;}
+.lb-name{flex:1;font-size:.8rem;color:var(--text);}
+.lb-score{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--neon);}
+.sky-chart-wrap{background:#000508;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);position:relative;}
+#sky-canvas{display:block;width:100%;cursor:crosshair;}
+.sky-tooltip{position:absolute;background:rgba(0,0,20,.95);border:1px solid rgba(255,215,0,.3);border-radius:8px;padding:.45rem .75rem;font-family:'Orbitron',monospace;font-size:.6rem;color:var(--gold);pointer-events:none;display:none;}
+
+/* ══ DEEP DIVE PAGE ══ */
+.deepdive-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0;}
+.deepdive-tab{font-family:'Orbitron',monospace;font-size:.56rem;padding:.4rem .9rem;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
+.deepdive-tab.active{background:linear-gradient(135deg,rgba(0,247,255,.2),rgba(168,85,247,.2));border-color:var(--neon);color:var(--neon);}
+.deepdive-panel{display:none;animation:pageIn .3s ease;}
+.deepdive-panel.active{display:block;}
+.sim-canvas-wrap{background:#000612;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);margin:1rem 0;position:relative;}
+.sim-canvas-wrap canvas{display:block;width:100%;}
+.sim-controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.7rem 0;}
+.sim-controls label{font-size:.76rem;color:var(--dim);display:flex;align-items:center;gap:.4rem;}
+.slider-gold{accent-color:var(--gold);}
+.slider-neon{accent-color:var(--neon);}
+.rocket-eq-display{background:rgba(0,0,20,.9);border:1px solid rgba(0,247,255,.2);border-radius:14px;padding:1.2rem;margin:1rem 0;text-align:center;}
+.rocket-eq-formula{font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--neon);margin:.5rem 0;}
+.rocket-eq-result{font-family:'Orbitron',monospace;font-size:1.4rem;color:var(--gold);margin:.3rem 0;}
+.drake-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin:1rem 0;}
+.drake-card{background:rgba(5,5,22,.95);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1rem;}
+.drake-card label{font-family:'Orbitron',monospace;font-size:.62rem;color:var(--neon);display:block;margin-bottom:.5rem;}
+.drake-result-big{font-family:'JetBrains Mono',monospace;font-size:2rem;color:var(--gold);text-align:center;margin:.6rem 0;font-weight:700;}
+.lunar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem;margin:1rem 0;}
+.lunar-day{background:rgba(255,255,255,.03);border-radius:8px;padding:.4rem;text-align:center;cursor:pointer;transition:all .2s;border:1px solid transparent;}
+.lunar-day:hover{border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.05);}
+.lunar-day .moon-icon{font-size:1.3rem;display:block;}
+.lunar-day .moon-date{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--dim);margin-top:.2rem;}
+.lunar-day .moon-name{font-size:.5rem;color:var(--gold);font-family:'Orbitron',monospace;margin-top:.1rem;}
+.lagrange-wrap{position:relative;margin:1rem 0;}
+.wordle-wrap{max-width:420px;margin:0 auto;}
+.wordle-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.35rem;margin:1rem 0;}
+.wordle-cell{aspect-ratio:1;border:2px solid rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;text-transform:uppercase;transition:all .3s;cursor:default;}
+.wordle-cell.correct{background:rgba(74,222,128,.25);border-color:var(--green);color:var(--green);}
+.wordle-cell.present{background:rgba(251,191,36,.2);border-color:#fbbf24;color:#fbbf24;}
+.wordle-cell.absent{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);color:var(--dim);}
+.wordle-cell.current{border-color:var(--neon);}
+.wordle-keyboard{display:flex;flex-direction:column;gap:.3rem;margin:.8rem 0;}
+.wordle-key-row{display:flex;justify-content:center;gap:.25rem;}
+.wordle-key{font-family:'Orbitron',monospace;font-size:.55rem;padding:.45rem .55rem;border-radius:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);color:var(--text);cursor:pointer;transition:all .2s;min-width:28px;text-align:center;}
+.wordle-key:hover{background:rgba(255,255,255,.18);}
+.wordle-key.correct{background:rgba(74,222,128,.3);border-color:var(--green);}
+.wordle-key.present{background:rgba(251,191,36,.25);border-color:#fbbf24;}
+.wordle-key.absent{background:rgba(255,255,255,.04);color:rgba(255,255,255,.25);}
+
+/* ══ MORE GAMES PAGE ══ */
+.orbit-game-wrap{background:#000510;border-radius:16px;overflow:hidden;border:1px solid rgba(0,247,255,.2);margin:1rem 0;position:relative;}
+#orbit-canvas{display:block;width:100%;cursor:crosshair;}
+.idle-wrap{background:rgba(5,5,22,.97);border:1px solid rgba(255,215,0,.18);border-radius:16px;padding:1.2rem;margin:1rem 0;}
+.idle-resources{display:flex;flex-wrap:wrap;gap:.6rem;margin:.6rem 0;}
+.idle-res{background:rgba(0,0,15,.8);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.5rem .8rem;min-width:110px;}
+.idle-res-name{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--dim);}
+.idle-res-val{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--gold);font-weight:700;}
+.idle-res-rate{font-size:.58rem;color:var(--green);}
+.idle-upgrades{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.6rem;margin:.8rem 0;}
+.idle-upgrade{background:rgba(0,0,20,.9);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.8rem;cursor:pointer;transition:all .25s;}
+.idle-upgrade:hover:not(.locked){border-color:rgba(255,215,0,.35);background:rgba(255,215,0,.04);}
+.idle-upgrade.locked{opacity:.4;cursor:not-allowed;}
+.idle-upgrade-name{font-family:'Orbitron',monospace;font-size:.64rem;color:var(--neon);}
+.idle-upgrade-cost{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--gold);margin:.2rem 0;}
+.idle-upgrade-desc{font-size:.7rem;color:var(--dim);line-height:1.5;}
+.alien-builder{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+.alien-builder-left{display:flex;flex-direction:column;gap:.6rem;}
+.alien-param{background:rgba(5,5,22,.9);border:1px solid rgba(168,85,247,.2);border-radius:12px;padding:.8rem;}
+.alien-param label{font-family:'Orbitron',monospace;font-size:.62rem;color:var(--violet);display:block;margin-bottom:.4rem;}
+.alien-select{width:100%;background:rgba(0,0,15,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.4rem;color:var(--text);font-size:.76rem;outline:none;}
+.alien-result{background:rgba(2,2,20,.98);border:1px solid rgba(168,85,247,.3);border-radius:16px;padding:1.2rem;}
+.alien-avatar{font-size:4rem;text-align:center;display:block;animation:planetFloat 3s ease-in-out infinite;}
+.alien-name{font-family:'Orbitron',monospace;font-size:.9rem;color:var(--violet);text-align:center;margin:.4rem 0;}
+.nebula-gen-wrap{margin:1rem 0;}
+#nebula-gen-canvas{border-radius:14px;display:block;width:100%;cursor:crosshair;}
+.nebula-controls{display:flex;flex-wrap:wrap;gap:.6rem;margin:.7rem 0;align-items:center;}
+.transit-wrap{margin:1rem 0;background:#000510;border-radius:14px;overflow:hidden;border:1px solid rgba(0,247,255,.15);}
+#transit-canvas{display:block;width:100%;}
+.news-feed{display:flex;flex-direction:column;gap:.6rem;margin:1rem 0;max-height:420px;overflow-y:auto;}
+.news-item{background:rgba(5,5,22,.95);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.9rem;cursor:pointer;transition:all .2s;}
+.news-item:hover{border-color:rgba(0,247,255,.25);background:rgba(0,247,255,.03);}
+.news-source{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--neon);margin-bottom:.3rem;}
+.news-title{font-size:.82rem;color:var(--text);line-height:1.6;}
+.news-date{font-size:.62rem;color:var(--dim);margin-top:.25rem;}
+.postcard-wrap{background:#000510;border-radius:16px;overflow:hidden;border:1px solid rgba(255,215,0,.2);margin:1rem 0;}
+#postcard-canvas{display:block;width:100%;}
+.postcard-controls{padding:1rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;}
+.doppler-wrap{background:#000510;border-radius:14px;overflow:hidden;border:1px solid rgba(0,247,255,.15);margin:1rem 0;}
+#doppler-canvas{display:block;width:100%;cursor:pointer;}
 </style>
 </head>
 <body> 
@@ -782,6 +992,11 @@ nav a{font-size:.6rem;}
     <li><a href="#" class="nav-link" data-page="solarsystem"><span>🪐 Solar System</span></a></li>
     <li><a href="#" class="nav-link" data-page="expeditions"><span>🚀 Expeditions</span></a></li>
     <li><a href="#" class="nav-link" data-page="sciencelab"><span>🔬 Science Lab</span></a></li>
+    <li><a href="#" class="nav-link" data-page="livedata"><span>📡 Live Data</span></a></li>
+    <li><a href="#" class="nav-link" data-page="exoplanets"><span>🌍 Exoplanets</span></a></li>
+    <li><a href="#" class="nav-link" data-page="creative"><span>🎨 Create</span></a></li>
+    <li><a href="#" class="nav-link" data-page="deepdive"><span>🎓 Deep Dive</span></a></li>
+    <li><a href="#" class="nav-link" data-page="moregames"><span>🕹️ More Games</span></a></li>
     <li><a href="#" class="nav-link" data-page="games"><span>🎮 Games Hub</span></a></li>
   </ul>
 </nav>
@@ -1389,7 +1604,494 @@ nav a{font-size:.6rem;}
     </div>
     <div id="comet-result" style="font-family:'Orbitron',monospace;font-size:.8rem;text-align:center;margin-top:.45rem;min-height:1.3rem;color:var(--neon);"></div>
   </div>
+
+  <!-- NEW GAMES -->
+  <h2>🌌 Gravity Slingshot!</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Click and drag to launch your spacecraft. Use planet gravity to reach the target star!</p>
+  <div class="slingshot-wrap">
+    <canvas id="slingshot-canvas" width="600" height="380"></canvas>
+    <div style="text-align:center;padding:.6rem;display:flex;gap:.5rem;justify-content:center;">
+      <button onclick="resetSlingshot()">↺ New Level</button>
+      <span style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);align-self:center;">Level: <span id="sling-level">1</span> | Stars: <span id="sling-stars">0</span></span>
+    </div>
+  </div>
+
+  <h2>🌍 Planet Builder!</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Combine elements to build your own world!</p>
+  <div class="planet-builder-wrap">
+    <div style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--dim);margin-bottom:.4rem;">Select elements (pick 2-4):</div>
+    <div class="element-palette" id="element-palette"></div>
+    <div style="text-align:center;margin:.8rem 0;">
+      <button onclick="buildPlanet()">🌍 Build Planet!</button>
+      <button class="ghost" onclick="resetPlanetBuilder()">↺ Reset</button>
+    </div>
+    <div class="planet-result" id="planet-result-display" style="display:none;">
+      <span id="planet-result-visual">🌍</span>
+      <div id="planet-result-name" style="font-family:'Orbitron',monospace;font-size:1rem;color:var(--gold);margin:.5rem 0;"></div>
+      <div id="planet-result-desc" style="font-size:.82rem;color:var(--text);line-height:1.7;max-width:400px;margin:0 auto;"></div>
+    </div>
+  </div>
+
+  <h2>🏆 Cosmic Leaderboard</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Top explorers across the universe! Enter your name to appear.</p>
+  <div style="display:flex;gap:.5rem;justify-content:center;margin:.8rem 0;">
+    <input id="lb-name-input" type="text" placeholder="Your explorer name…" style="width:200px;">
+    <button onclick="submitToLeaderboard()">📊 Submit Score</button>
+  </div>
+  <div class="leaderboard-wrap" id="leaderboard-wrap">
+    <div class="lb-header"><span style="font-size:1.1rem;">🏆</span><span class="lb-title">COSMIC LEADERBOARD</span></div>
+    <div id="leaderboard-rows"></div>
+  </div>
 </div>
+
+<!-- ═══════════════════ LIVE DATA PAGE ═══════════════════ -->
+<div id="livedata" class="page">
+  <h1>📡 Live Space Data <span class="pill">REAL-TIME</span></h1>
+  <p style="text-align:center;color:var(--dim);max-width:540px;margin:0 auto 1rem;">Live data from NASA APIs and real-time space tracking. Updated on every visit.</p>
+
+  <h2>🌅 NASA Astronomy Picture of the Day</h2>
+  <div id="apod-container">
+    <div style="text-align:center;padding:2rem;color:var(--dim);">
+      <div style="font-size:2rem;margin-bottom:.5rem;">🔭</div>
+      <button onclick="loadAPOD()" class="neon">Load Today's APOD</button>
+    </div>
+  </div>
+
+  <h2>🛸 ISS Real-Time Tracker</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">The International Space Station orbits Earth every ~92 minutes at 7.7 km/s.</p>
+  <div class="iss-map">
+    <canvas id="iss-canvas" width="700" height="350"></canvas>
+    <div class="iss-coords" id="iss-coords">Loading ISS position…</div>
+  </div>
+  <div style="text-align:center;margin:.5rem 0;">
+    <button onclick="refreshISS()" class="neon">🔄 Refresh Position</button>
+    <button onclick="startISSTracking()" id="iss-track-btn">▶ Auto-Track</button>
+  </div>
+
+  <h2>☀️ Solar Activity</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Current solar conditions affect everything from satellite orbits to auroras.</p>
+  <div class="solar-activity" id="solar-activity-display"></div>
+  <canvas id="solar-canvas-live" width="600" height="200" style="border-radius:14px;border:1px solid rgba(255,119,0,.2);margin:1rem auto;display:block;"></canvas>
+  <div style="text-align:center;"><button onclick="refreshSolar()">🌞 Refresh Solar Data</button></div>
+
+  <h2>☄️ Near-Earth Asteroids</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Objects passing close to Earth in the next 7 days. Data from NASA's NeoWs API.</p>
+  <div style="text-align:center;margin:.8rem 0;"><button onclick="loadAsteroids()" class="neon">Load Asteroid Data</button></div>
+  <div class="asteroid-list" id="asteroid-list"></div>
+
+  <h2>🌌 Space Weather Index</h2>
+  <div class="live-grid" id="space-weather-grid"></div>
+
+  <h2>🌠 Sky Chart — Your Location</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">What's visible in the night sky from your location right now.</p>
+  <div style="text-align:center;margin:.6rem 0;"><button onclick="loadSkyChart()" class="neon">🌠 Generate Sky Chart</button></div>
+  <div class="sky-chart-wrap" id="sky-chart-wrap" style="display:none;">
+    <canvas id="sky-canvas" width="600" height="400"></canvas>
+    <div class="sky-tooltip" id="sky-tooltip"></div>
+  </div>
+  <div id="sky-info" style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--neon);text-align:center;margin:.5rem 0;min-height:1.2rem;"></div>
+</div>
+
+<!-- ═══════════════════ EXOPLANET EXPLORER PAGE ═══════════════════ -->
+<div id="exoplanets" class="page">
+  <h1>🌍 Exoplanet Explorer <span class="pill">5,500+ WORLDS</span></h1>
+  <p style="text-align:center;color:var(--dim);max-width:540px;margin:0 auto 1rem;">Planets beyond our solar system. Over 5,500 confirmed and thousands more candidates.</p>
+
+  <h2>🔭 Browse Exoplanets</h2>
+  <div class="exo-filters" id="exo-filters">
+    <button class="exo-filter active" onclick="filterExo('all',this)">All Types</button>
+    <button class="exo-filter" onclick="filterExo('terrestrial',this)">🪨 Terrestrial</button>
+    <button class="exo-filter" onclick="filterExo('superearth',this)">🌍 Super-Earth</button>
+    <button class="exo-filter" onclick="filterExo('neptunian',this)">💙 Neptunian</button>
+    <button class="exo-filter" onclick="filterExo('gasgiant',this)">🟠 Gas Giant</button>
+    <button class="exo-filter" onclick="filterExo('habitable',this)">💚 Habitable Zone</button>
+  </div>
+  <div class="exo-grid" id="exo-grid"></div>
+  <div class="exo-detail-panel" id="exo-detail-panel"></div>
+
+  <h2>📊 Hertzsprung-Russell Diagram</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">The fundamental map of stellar evolution. Click any star to explore it!</p>
+  <div class="hr-diagram">
+    <canvas id="hr-canvas" width="600" height="420"></canvas>
+    <div id="hr-info" style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--neon);text-align:center;margin-top:.5rem;min-height:1.2rem;"></div>
+  </div>
+
+  <h2>🎯 Exoplanet Detection Methods</h2>
+  <div id="detect-methods"></div>
+
+  <h2>🌡️ Habitable Zone Calculator</h2>
+  <div class="glass" style="margin:1.2rem 0;">
+    <p style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);margin-bottom:.8rem;">Configure your star to find the habitable zone:</p>
+    <label style="display:flex;align-items:center;gap:.6rem;margin:.5rem 0;font-size:.78rem;">Star Temperature (K): <input type="range" id="hz-temp" min="2000" max="30000" value="5778" style="flex:1;accent-color:var(--gold);" oninput="calcHZ()"> <span id="hz-temp-val" style="font-family:'JetBrains Mono',monospace;color:var(--gold);width:55px;">5778</span></label>
+    <label style="display:flex;align-items:center;gap:.6rem;margin:.5rem 0;font-size:.78rem;">Star Luminosity (L☉): <input type="range" id="hz-lum" min="0.01" max="100" value="1" step="0.01" style="flex:1;accent-color:var(--orange);" oninput="calcHZ()"> <span id="hz-lum-val" style="font-family:'JetBrains Mono',monospace;color:var(--orange);width:55px;">1.0</span></label>
+    <canvas id="hz-canvas" width="600" height="100" style="border-radius:10px;margin:.7rem 0;"></canvas>
+    <div id="hz-result" style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text);text-align:center;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CREATIVE STUDIO PAGE ═══════════════════ -->
+<div id="creative" class="page">
+  <h1>🎨 Cosmic Creative Studio <span class="pill">PERSONALIZE</span></h1>
+  <p style="text-align:center;color:var(--dim);max-width:540px;margin:0 auto 1rem;">Make the cosmos your own. Tools to explore your place in the universe.</p>
+
+  <div class="studio-tabs">
+    <button class="studio-tab active" onclick="switchStudio('address',this)">🌌 Cosmic Address</button>
+    <button class="studio-tab" onclick="switchStudio('birthday',this)">🎂 Birthday Star</button>
+    <button class="studio-tab" onclick="switchStudio('planetage',this)">🪐 Your Age on Planets</button>
+    <button class="studio-tab" onclick="switchStudio('calendar',this)">📅 Cosmic Calendar</button>
+    <button class="studio-tab" onclick="switchStudio('patch',this)">🚀 Mission Patch</button>
+    <button class="studio-tab" onclick="switchStudio('golden',this)">💿 Golden Record</button>
+    <button class="studio-tab" onclick="switchStudio('marscrew',this)">👨‍🚀 Mars Mission</button>
+  </div>
+
+  <!-- COSMIC ADDRESS -->
+  <div class="studio-panel active" id="studio-address">
+    <h2>🌌 Your Cosmic Address</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">From the largest to smallest — where exactly are you in the universe?</p>
+    <div class="cosmic-address" id="cosmic-address-display"></div>
+  </div>
+
+  <!-- BIRTHDAY STAR -->
+  <div class="studio-panel" id="studio-birthday">
+    <h2>⭐ Birthday Star Finder</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Find a star where light left it the year you were born — you're seeing your birth year in starlight!</p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin:1rem 0;">
+      <label style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);">Your birth year: </label>
+      <input type="number" id="bday-year" min="1900" max="2024" value="1990" style="width:100px;text-align:center;font-family:'JetBrains Mono',monospace;" oninput="findBirthdayStar()">
+    </div>
+    <div class="bday-result" id="bday-result"></div>
+  </div>
+
+  <!-- PLANET AGE -->
+  <div class="studio-panel" id="studio-planetage">
+    <h2>🪐 Your Age Across the Solar System</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">How old would you be if you lived on another planet?</p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin:1rem 0;align-items:center;">
+      <label style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);">Your age on Earth: </label>
+      <input type="number" id="earth-age-input" min="1" max="120" value="25" style="width:80px;text-align:center;font-family:'JetBrains Mono',monospace;" oninput="calcPlanetAges()">
+    </div>
+    <div class="planet-age-grid" id="planet-age-grid"></div>
+  </div>
+
+  <!-- COSMIC CALENDAR -->
+  <div class="studio-panel" id="studio-calendar">
+    <h2>📅 Cosmic Calendar</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">If the universe's 13.8 billion year history were compressed into a single year — where do humans appear?</p>
+    <div class="cosmic-calendar-wrap">
+      <canvas id="cosmic-cal-canvas" width="700" height="420"></canvas>
+    </div>
+    <div id="cal-info" style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--neon);text-align:center;margin:.5rem 0;min-height:1.2rem;">Click any point on the calendar to explore</div>
+  </div>
+
+  <!-- MISSION PATCH -->
+  <div class="studio-panel" id="studio-patch">
+    <h2>🚀 Design Your Mission Patch</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Every NASA mission has a custom patch. Design yours!</p>
+    <div style="display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;align-items:flex-start;margin:1rem 0;">
+      <canvas id="mission-patch-canvas" width="240" height="240" class="mission-patch-canvas"></canvas>
+      <div style="flex:1;min-width:200px;">
+        <div style="margin:.5rem 0;"><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Mission Name:</label><br><input id="patch-mission-name" type="text" placeholder="APOLLO XIII" style="width:100%;margin-top:.3rem;" oninput="drawMissionPatch()"></div>
+        <div style="margin:.5rem 0;"><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Mission Symbol:</label><br>
+        <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.3rem;" id="patch-symbols"></div></div>
+        <div style="margin:.5rem 0;"><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Background Color:</label><br>
+        <input type="color" id="patch-bg-color" value="#000840" oninput="drawMissionPatch()" style="width:60px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,.2);margin-top:.3rem;"></div>
+        <div style="margin:.5rem 0;"><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Accent Color:</label><br>
+        <input type="color" id="patch-accent-color" value="#ffd700" oninput="drawMissionPatch()" style="width:60px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,.2);margin-top:.3rem;"></div>
+        <button onclick="downloadPatch()" class="neon" style="margin-top:.7rem;width:100%;">⬇️ Download Patch</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOLDEN RECORD -->
+  <div class="studio-panel" id="studio-golden">
+    <h2>💿 Compose Your Golden Record</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">NASA's Voyager probes carried a Golden Record with sounds and images of Earth. What would YOU include to represent humanity?</p>
+    <div class="golden-record" id="golden-record">
+      <div style="text-align:center;margin-bottom:1rem;">
+        <div style="font-size:2.5rem;animation:planetFloat 4s ease-in-out infinite;">💿</div>
+        <div style="font-family:'Orbitron',monospace;font-size:.72rem;color:var(--gold);margin-top:.4rem;">YOUR GOLDEN RECORD</div>
+      </div>
+      <div id="golden-slots"></div>
+    </div>
+    <div style="text-align:center;margin-top:1rem;">
+      <button onclick="generateGoldenRecord()">✨ Generate AI Summary +30 XP</button>
+      <button class="ghost" onclick="resetGoldenRecord()">↺ Reset</button>
+    </div>
+    <div id="golden-ai-summary" style="margin-top:1rem;display:none;"></div>
+  </div>
+
+  <!-- MARS CREW -->
+  <div class="studio-panel" id="studio-marscrew">
+    <h2>👨‍🚀 Plan Your Mars Mission</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Design a 6-person Mars crew. Assign roles, set your mission duration, and get an AI mission briefing!</p>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin:.8rem 0;">
+      <div><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Mission Name</label><br><input id="mars-mission-name" type="text" placeholder="ARES I" style="width:150px;margin-top:.3rem;"></div>
+      <div><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Duration</label><br>
+      <select id="mars-duration" style="width:120px;background:rgba(0,0,15,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem;color:var(--text);font-size:.78rem;outline:none;margin-top:.3rem;">
+        <option>300 days</option><option>500 days</option><option>730 days</option><option>1000 days</option>
+      </select></div>
+      <div><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);">Landing Site</label><br>
+      <select id="mars-site" style="width:140px;background:rgba(0,0,15,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem;color:var(--text);font-size:.78rem;outline:none;margin-top:.3rem;">
+        <option>Jezero Crater</option><option>Hellas Basin</option><option>Olympus Mons</option><option>Valles Marineris</option><option>Arcadia Planitia</option>
+      </select></div>
+    </div>
+    <div class="mars-builder" id="mars-crew-builder"></div>
+    <div style="text-align:center;margin:1rem 0;">
+      <button class="neon" onclick="generateMissionBriefing()">🚀 Generate Mission Briefing (AI) +50 XP</button>
+    </div>
+    <div id="mars-briefing-result" style="display:none;margin:1rem 0;padding:1.2rem;background:rgba(255,100,50,.04);border:1px solid rgba(255,100,50,.2);border-radius:16px;">
+      <div style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--orange);margin-bottom:.6rem;">📋 MISSION BRIEFING</div>
+      <div id="mars-briefing-text" style="font-size:.83rem;line-height:1.8;color:var(--text);"></div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- ═══════════════════ DEEP DIVE PAGE ═══════════════════ -->
+<div id="deepdive" class="page">
+  <h1>🎓 Deep Dive <span class="pill">SCIENCE TOOLS</span></h1>
+  <p style="text-align:center;color:var(--dim);max-width:560px;margin:0 auto 1rem;">Interactive physics simulators, calculators, and visualizers. Real science, hands-on.</p>
+  <div class="deepdive-tabs">
+    <button class="deepdive-tab active" onclick="switchDeepDive('lensing',this)">🌀 Grav. Lensing</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('nucleosynthesis',this)">⚛️ Nucleosynthesis</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('rocketEq',this)">🚀 Rocket Equation</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('doppler',this)">〰️ Doppler Effect</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('drake',this)">👽 Drake Equation</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('lunar',this)">🌙 Lunar Calendar</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('lagrange',this)">🔵 Lagrange Points</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('tidalock',this)">🌍 Tidal Locking</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('dilation',this)">⏱️ Time Dilation</button>
+    <button class="deepdive-tab" onclick="switchDeepDive('transit',this)">🌑 Transit Sim</button>
+  </div>
+
+  <!-- GRAVITATIONAL LENSING -->
+  <div class="deepdive-panel active" id="dd-lensing">
+    <h2>🌀 Gravitational Lensing</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Drag the black hole across the star field. Watch how its gravity bends light!</p>
+    <div class="sim-canvas-wrap"><canvas id="lensing-canvas" width="600" height="340"></canvas></div>
+    <div class="sim-controls">
+      <label>Mass: <input type="range" id="lens-mass" min="50" max="300" value="120" class="slider-gold" oninput="updateLensing()"><span id="lens-mass-val" style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.7rem;"> 120 M</span></label>
+      <button onclick="resetLensing()">↺ Reset Stars</button>
+    </div>
+  </div>
+
+  <!-- NUCLEOSYNTHESIS -->
+  <div class="deepdive-panel" id="dd-nucleosynthesis">
+    <h2>⚛️ Stellar Nucleosynthesis</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Watch elements being forged inside stars. Click a layer to learn about each fusion process!</p>
+    <div class="sim-canvas-wrap"><canvas id="nucleo-canvas" width="600" height="380"></canvas></div>
+    <div id="nucleo-info" style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--neon);text-align:center;margin:.5rem 0;min-height:1.2rem;padding:.5rem;background:rgba(0,247,255,.04);border-radius:10px;"></div>
+    <div class="sim-controls" style="justify-content:center;">
+      <button onclick="animateNucleo()">▶ Animate Fusion</button>
+      <button class="ghost" onclick="drawNucleo()">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- ROCKET EQUATION -->
+  <div class="deepdive-panel" id="dd-rocketEq">
+    <h2>🚀 Tsiolkovsky Rocket Equation</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Δv = ve × ln(m₀/mf) — adjust parameters to see how delta-v changes!</p>
+    <div class="rocket-eq-display">
+      <div style="font-size:.7rem;color:var(--dim);margin-bottom:.4rem;">Δv = exhaust velocity × ln(initial mass / final mass)</div>
+      <div class="rocket-eq-formula" id="rocket-eq-formula">Δv = 4,400 × ln(300,000 / 150,000)</div>
+      <div class="rocket-eq-result" id="rocket-eq-result">Δv = 3,050 m/s</div>
+      <div id="rocket-eq-compare" style="font-size:.76rem;color:var(--dim);margin-top:.4rem;"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;">
+      <div class="glass"><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--neon);">Exhaust Velocity (m/s)</label><br><input type="range" id="rk-ve" min="1000" max="100000" value="4400" class="slider-gold" style="width:100%;margin:.5rem 0;" oninput="calcRocketEq()"><div style="font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--gold);" id="rk-ve-val">4,400 m/s</div><div style="font-size:.65rem;color:var(--dim);">Chemical: ~3-4km/s · Ion: ~30km/s · Plasma: ~100km/s</div></div>
+      <div class="glass"><label style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--neon);">Mass Ratio (m₀/mf)</label><br><input type="range" id="rk-mr" min="1.1" max="20" step="0.1" value="2" class="slider-neon" style="width:100%;margin:.5rem 0;" oninput="calcRocketEq()"><div style="font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--neon);" id="rk-mr-val">2.0 : 1</div><div style="font-size:.65rem;color:var(--dim);">Saturn V: ~17:1 · Starship: ~10:1</div></div>
+    </div>
+    <canvas id="rocket-viz-canvas" width="600" height="120" style="border-radius:12px;border:1px solid rgba(255,255,255,.08);display:block;width:100%;margin:.5rem 0;"></canvas>
+  </div>
+
+  <!-- DOPPLER -->
+  <div class="deepdive-panel" id="dd-doppler">
+    <h2>〰️ Doppler Effect Demonstrator</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Click to move the star toward or away from Earth. Watch the spectrum shift red or blue!</p>
+    <div class="doppler-wrap"><canvas id="doppler-canvas" width="600" height="300"></canvas></div>
+    <div class="sim-controls">
+      <label>Velocity: <input type="range" id="doppler-vel" min="-0.8" max="0.8" step="0.01" value="0" class="slider-gold" oninput="updateDoppler()"><span id="doppler-vel-val" style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.7rem;"> 0% c</span></label>
+    </div>
+    <div id="doppler-info" style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--neon);text-align:center;min-height:1rem;"></div>
+  </div>
+
+  <!-- DRAKE EQUATION -->
+  <div class="deepdive-panel" id="dd-drake">
+    <h2>👽 Drake Equation</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">N = R* · fp · ne · fl · fi · fc · L — estimate the number of detectable civilizations in our galaxy!</p>
+    <div class="drake-grid" id="drake-grid"></div>
+    <div class="glass" style="text-align:center;padding:1.2rem;margin:.8rem 0;">
+      <div style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--dim);margin-bottom:.3rem;">ESTIMATED DETECTABLE CIVILIZATIONS IN THE MILKY WAY</div>
+      <div class="drake-result-big" id="drake-result">0</div>
+      <div id="drake-interpretation" style="font-size:.8rem;color:var(--dim);line-height:1.7;"></div>
+    </div>
+  </div>
+
+  <!-- LUNAR CALENDAR -->
+  <div class="deepdive-panel" id="dd-lunar">
+    <h2>🌙 Lunar Phase Calendar</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Every moon phase for the current month. Click any day for details!</p>
+    <div style="text-align:center;margin:.5rem 0;font-family:'Orbitron',monospace;font-size:.75rem;color:var(--gold);" id="lunar-month-label"></div>
+    <div class="lunar-grid" id="lunar-grid"></div>
+    <div id="lunar-detail" style="padding:.8rem;background:rgba(255,255,255,.03);border-radius:12px;margin:.5rem 0;min-height:50px;font-size:.82rem;line-height:1.7;"></div>
+  </div>
+
+  <!-- LAGRANGE POINTS -->
+  <div class="deepdive-panel" id="dd-lagrange">
+    <h2>🔵 Lagrange Points</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">The 5 gravitational balance points in a two-body system. Click each point to learn more!</p>
+    <div class="sim-canvas-wrap"><canvas id="lagrange-canvas" width="600" height="360"></canvas></div>
+    <div id="lagrange-info" style="font-family:'Orbitron',monospace;font-size:.68rem;color:var(--neon);text-align:center;margin:.5rem 0;min-height:1.2rem;padding:.5rem;background:rgba(0,247,255,.04);border-radius:10px;">Click a Lagrange point to learn about it</div>
+  </div>
+
+  <!-- TIDAL LOCKING -->
+  <div class="deepdive-panel" id="dd-tidalock">
+    <h2>🌍 Tidal Locking Demonstrator</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Why does the Moon always show the same face? See tidal locking in action!</p>
+    <div class="sim-canvas-wrap"><canvas id="tidalock-canvas" width="600" height="320"></canvas></div>
+    <div class="sim-controls" style="justify-content:center;">
+      <label>Orbit speed: <input type="range" id="tidal-speed" min="0.2" max="4" step="0.1" value="1" class="slider-gold" oninput="updateTidalSpeed()"></label>
+      <button onclick="toggleTidalLock()">🔒 Toggle Lock</button>
+    </div>
+    <div id="tidal-info" style="text-align:center;font-size:.8rem;color:var(--dim);margin:.5rem 0;"></div>
+  </div>
+
+  <!-- TIME DILATION -->
+  <div class="deepdive-panel" id="dd-dilation">
+    <h2>⏱️ Time Dilation Calculator</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Einstein's Special Relativity: the faster you travel, the slower time passes for you.</p>
+    <div class="glass" style="margin:1rem 0;">
+      <label style="display:flex;align-items:center;gap:.6rem;margin:.5rem 0;font-size:.78rem;">Speed (% of light): <input type="range" id="dilation-speed" min="0" max="99.99" step="0.01" value="50" class="slider-gold" style="flex:1;" oninput="calcDilation()"><span id="dilation-speed-val" style="font-family:'JetBrains Mono',monospace;color:var(--gold);width:60px;">50%</span></label>
+      <label style="display:flex;align-items:center;gap:.6rem;margin:.5rem 0;font-size:.78rem;">Mission duration (yrs): <input type="range" id="dilation-time" min="1" max="100" value="10" class="slider-neon" style="flex:1;" oninput="calcDilation()"><span id="dilation-time-val" style="font-family:'JetBrains Mono',monospace;color:var(--neon);width:60px;">10 yrs</span></label>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;">
+      <div class="lab-card" style="text-align:center;"><div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--neon);margin-bottom:.4rem;">TIME FOR TRAVELER</div><div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;color:var(--gold);" id="dilation-traveler">7.07 yrs</div></div>
+      <div class="lab-card" style="text-align:center;"><div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--violet);margin-bottom:.4rem;">TIME ON EARTH</div><div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;color:var(--violet);" id="dilation-earth">10 yrs</div></div>
+    </div>
+    <canvas id="dilation-canvas" width="600" height="150" style="border-radius:12px;border:1px solid rgba(255,255,255,.08);display:block;width:100%;"></canvas>
+    <div id="dilation-info" style="font-size:.8rem;color:var(--dim);line-height:1.75;margin-top:.8rem;text-align:center;"></div>
+  </div>
+
+  <!-- TRANSIT SIMULATOR -->
+  <div class="deepdive-panel" id="dd-transit">
+    <h2>🌑 Exoplanet Transit Simulator</h2>
+    <p style="text-align:center;font-size:.82rem;color:var(--dim);">Watch the light curve dip as a planet crosses its star — exactly how Kepler detected thousands of worlds!</p>
+    <div class="transit-wrap"><canvas id="transit-canvas" width="600" height="260"></canvas></div>
+    <div class="sim-controls">
+      <label>Planet size: <input type="range" id="transit-size" min="5" max="60" value="20" class="slider-gold" oninput="updateTransit()"></label>
+      <label>Orbit: <input type="range" id="transit-orbit" min="40" max="160" value="80" class="slider-neon" oninput="updateTransit()"></label>
+      <label>Speed: <input type="range" id="transit-speed" min="0.3" max="3" step="0.1" value="1" class="slider-gold" oninput="updateTransit()"></label>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MORE GAMES PAGE ═══════════════════ -->
+<div id="moregames" class="page">
+  <h1>🕹️ More Games <span class="pill">EXPANDED</span></h1>
+  <p style="text-align:center;color:var(--dim);max-width:540px;margin:0 auto 1rem;">Space Wordle, orbital mechanics, idle mining, alien builder, nebula generator, and more!</p>
+
+  <!-- SPACE WORDLE -->
+  <h2>📝 Space Wordle</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Guess the 6-letter space term in 6 tries. Green = correct spot. Yellow = wrong spot.</p>
+  <div class="wordle-wrap">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.3rem;margin-bottom:.5rem;" id="wordle-grid"></div>
+    <div id="wordle-message" style="font-family:'Orbitron',monospace;font-size:.72rem;text-align:center;min-height:1.2rem;color:var(--neon);margin:.4rem 0;"></div>
+    <div class="wordle-keyboard" id="wordle-keyboard"></div>
+    <div style="text-align:center;margin:.7rem 0;">
+      <button onclick="newWordleGame()">🔄 New Word</button>
+      <span style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);margin-left:.8rem;">Streak: <span id="wordle-streak">0</span>🔥</span>
+    </div>
+  </div>
+
+  <!-- ORBITAL MECHANICS -->
+  <h2>🛸 Orbital Mechanics Puzzle</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Adjust thrust direction and magnitude to achieve a stable orbit around the planet!</p>
+  <div class="orbit-game-wrap"><canvas id="orbit-canvas" width="600" height="380"></canvas></div>
+  <div style="text-align:center;padding:.6rem;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;">
+    <button onclick="applyOrbitalThrust('prograde')">▶ Prograde Burn</button>
+    <button onclick="applyOrbitalThrust('retrograde')">◀ Retrograde Burn</button>
+    <button onclick="applyOrbitalThrust('normal')">▲ Normal Burn</button>
+    <button class="ghost" onclick="resetOrbitGame()">↺ Reset</button>
+    <span style="font-family:'Orbitron',monospace;font-size:.7rem;color:var(--neon);align-self:center;">Fuel: <span id="orbit-fuel">100</span>% · Orbit: <span id="orbit-status">Suborbital</span></span>
+  </div>
+
+  <!-- ASTEROID MINING IDLE -->
+  <h2>⛏️ Asteroid Mining (Idle Game)</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Collect resources, upgrade your fleet, build a space base. Resources accumulate even while away!</p>
+  <div class="idle-wrap">
+    <div class="idle-resources" id="idle-resources"></div>
+    <div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);margin:.5rem 0;">UPGRADES</div>
+    <div class="idle-upgrades" id="idle-upgrades"></div>
+    <div style="text-align:center;margin:.8rem 0;">
+      <button onclick="idleManualMine()">⛏️ Manual Mine (+1)</button>
+      <button class="ghost" onclick="resetIdleGame()">↺ Reset Base</button>
+    </div>
+  </div>
+
+  <!-- ALIEN CIVILIZATION BUILDER -->
+  <h2>👽 Alien Civilization Builder</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Choose your planet's conditions and generate an alien species with AI!</p>
+  <div class="alien-builder">
+    <div class="alien-builder-left">
+      <div class="alien-param"><label>Star Type</label><select class="alien-select" id="alien-star"><option>Red Dwarf (M-type)</option><option>Sun-like (G-type)</option><option>Hot Blue (A-type)</option><option>Binary Stars</option><option>Neutron Star</option></select></div>
+      <div class="alien-param"><label>Atmosphere</label><select class="alien-select" id="alien-atmo"><option>Nitrogen/Oxygen (Earth-like)</option><option>Dense CO₂ (Venus-like)</option><option>Methane/Nitrogen (Titan-like)</option><option>Hydrogen/Helium (Gas Giant)</option><option>Nearly None (Mars-like)</option></select></div>
+      <div class="alien-param"><label>Surface</label><select class="alien-select" id="alien-surface"><option>Liquid Oceans</option><option>Ice Covered</option><option>Desert/Rock</option><option>Dense Jungle</option><option>Underground Caves</option><option>Floating Islands</option></select></div>
+      <div class="alien-param"><label>Gravity</label><select class="alien-select" id="alien-gravity"><option>Low (0.3g)</option><option>Earth-like (1g)</option><option>High (2g)</option><option>Extreme (5g)</option></select></div>
+      <button class="neon" onclick="generateAlien()" style="margin-top:.3rem;">👽 Generate Alien! +30 XP</button>
+    </div>
+    <div class="alien-result" id="alien-result">
+      <span style="font-size:3rem;display:block;text-align:center;opacity:.3;">👽</span>
+      <div style="text-align:center;font-family:'Orbitron',monospace;font-size:.65rem;color:var(--dim);margin-top:.5rem;">Configure parameters and generate!</div>
+    </div>
+  </div>
+
+  <!-- NEBULA GENERATOR -->
+  <h2>🌫️ Procedural Nebula Generator</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Generate unique nebulae. Click the canvas to add gas clouds. Download your creation!</p>
+  <div class="nebula-gen-wrap">
+    <canvas id="nebula-gen-canvas" width="600" height="340"></canvas>
+  </div>
+  <div class="nebula-controls">
+    <label style="font-size:.76rem;color:var(--dim);">Color:</label>
+    <input type="color" id="nebula-color1" value="#00f7ff" style="width:40px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,.2);">
+    <input type="color" id="nebula-color2" value="#a855f7" style="width:40px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,.2);">
+    <label style="font-size:.76rem;color:var(--dim);">Density:</label>
+    <input type="range" id="nebula-density" min="10" max="80" value="35" class="slider-gold" style="width:100px;">
+    <button onclick="generateNebula()">✨ Generate</button>
+    <button onclick="downloadNebula()" class="neon">⬇️ Download</button>
+  </div>
+
+  <!-- SPACE NEWS FEED -->
+  <h2>📰 Space News Feed</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Latest headlines from the cosmos. Curated space news from major agencies.</p>
+  <div style="text-align:center;margin:.6rem 0;"><button onclick="loadSpaceNews()" class="neon">📡 Load Space News</button></div>
+  <div class="news-feed" id="news-feed"></div>
+
+  <!-- EXOPLANET POSTCARD -->
+  <h2>📮 Exoplanet Travel Postcard</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Generate a retro NASA travel poster for any exoplanet!</p>
+  <div class="postcard-wrap">
+    <canvas id="postcard-canvas" width="600" height="380"></canvas>
+  </div>
+  <div class="postcard-controls">
+    <select id="postcard-planet" style="background:rgba(0,0,15,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem;color:var(--text);font-size:.78rem;outline:none;" onchange="generatePostcard()">
+      <option>Kepler-186f</option><option>TRAPPIST-1e</option><option>Proxima b</option><option>HD 40307g</option><option>Kepler-442b</option><option>TOI 700 d</option><option>HD 189733b</option><option>51 Pegasi b</option>
+    </select>
+    <button onclick="generatePostcard()" class="neon">🎨 Generate Poster</button>
+    <button onclick="downloadPostcard()">⬇️ Download</button>
+  </div>
+
+  <!-- SPACE HOROSCOPE -->
+  <h2>🔮 Cosmic Horoscope (AI)</h2>
+  <p style="text-align:center;font-size:.82rem;color:var(--dim);">Your space-themed personality reading based on cosmic events at your birth.</p>
+  <div class="glass" style="margin:1rem 0;">
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;align-items:center;margin:.5rem 0;">
+      <input type="date" id="horoscope-date" style="background:rgba(0,0,15,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem;color:var(--text);font-size:.8rem;outline:none;">
+      <button class="violet" onclick="generateHoroscope()">🔮 Generate Reading +20 XP</button>
+    </div>
+    <div id="horoscope-result" style="display:none;margin-top:1rem;padding:1rem;background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.2);border-radius:12px;font-size:.84rem;line-height:1.8;color:var(--text);"></div>
+  </div>
+</div>
+
 </main>
  
 <div id="lightbox" onclick="closeLB()">
@@ -1419,7 +2121,7 @@ nav a{font-size:.6rem;}
   <div class="ai-panel-header">
     <span style="font-size:1.1rem;">🌌</span>
     <strong>ASK THE COSMOS</strong>
-    <span style="font-size:.6rem;color:var(--dim);flex:1;">Powered by MarcSnabb AI</span>
+    <span style="font-size:.6rem;color:var(--dim);flex:1;">Powered by Claude AI</span>
     <button class="ai-close-btn" onclick="toggleAIPanel()">✕</button>
   </div>
   <div id="ai-chat-messages">
@@ -1457,7 +2159,7 @@ const CFG={XP_PER_LEVEL:200,MAX_VISITS:10,COMBO_MS:2500};
 let cosmicScore=0,level=1,comboCount=0,comboTimer=null;
 const sectionVisits={stars:0,constellations:0,galaxies:0,solarsystem:0,expeditions:0,games:0};
 const unlockedAch=new Set();
-const achEmoji={'Quiz Master':'🎯','Star Scientist':'🔬','Memory Master':'🃏','Constellation Creator':'🧩','Supernova Witness':'💥','Galaxy Collider':'💫','Solar System Master':'🪐','Space Expert':'🧑‍🚀','First Launch':'🚀','Speed Demon':'⚡','Defender':'🛡️','Match Master':'🔗','Scramble Pro':'🔤','Alien Decoder':'👽','Level 5':'🏅','Level 10':'🥇','Comet Catcher':'☄️','Snake Master':'🐍'};
+const achEmoji={'Quiz Master':'🎯','Star Scientist':'🔬','Memory Master':'🃏','Constellation Creator':'🧩','Supernova Witness':'💥','Galaxy Collider':'💫','Solar System Master':'🪐','Space Expert':'🧑‍🚀','First Launch':'🚀','Speed Demon':'⚡','Defender':'🛡️','Match Master':'🔗','Scramble Pro':'🔤','Alien Decoder':'👽','Level 5':'🏅','Level 10':'🥇','Comet Catcher':'☄️','Snake Master':'🐍','Slingshot Master':'🎯','Planet Builder':'🌍','Mars Commander':'🚀','Golden Recorder':'💿','Mission Designer':'🎨'};
  
 const cursorEl=document.getElementById('cursor'),trailEl=document.getElementById('cur-trail');
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursorEl.style.left=mx+'px';cursorEl.style.top=my+'px';});
@@ -2342,6 +3044,1967 @@ window.addEventListener('load',()=>{
   document.addEventListener('touchstart',e=>{if(e.target.closest('#snake-canvas')){touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;}});
   document.addEventListener('touchend',e=>{if(!snakeRunning||!e.target.closest('#snake-canvas'))return;const dx=e.changedTouches[0].clientX-touchStartX;const dy=e.changedTouches[0].clientY-touchStartY;if(Math.abs(dx)>Math.abs(dy)){snakeDir=dx>0?{x:1,y:0}:{x:-1,y:0};}else{snakeDir=dy>0?{x:0,y:1}:{x:0,y:-1};}});
 });
+
+const _navOrig = navigateTo;
+navigateTo = function(page){
+  _navOrig(page);
+  if(page==='livedata') initLiveData();
+  if(page==='exoplanets') initExoplanets();
+  if(page==='creative') initCreativeStudio();
+};
+document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigateTo(a.dataset.page);}));
+ 
+async function loadAPOD(){
+  const container = document.getElementById('apod-container');
+  container.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--dim);">🔭 Loading from NASA…</div>';
+  try {
+    // Use demo key for APOD
+    const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+    const data = await res.json();
+    if(data.media_type === 'video') {
+      container.innerHTML = `<div class="apod-wrap"><div style="padding:1.5rem;text-align:center;">
+        <div class="apod-title">${data.title}</div>
+        <div class="apod-date">${data.date}</div>
+        <a href="${data.url}" target="_blank" style="color:var(--neon);font-size:.82rem;">▶ Watch Video on NASA</a>
+        <div class="apod-explanation" style="margin-top:.7rem;">${data.explanation}</div>
+      </div></apod-wrap>`;
+    } else {
+      container.innerHTML = `<div class="apod-wrap">
+        <img class="apod-img" src="${data.hdurl||data.url}" alt="${data.title}" onclick="window.open('${data.hdurl||data.url}','_blank')">
+        <div class="apod-caption">
+          <div class="apod-title">${data.title}</div>
+          <div class="apod-date">${data.date}${data.copyright?' · © '+data.copyright:''}</div>
+          <div class="apod-explanation">${data.explanation}</div>
+        </div>
+      </div>`;
+    }
+    addScore(20, mx, my); toast('NASA APOD loaded! +20');
+  } catch(e) {
+    container.innerHTML = `<div class="apod-wrap"><div class="apod-caption">
+      <div class="apod-title">Pillars of Creation — Eagle Nebula</div>
+      <div class="apod-date">2024 — NASA/ESA Hubble Space Telescope</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg/800px-Pillars_of_creation_2014_HST_WFC3-UVIS_full-res_denoised.jpg" style="width:100%;border-radius:10px;margin:.5rem 0;" alt="Pillars of Creation">
+      <div class="apod-explanation">These towering columns of gas and dust, nicknamed the "Pillars of Creation," are located in the Eagle Nebula, 6,500 light-years away. They are stellar nurseries where new stars are forming within vast clouds of molecular hydrogen. This iconic Hubble image became one of the most recognizable astronomical photographs ever taken.</div>
+    </div></div>`;
+  }
+}
+ 
+let issTrackInterval = null, issLat = 51.6, issLng = 0;
+function drawISSMap(lat, lng) {
+  const canvas = document.getElementById('iss-canvas'); if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#000a18'; ctx.fillRect(0,0,W,H);
+  
+  ctx.strokeStyle = 'rgba(0,247,255,.08)'; ctx.lineWidth = .5;
+  for(let i=0;i<12;i++){ctx.beginPath();ctx.moveTo(i*W/12,0);ctx.lineTo(i*W/12,H);ctx.stroke();}
+  for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(0,i*H/6);ctx.lineTo(W,i*H/6);ctx.stroke();}
+ 
+  ctx.fillStyle = 'rgba(0,180,80,.25)';
+  const continents = [
+ 
+    [[80,35],[110,40],[120,50],[115,60],[95,65],[75,55],[65,45],[70,35]],
+ 
+    [[85,75],[100,80],[105,100],[95,115],[80,110],[75,90],[80,78]],
+ 
+    [[155,35],[175,35],[178,42],[168,45],[160,40],[155,38]],
+ 
+    [[155,60],[180,58],[190,75],[185,110],[165,120],[150,110],[148,85],[152,65]],
+ 
+    [[180,28],[250,28],[265,40],[260,55],[240,60],[210,55],[190,45],[180,35]],
+ 
+    [[235,100],[260,98],[265,112],[255,122],[238,118],[230,108]],
+  ];
+  continents.forEach(pts => {
+    ctx.beginPath();
+    pts.forEach(([x,y],i) => i===0?ctx.moveTo(x,y):ctx.lineTo(x,y));
+    ctx.closePath(); ctx.fill();
+  }); 
+  const issX = ((lng + 180) / 360) * W;
+  const issY = ((90 - lat) / 180) * H;
+ 
+  ctx.strokeStyle='rgba(0,247,255,.25)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  for(let lngT=-180;lngT<=180;lngT+=5){
+    const latT = lat * Math.cos((lngT-lng)*Math.PI/180);
+    const x = ((lngT+180)/360)*W; const y=((90-latT)/180)*H;
+    lngT===-180?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke(); ctx.setLineDash([]);
+ 
+  ctx.beginPath(); ctx.arc(issX, issY, 8, 0, Math.PI*2);
+  ctx.fillStyle='rgba(0,247,255,.15)'; ctx.fill();
+  ctx.strokeStyle='rgba(0,247,255,.9)'; ctx.lineWidth=2; ctx.stroke();
+  ctx.fillStyle='rgba(0,247,255,1)'; ctx.font='14px serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('🛸', issX, issY);
+ 
+  ctx.fillStyle='rgba(255,255,255,.5)'; ctx.font='9px Orbitron,monospace';
+  ctx.textAlign='left'; ctx.textBaseline='top';
+  ['Americas','Europe/Africa','Asia/Pacific'].forEach((l,i)=>ctx.fillText(l, 10+i*230, 5));
+}
+async function refreshISS(){
+  try {
+    const res = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
+    const d = await res.json();
+    issLat = d.latitude; issLng = d.longitude;
+    document.getElementById('iss-coords').textContent = `LAT: ${issLat.toFixed(4)}° | LNG: ${issLng.toFixed(4)}° | ALT: ${d.altitude.toFixed(1)} km | SPEED: ${(d.velocity/3600).toFixed(2)} km/s`;
+    drawISSMap(issLat, issLng); addScore(5, mx, my);
+  } catch(e) {
+   
+    issLat += (Math.random()-.5)*2; issLng = (issLng + 5) % 360 - 180;
+    document.getElementById('iss-coords').textContent = `LAT: ${issLat.toFixed(4)}° | LNG: ${issLng.toFixed(4)}° | ALT: ~408 km | SPEED: 7.66 km/s (simulated)`;
+    drawISSMap(issLat, issLng);
+  }
+}
+function startISSTracking(){
+  const btn = document.getElementById('iss-track-btn');
+  if(issTrackInterval){clearInterval(issTrackInterval);issTrackInterval=null;btn.textContent='▶ Auto-Track';}
+  else{issTrackInterval=setInterval(refreshISS,3000);btn.textContent='⏹ Stop Tracking';refreshISS();}
+}
+ 
+function refreshSolar(){
+ 
+  const kIndex = Math.floor(Math.random()*5)+1;
+  const sunspots = Math.floor(Math.random()*120)+20;
+  const flareClass = ['A','B','C','M','X'][Math.floor(Math.random()*4)];
+  const solarWind = (350+Math.random()*300).toFixed(0);
+  const display = document.getElementById('solar-activity-display');
+  if(!display) return;
+  const kColors = ['var(--green)','var(--green)','#fbbf24','var(--orange)','var(--red)'];
+  display.innerHTML = `
+    <div class="solar-stat"><div class="solar-stat-num" style="color:${kColors[kIndex-1]}">${kIndex}</div><div class="solar-stat-label">Kp Index<br><span style="font-size:.5rem;color:var(--dim)">(Geomagnetic)</span></div></div>
+    <div class="solar-stat"><div class="solar-stat-num">${sunspots}</div><div class="solar-stat-label">Sunspot Count</div></div>
+    <div class="solar-stat"><div class="solar-stat-num">${flareClass}</div><div class="solar-stat-label">Max Flare Class</div></div>
+    <div class="solar-stat"><div class="solar-stat-num">${solarWind}</div><div class="solar-stat-label">Solar Wind<br><span style="font-size:.5rem;color:var(--dim)">(km/s)</span></div></div>
+  `;
+  drawSolarCanvas(sunspots, kIndex);
+  addScore(8, mx, my);
+}
+function drawSolarCanvas(sunspots, kp){
+  const canvas = document.getElementById('solar-canvas-live'); if(!canvas) return;
+  const ctx = canvas.getContext('2d'); const W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const days = 30;
+  const data = Array.from({length:days}, (_,i) => ({
+    spots: Math.max(0, sunspots + (Math.random()-.5)*40),
+    kp: Math.max(0, Math.min(9, kp + (Math.random()-.5)*3))
+  }));
+ 
+  ctx.fillStyle='rgba(0,0,15,.8)'; ctx.fillRect(0,0,W,H);
+ 
+  ctx.strokeStyle='rgba(255,255,255,.06)'; ctx.lineWidth=.5;
+  for(let i=0;i<=5;i++){ctx.beginPath();ctx.moveTo(0,i*H/5);ctx.lineTo(W,i*H/5);ctx.stroke();}
+ 
+  ctx.strokeStyle='rgba(255,165,0,.8)'; ctx.lineWidth=2;
+  ctx.beginPath();
+  data.forEach((d,i)=>{const x=i*(W/days);const y=H-(d.spots/160)*H*0.9-10;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+ 
+  ctx.strokeStyle='rgba(0,247,255,.6)'; ctx.lineWidth=1.5;
+  ctx.beginPath();
+  data.forEach((d,i)=>{const x=i*(W/days);const y=H-(d.kp/9)*H*0.9-10;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+ 
+  ctx.fillStyle='rgba(255,165,0,.8)'; ctx.font='10px Orbitron,monospace'; ctx.textAlign='left';
+  ctx.fillText('Sunspot count', 10, 16);
+  ctx.fillStyle='rgba(0,247,255,.8)'; ctx.fillText('Kp index ×14', 10, 28);
+  ctx.fillStyle='rgba(255,255,255,.3)'; ctx.font='9px Orbitron,monospace'; ctx.textAlign='right';
+  ctx.fillText('30-day trend', W-8, H-6);
+}
+ 
+async function loadAsteroids(){
+  const list = document.getElementById('asteroid-list');
+  list.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--dim);">Loading from NASA NeoWs…</div>';
+  const today = new Date().toISOString().split('T')[0];
+  const end = new Date(Date.now()+7*86400000).toISOString().split('T')[0];
+  try {
+    const res = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${end}&api_key=DEMO_KEY`);
+    const data = await res.json();
+    const neos = Object.values(data.near_earth_objects).flat().slice(0,12);
+    renderAsteroids(neos.map(n=>({
+      name: n.name.replace('(','').replace(')',''),
+      dist: (n.close_approach_data[0]?.miss_distance?.lunar||'?'),
+      diam: n.estimated_diameter.meters,
+      hazardous: n.is_potentially_hazardous_asteroid,
+      speed: n.close_approach_data[0]?.relative_velocity?.kilometers_per_hour
+    })));
+    addScore(15, mx, my); toast('Asteroid data loaded! +15');
+  } catch(e) {
+ 
+    renderAsteroids([
+      {name:'2024 BX1',dist:'12.4',diam:{min:18,max:40},hazardous:false,speed:'42000'},
+      {name:'(99942) Apophis',dist:'38.1',diam:{min:310,max:690},hazardous:true,speed:'30500'},
+      {name:'2023 DW',dist:'5.2',diam:{min:45,max:100},hazardous:true,speed:'28000'},
+      {name:'2024 CK1',dist:'22.8',diam:{min:8,max:18},hazardous:false,speed:'55000'},
+      {name:'2024 AE4',dist:'31.5',diam:{min:130,max:290},hazardous:false,speed:'39000'},
+      {name:'(65803) Didymos',dist:'72.3',diam:{min:700,max:780},hazardous:false,speed:'21000'},
+    ]);
+  }
+}
+function renderAsteroids(neos){
+  const list = document.getElementById('asteroid-list');
+  list.innerHTML = neos.map(n => {
+    const dist = typeof n.dist === 'string' ? parseFloat(n.dist).toFixed(1) : parseFloat(n.dist).toFixed(1);
+    const diam = n.diam?.min ? `${Math.round(n.diam.min)}–${Math.round(n.diam.max)}m` : '?';
+    const speed = n.speed ? (parseFloat(n.speed)/1000).toFixed(1)+' km/s' : '?';
+    return `<div class="asteroid-item" onclick="addScore(5,mx,my)">
+      <span style="font-size:1.2rem;">${n.hazardous?'🔴':'🪨'}</span>
+      <span class="asteroid-name">${n.name}</span>
+      <span style="font-size:.65rem;color:var(--dim);">${diam} · ${speed}</span>
+      <span class="asteroid-dist" style="color:${parseFloat(dist)<10?'var(--red)':parseFloat(dist)<30?'var(--orange)':'var(--green)'};">${dist} LD</span>
+      <span class="asteroid-hazard ${n.hazardous?'hazard-yes':'hazard-no'}">${n.hazardous?'PHO':'Safe'}</span>
+    </div>`;
+  }).join('');
+}
+ 
+function buildSpaceWeatherGrid(){
+  const grid = document.getElementById('space-weather-grid'); if(!grid) return;
+  const items = [
+    {icon:'🌌',label:'Cosmic Ray Flux',val:(80+Math.random()*40).toFixed(1)+' pfu',desc:'Galactic cosmic rays entering Earth\'s atmosphere'},
+    {icon:'🧲',label:'Geomagnetic Field',val:['Quiet','Unsettled','Active','Minor Storm'][Math.floor(Math.random()*4)],desc:'Disturbance in Earth\'s magnetosphere'},
+    {icon:'☀️',label:'Solar Flux Index',val:(90+Math.random()*80).toFixed(0)+' sfu',desc:'Radio emission from the Sun at 10.7cm wavelength'},
+    {icon:'🌈',label:'Aurora Visibility',val:['High lat only','To 60°N','To 50°N','To 40°N'][Math.floor(Math.random()*4)],desc:'Likelihood of aurora borealis / australis'},
+    {icon:'📡',label:'Radio Blackout',val:['None','R1 Minor','R2 Moderate','None'][Math.floor(Math.random()*4)],desc:'High-frequency radio blackout from solar flares'},
+    {icon:'⚡',label:'Radiation Storm',val:'S0 — None',desc:'Energetic proton events affecting satellites and crewed missions'},
+  ];
+  grid.innerHTML = items.map(i=>`
+    <div class="live-card" onclick="addScore(5,mx,my)">
+      <h3>${i.icon} ${i.label}</h3>
+      <div class="live-val">${i.val}</div>
+      <div class="live-sub">${i.desc}</div>
+    </div>
+  `).join('');
+}
+ 
+const skyObjects = [
+  {name:'Sirius',ra:6.75,dec:-16.7,mag:-1.46,type:'star',color:'#cceeff'},
+  {name:'Canopus',ra:6.4,dec:-52.7,mag:-0.74,type:'star',color:'#ffffcc'},
+  {name:'Arcturus',ra:14.26,dec:19.2,mag:-0.05,type:'star',color:'#ffaa44'},
+  {name:'Vega',ra:18.6,dec:38.8,mag:0.03,type:'star',color:'#ccddff'},
+  {name:'Rigel',ra:5.24,dec:-8.2,mag:0.13,type:'star',color:'#aabbff'},
+  {name:'Betelgeuse',ra:5.92,dec:7.4,mag:0.42,type:'star',color:'#ff6633'},
+  {name:'Aldebaran',ra:4.6,dec:16.5,mag:0.87,type:'star',color:'#ff8844'},
+  {name:'Antares',ra:16.49,dec:-26.4,mag:1.06,type:'star',color:'#ff4422'},
+  {name:'Spica',ra:13.42,dec:-11.2,mag:1.04,type:'star',color:'#aaccff'},
+  {name:'Pollux',ra:7.76,dec:28.0,mag:1.16,type:'star',color:'#ffcc88'},
+  {name:'Jupiter',ra:null,dec:null,mag:-2.5,type:'planet',color:'#e8c87a',dyn:true},
+  {name:'Saturn',ra:null,dec:null,mag:0.5,type:'planet',color:'#e8d5a3',dyn:true},
+  {name:'Mars',ra:null,dec:null,mag:-1.0,type:'planet',color:'#e05030',dyn:true},
+  {name:'Pleiades',ra:3.79,dec:24.1,mag:1.6,type:'cluster',color:'#aaddff'},
+  {name:'Orion Nebula',ra:5.59,dec:-5.4,mag:4.0,type:'nebula',color:'#88aaff'},
+  {name:'Milky Way Core',ra:17.76,dec:-28.9,mag:null,type:'galaxy',color:'rgba(255,255,220,.2)'},
+];
+function loadSkyChart(){
+  const wrap = document.getElementById('sky-chart-wrap');
+  wrap.style.display = 'block';
+  const now = new Date();
+  document.getElementById('sky-info').textContent = `Sky chart for your location · ${now.toLocaleDateString()} ${now.toLocaleTimeString()} local time`;
+  drawSkyChart(now);
+  addScore(15, mx, my);
+  toast('Sky chart generated! +15');
+}
+function drawSkyChart(now){
+  const canvas = document.getElementById('sky-canvas'); if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height, cx=W/2, cy=H/2, R=Math.min(cx,cy)-20;
+  ctx.clearRect(0,0,W,H);
+ 
+  const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,R);
+  grad.addColorStop(0,'#060818'); grad.addColorStop(0.7,'#020510'); grad.addColorStop(1,'#010208');
+  ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+ 
+  ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+ 
+  [30,60].forEach(alt=>{
+    ctx.strokeStyle='rgba(255,255,255,.07)'; ctx.lineWidth=.5;
+    ctx.beginPath(); ctx.arc(cx,cy,R*(1-alt/90),0,Math.PI*2); ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.25)'; ctx.font='9px Orbitron,monospace'; ctx.textAlign='left';
+    ctx.fillText(alt+'°', cx+R*(1-alt/90)+2, cy);
+  });
+  
+  const cards=[['N',0],['E',90],['S',180],['W',270]];
+  ctx.fillStyle='rgba(255,215,0,.8)'; ctx.font='bold 11px Orbitron,monospace'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  cards.forEach(([l,deg])=>{const rad=deg*Math.PI/180;ctx.fillText(l,cx+Math.sin(rad)*(R+12),cy-Math.cos(rad)*(R+12));});
+  
+  const lst = (now.getUTCHours() + now.getUTCMinutes()/60) * 15;
+  skyObjects.forEach(obj => {
+    if(obj.dyn){
+      obj.ra = (lst/15 + Math.random()*4-2 + 18) % 24;
+      obj.dec = (Math.random()-0.5)*40;
+    }
+    if(obj.ra===null) return;
+    const ha = ((lst - obj.ra*15 + 360) % 360) * Math.PI/180;
+    const dec = obj.dec * Math.PI/180;
+    const sinAlt = Math.sin(dec)*Math.sin(40*Math.PI/180) + Math.cos(dec)*Math.cos(40*Math.PI/180)*Math.cos(ha);
+    const alt = Math.asin(Math.max(-1,Math.min(1,sinAlt)));
+    if(alt < 0) return;
+    const az = Math.atan2(Math.sin(ha), Math.cos(ha)*Math.sin(40*Math.PI/180)-Math.tan(dec)*Math.cos(40*Math.PI/180));
+    const r = R * (1 - alt/(Math.PI/2));
+    const x = cx + r*Math.sin(az), y = cy - r*Math.cos(az);
+    if(obj.type==='nebula'){
+      ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);
+      const ng=ctx.createRadialGradient(x,y,0,x,y,8);ng.addColorStop(0,'rgba(100,150,255,.3)');ng.addColorStop(1,'transparent');
+      ctx.fillStyle=ng;ctx.fill();return;
+    }
+    const size = obj.mag!==null ? Math.max(1, 4-(obj.mag+1.5)) : 3;
+    ctx.beginPath(); ctx.arc(x,y,size,0,Math.PI*2);
+    if(obj.type==='planet'){
+      ctx.fillStyle=obj.color; ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.4)'; ctx.lineWidth=.5; ctx.stroke();
+    } else if(obj.type==='cluster'){
+      for(let i=0;i<7;i++){ctx.beginPath();ctx.arc(x+(Math.random()-.5)*8,y+(Math.random()-.5)*8,1,0,Math.PI*2);ctx.fillStyle=obj.color;ctx.fill();}
+    } else {
+      ctx.fillStyle=obj.color||'#fff'; ctx.fill();
+    }
+    if(size>2){
+      ctx.fillStyle='rgba(255,255,255,.55)'; ctx.font='8px Space Grotesk,sans-serif'; ctx.textAlign='left';
+      ctx.fillText(obj.name, x+size+2, y);
+    }
+  });
+  
+  ctx.save(); ctx.globalAlpha=0.06;
+  const mwGrad = ctx.createLinearGradient(cx-R*.3,cy-R,cx+R*.3,cy+R);
+  mwGrad.addColorStop(0,'transparent'); mwGrad.addColorStop(0.3,'rgba(255,255,220,.8)');
+  mwGrad.addColorStop(0.5,'rgba(255,255,220,1)'); mwGrad.addColorStop(0.7,'rgba(255,255,220,.8)'); mwGrad.addColorStop(1,'transparent');
+  ctx.fillStyle=mwGrad; ctx.fillRect(cx-R*.4,0,R*.8,H); ctx.restore();
+   
+  canvas.onmousemove = (e) => {
+    const rect=canvas.getBoundingClientRect();
+    const scX=W/rect.width, scY=H/rect.height;
+    const mx2=(e.clientX-rect.left)*scX, my2=(e.clientY-rect.top)*scY;
+    const tooltip=document.getElementById('sky-tooltip');
+    let found=false;
+    skyObjects.forEach(obj=>{
+      if(!obj.ra||obj.type==='nebula') return;
+      const ha=((lst-obj.ra*15+360)%360)*Math.PI/180;
+      const dec=obj.dec*Math.PI/180;
+      const sinAlt=Math.sin(dec)*Math.sin(40*Math.PI/180)+Math.cos(dec)*Math.cos(40*Math.PI/180)*Math.cos(ha);
+      const alt2=Math.asin(Math.max(-1,Math.min(1,sinAlt))); if(alt2<0) return;
+      const az=Math.atan2(Math.sin(ha),Math.cos(ha)*Math.sin(40*Math.PI/180)-Math.tan(dec)*Math.cos(40*Math.PI/180));
+      const r=R*(1-alt2/(Math.PI/2)); const x=cx+r*Math.sin(az),y2=cy-r*Math.cos(az);
+      if(Math.sqrt((mx2-x)**2+(my2-y2)**2)<12){
+        tooltip.style.display='block'; tooltip.style.left=(e.clientX-rect.left+10)+'px'; tooltip.style.top=(e.clientY-rect.top-20)+'px';
+        tooltip.textContent=`${obj.name} (${obj.type})${obj.mag!==null?' mag '+obj.mag:''}`;
+        found=true;
+      }
+    });
+    if(!found) tooltip.style.display='none';
+  };
+}
+ 
+const exoplanetData = [
+  {name:'Kepler-186f',type:'terrestrial',icon:'🪨',color:'#8b7355',star:'Kepler-186',dist:500,radius:1.11,mass:'~1.4',period:129.9,temp:188,hz:'yes',
+   discovery:2014,method:'transit',desc:'One of the first Earth-sized planets found in the habitable zone of another star. Its star is an M-dwarf, so it receives only 32% of the light Earth gets from the Sun.'},
+  {name:'Kepler-442b',type:'superearth',icon:'🌍',color:'#4a8f4a',star:'Kepler-442',dist:1206,radius:1.34,mass:'~2.3',period:112.3,temp:233,hz:'yes',
+   discovery:2015,method:'transit',desc:'One of the most Earth-like exoplanets known. It orbits within the habitable zone of a K-type star with an 85% Earth Similarity Index.'},
+  {name:'HD 40307g',type:'superearth',icon:'🌎',color:'#4a7f9f',star:'HD 40307',dist:42,radius:1.77,mass:'7.1',period:197.8,temp:226,hz:'yes',
+   discovery:2012,method:'radial velocity',desc:'A potentially habitable super-Earth just 42 light-years away. Unlike many exoplanets, it may rotate normally (not tidally locked), allowing day-night cycles.'},
+  {name:'51 Pegasi b',type:'gasgiant',icon:'🟠',color:'#e8a44a',star:'51 Pegasi',dist:50,radius:10.4,mass:'150',period:4.23,temp:1200,hz:'no',
+   discovery:1995,method:'radial velocity',desc:'The first confirmed exoplanet around a Sun-like star. A hot Jupiter so close to its star that a year lasts just 4 days. Its discovery revolutionized astronomy.'},
+  {name:'TRAPPIST-1e',type:'terrestrial',icon:'🌑',color:'#555577',star:'TRAPPIST-1',dist:39,radius:0.91,mass:'0.69',period:6.1,temp:251,hz:'yes',
+   discovery:2017,method:'transit',desc:'One of seven Earth-sized planets in the TRAPPIST-1 system. This planet sits firmly in the habitable zone and receives similar energy to Earth. Likely tidally locked.'},
+  {name:'TRAPPIST-1f',type:'terrestrial',icon:'🌒',color:'#445566',star:'TRAPPIST-1',dist:39,radius:1.04,mass:'1.04',period:9.2,temp:219,hz:'maybe',
+   discovery:2017,method:'transit',desc:'Another TRAPPIST-1 planet in the outer habitable zone. Could have liquid water with the right greenhouse effect. JWST is actively studying its atmosphere.'},
+  {name:'GJ 1214 b',type:'neptunian',icon:'💙',color:'#4466aa',star:'GJ 1214',dist:48,radius:2.65,mass:'6.0',period:1.58,temp:393,hz:'no',
+   discovery:2009,method:'transit',desc:'A "warm sub-Neptune" likely covered by a thick water or hydrogen atmosphere. Its featureless spectrum suggests high-altitude clouds or haze dominate.'},
+  {name:'Kepler-22b',type:'superearth',icon:'🌊',color:'#2255aa',star:'Kepler-22',dist:620,radius:2.4,mass:'~10-36',period:289.9,temp:262,hz:'maybe',
+   discovery:2011,method:'transit',desc:'One of the first "Goldilocks" planets found by Kepler. May have a surface temperature of around 22°C if it has a thick greenhouse atmosphere.'},
+  {name:'HD 189733b',type:'gasgiant',icon:'🔵',color:'#2277cc',star:'HD 189733',dist:63,radius:12.7,mass:'380',period:2.22,temp:1200,hz:'no',
+   discovery:2005,method:'transit',desc:'An infamous hot Jupiter where it rains molten glass — sideways, at 8,700 km/h. The blue color comes from silicate particles in the atmosphere.'},
+  {name:'Kepler-438b',type:'terrestrial',icon:'🔴',color:'#aa3322',star:'Kepler-438',dist:470,radius:1.12,mass:'~1.4',period:35.2,temp:276,hz:'maybe',
+   discovery:2015,method:'transit',desc:'Once celebrated as one of the most Earth-like planets, but it orbits an active M-star that blasts it with superflares 100× stronger than any solar flare.'},
+  {name:'Proxima b',type:'terrestrial',icon:'🌿',color:'#338844',star:'Proxima Centauri',dist:4.24,radius:1.07,mass:'1.17',period:11.2,temp:234,hz:'maybe',
+   discovery:2016,method:'radial velocity',desc:'The nearest exoplanet to Earth, orbiting our closest stellar neighbour. Its habitable-zone status is debated due to intense stellar flares from Proxima Centauri.'},
+  {name:'TOI 700 d',type:'terrestrial',icon:'🪴',color:'#448844',star:'TOI 700',dist:101,radius:1.19,mass:'~1.7',period:37.4,temp:268,hz:'yes',
+   discovery:2020,method:'transit',desc:'A confirmed Earth-sized habitable-zone planet found by the TESS mission. Its star is calm enough to allow stable surface conditions. A prime JWST target.'},
+];
+let exoFilter = 'all';
+function initExoplanets(){
+  renderExoGrid();
+  drawHRDiagram();
+  buildDetectionMethods();
+  calcHZ();
+}
+function filterExo(type, btn){
+  exoFilter = type;
+  document.querySelectorAll('.exo-filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderExoGrid();
+}
+function renderExoGrid(){
+  const grid = document.getElementById('exo-grid'); if(!grid) return;
+  const filtered = exoFilter==='all' ? exoplanetData :
+    exoFilter==='habitable' ? exoplanetData.filter(e=>e.hz==='yes'||e.hz==='maybe') :
+    exoplanetData.filter(e=>e.type===exoFilter);
+  const habColors = {yes:'#4ade80',maybe:'#fbbf24',no:'#f87171'};
+  grid.innerHTML = filtered.map((p,i) => {
+    const habPct = p.hz==='yes'?85:p.hz==='maybe'?45:10;
+    return `<div class="exo-card" onclick="showExoDetail(${exoplanetData.indexOf(p)})" style="--accent:${p.color}">
+      <div class="exo-planet-visual" style="background:radial-gradient(circle at 35% 35%,${p.color},#000118);color:${p.color};">
+        <span style="z-index:1;position:relative;">${p.icon}</span>
+      </div>
+      <div class="exo-name">${p.name}</div>
+      <div class="exo-stat-row"><span>Type</span><span>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span></div>
+      <div class="exo-stat-row"><span>Distance</span><span>${p.dist} ly</span></div>
+      <div class="exo-stat-row"><span>Radius</span><span>${p.radius} R⊕</span></div>
+      <div class="exo-stat-row"><span>Period</span><span>${p.period} days</span></div>
+      <div class="exo-stat-row"><span>Eq. Temp</span><span>${p.temp}K</span></div>
+      <div class="habitability-bar"><div class="habitability-fill" style="width:${habPct}%;background:${habColors[p.hz]};"></div></div>
+      <span class="exo-hz hz-${p.hz}">HZ: ${p.hz==='yes'?'✓ Inside':'maybe'===p.hz?'~ Edge':'✗ Outside'}</span>
+    </div>`;
+  }).join('');
+  if(filtered.length===0) grid.innerHTML='<div style="text-align:center;color:var(--dim);padding:2rem;grid-column:1/-1;">No planets match this filter.</div>';
+}
+function showExoDetail(i){
+  const p = exoplanetData[i];
+  const panel = document.getElementById('exo-detail-panel');
+  panel.classList.add('open');
+  const maxRadius=14, maxMass=400, maxTemp=1300;
+  panel.innerHTML = `
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+      <div style="width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 35%,${p.color},#000);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;">${p.icon}</div>
+      <div>
+        <div style="font-family:'Orbitron',monospace;font-size:.95rem;color:var(--gold);font-weight:900;">${p.name}</div>
+        <div style="font-size:.75rem;color:var(--dim);">Star: ${p.star} · Discovered ${p.discovery} via ${p.method}</div>
+        <div style="margin-top:.3rem;font-size:.78rem;color:var(--text);line-height:1.65;">${p.desc}</div>
+      </div>
+    </div>
+    <div style="margin:.8rem 0;">
+      <div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--neon);margin-bottom:.5rem;">COMPARISON TO EARTH</div>
+      <div class="exo-comparison-bar"><span class="exo-comparison-label">Radius</span><div class="exo-bar-track"><div class="exo-bar-fill" style="width:${Math.min(100,(p.radius/maxRadius)*100)}%;background:linear-gradient(90deg,var(--blue),var(--violet));"></div></div><span class="exo-bar-val">${p.radius}× Earth</span></div>
+      <div class="exo-comparison-bar"><span class="exo-comparison-label">Mass</span><div class="exo-bar-track"><div class="exo-bar-fill" style="width:${Math.min(100,(parseFloat(p.mass)/maxMass)*100)}%;background:linear-gradient(90deg,var(--orange),var(--red));"></div></div><span class="exo-bar-val">${p.mass} M⊕</span></div>
+      <div class="exo-comparison-bar"><span class="exo-comparison-label">Eq. Temp</span><div class="exo-bar-track"><div class="exo-bar-fill" style="width:${Math.min(100,(p.temp/maxTemp)*100)}%;background:linear-gradient(90deg,var(--neon),var(--gold));"></div></div><span class="exo-bar-val">${p.temp}K</span></div>
+    </div>
+    <button class="ghost" onclick="document.getElementById('exo-detail-panel').classList.remove('open')" style="margin-top:.5rem;">✕ Close</button>
+  `;
+  addScore(15, mx, my);
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+ 
+const hrStars=[
+  {name:'Sirius',temp:9940,lum:25.4,type:'A',color:'#cceeff'},{name:'Sun',temp:5778,lum:1,type:'G',color:'#ffd700'},
+  {name:'Betelgeuse',temp:3500,lum:90000,type:'M',color:'#ff4422'},{name:'Rigel',temp:12100,lum:120000,type:'B',color:'#aabbff'},
+  {name:'Proxima',temp:3042,lum:0.0017,type:'M',color:'#ff6644'},{name:'Vega',temp:9602,lum:40,type:'A',color:'#ccddff'},
+  {name:'Aldebaran',temp:3910,lum:439,type:'K',color:'#ff8844'},{name:'Arcturus',temp:4286,lum:170,color:'#ff9944'},
+  {name:'Spica',temp:25400,lum:12100,type:'B',color:'#aabbff'},{name:'Canopus',temp:7400,lum:10700,type:'F',color:'#ffffcc'},
+  {name:'Achernar',temp:15000,lum:3150,type:'B',color:'#bbccff'},{name:'Deneb',temp:8525,lum:196000,type:'A',color:'#ddeeff'},
+  {name:'VY Canis Maj',temp:3490,lum:270000,type:'M',color:'#ff3311'},{name:'Procyon',temp:6530,lum:6.9,type:'F',color:'#ffffee'},
+  {name:'Pollux',temp:4666,lum:32,type:'K',color:'#ffcc88'},{name:'White Dwarf A',temp:25000,lum:0.005,type:'WD',color:'#eeeeff'},
+  {name:'White Dwarf B',temp:15000,lum:0.001,type:'WD',color:'#ddddff'},{name:'Neutron Star',temp:600000,lum:0.0001,type:'NS',color:'#ffffff'},
+];
+function drawHRDiagram(){
+  const canvas=document.getElementById('hr-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  const pad={l:55,r:20,t:20,b:45};
+  const plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b;
+ 
+  const tempMin=2000,tempMax=700000;
+  const lumMin=0.0001,lumMax=300000;
+  const tx=t=>pad.l+plotW*(1-Math.log10(t/tempMin)/Math.log10(tempMax/tempMin));
+  const ly=l=>pad.t+plotH*(1-Math.log10(l/lumMin)/Math.log10(lumMax/lumMin));
+ 
+  const zones=[{x:0,w:1,label:'Main Sequence',color:'rgba(0,60,120,.25)'},];
+  ctx.fillStyle='rgba(0,40,100,.18)';
+  ctx.fillRect(tx(40000),pad.t,tx(2500)-tx(40000),plotH);
+  ctx.fillStyle='rgba(255,150,0,.04)';
+  ctx.fillRect(tx(5000),pad.t,tx(2500)-tx(5000),plotH*0.45);
+ 
+  ctx.fillStyle='rgba(255,150,0,.3)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('GIANTS',tx(4000),pad.t+plotH*0.3);
+  ctx.fillStyle='rgba(0,100,200,.4)';
+  ctx.fillText('SUPERGIANTS',tx(10000),pad.t+20);
+  ctx.fillStyle='rgba(200,200,255,.3)';
+  ctx.fillText('WHITE DWARFS',tx(20000),pad.t+plotH*0.9);
+ 
+  ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=.5;
+  [3000,5000,8000,15000,30000,100000].forEach(t=>{
+    ctx.beginPath();ctx.moveTo(tx(t),pad.t);ctx.lineTo(tx(t),pad.t+plotH);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.35)';ctx.font='8px Orbitron,monospace';ctx.textAlign='center';
+    ctx.fillText(t>=1000?Math.round(t/1000)+'K':t,tx(t),pad.t+plotH+12);
+  });
+  [0.001,0.1,1,10,1000,100000].forEach(l=>{
+    ctx.beginPath();ctx.moveTo(pad.l,ly(l));ctx.lineTo(pad.l+plotW,ly(l));ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.35)';ctx.font='8px Orbitron,monospace';ctx.textAlign='right';
+    ctx.fillText(l>=1000?l/1000+'K':l,pad.l-4,ly(l)+3);
+  });
+ 
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='9px Orbitron,monospace';
+  ctx.textAlign='center';ctx.fillText('Temperature (K, hotter →)',W/2,H-5);
+  ctx.save();ctx.translate(12,H/2);ctx.rotate(-Math.PI/2);ctx.fillText('Luminosity (L☉)',0,0);ctx.restore();
+
+  hrStars.forEach((s,i)=>{
+    const x=tx(s.temp),y=ly(s.lum);
+    const r=s.name.includes('VY')||s.name.includes('Deneb')||s.name==='Betelgeuse'?8:
+             s.lum>1000?6:s.lum>10?4:s.lum<0.01?3:4;
+    const grd=ctx.createRadialGradient(x,y,0,x,y,r*2);
+    grd.addColorStop(0,s.color||'#fff');grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,r*2,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=s.color||'#fff';ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='7.5px Space Grotesk,sans-serif';ctx.textAlign='left';
+    if(r>3)ctx.fillText(s.name,x+r+2,y+3);
+  });
+ 
+  canvas.onclick=e=>{
+    const rect=canvas.getBoundingClientRect();
+    const scX=W/rect.width,scY=H/rect.height;
+    const cx2=(e.clientX-rect.left)*scX,cy2=(e.clientY-rect.top)*scY;
+    let closest=null,minD=30;
+    hrStars.forEach(s=>{const d=Math.sqrt((cx2-tx(s.temp))**2+(cy2-ly(s.lum))**2);if(d<minD){minD=d;closest=s;}});
+    if(closest){
+      document.getElementById('hr-info').textContent=`${closest.name}: Temp ${closest.temp.toLocaleString()}K · Luminosity ${closest.lum} L☉ · Spectral type ${closest.type||'?'}`;
+      addScore(8,e.clientX,e.clientY);
+    }
+  };
+}
+ 
+function calcHZ(){
+  const temp=parseFloat(document.getElementById('hz-temp')?.value||5778);
+  const lum=parseFloat(document.getElementById('hz-lum')?.value||1);
+  if(document.getElementById('hz-temp-val')) document.getElementById('hz-temp-val').textContent=Math.round(temp);
+  if(document.getElementById('hz-lum-val')) document.getElementById('hz-lum-val').textContent=parseFloat(lum).toFixed(2);
+  const hzIn=Math.sqrt(lum/1.1), hzOut=Math.sqrt(lum/0.53);
+  const canvas=document.getElementById('hz-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#000610';ctx.fillRect(0,0,W,H);
+  const maxDist=Math.max(hzOut*2.5,3),scale=W/maxDist;
+ 
+  const starR=Math.max(8,Math.min(22,(lum**0.25)*12));
+  const starColor=temp>20000?'#aabbff':temp>7500?'#ffffee':temp>6000?'#fff8cc':temp>5000?'#ffd700':temp>3500?'#ff8844':'#ff4422';
+  const sg=ctx.createRadialGradient(20,H/2,0,20,H/2,starR*2);
+  sg.addColorStop(0,starColor);sg.addColorStop(0.5,starColor+'88');sg.addColorStop(1,'transparent');
+  ctx.fillStyle=sg;ctx.beginPath();ctx.arc(20,H/2,starR*2.5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle=starColor;ctx.beginPath();ctx.arc(20,H/2,starR,0,Math.PI*2);ctx.fill();
+ 
+  const hzX1=20+hzIn*scale,hzX2=20+hzOut*scale;
+  const hzGrad=ctx.createLinearGradient(hzX1,0,hzX2,0);
+  hzGrad.addColorStop(0,'rgba(74,222,128,.08)');hzGrad.addColorStop(0.5,'rgba(74,222,128,.25)');hzGrad.addColorStop(1,'rgba(74,222,128,.08)');
+  ctx.fillStyle=hzGrad;ctx.fillRect(hzX1,5,hzX2-hzX1,H-10);
+  ctx.strokeStyle='rgba(74,222,128,.4)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(hzX1,0);ctx.lineTo(hzX1,H);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(hzX2,0);ctx.lineTo(hzX2,H);ctx.stroke();
+  ctx.setLineDash([]);
+ 
+  const earthX=20+1.0*scale;
+  ctx.fillStyle='#4a90e2';ctx.beginPath();ctx.arc(earthX,H/2,4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='8px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('Earth',earthX,H/2-8);
+ 
+  ctx.fillStyle='rgba(74,222,128,.8)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('HABITABLE ZONE',(hzX1+hzX2)/2,H-4);
+  if(document.getElementById('hz-result'))
+    document.getElementById('hz-result').textContent=`Habitable zone: ${hzIn.toFixed(2)} – ${hzOut.toFixed(2)} AU from the star`;
+}
+ 
+function buildDetectionMethods(){
+  const cont=document.getElementById('detect-methods');if(!cont)return;
+  const methods=[
+    {name:'Transit Method',icon:'🌑',pct:76,desc:'Measures dimming as a planet passes in front of its star. Used by Kepler and TESS. Best for planets in edge-on orbits.'},
+    {name:'Radial Velocity',icon:'〰️',pct:19,desc:'Detects the wobble a planet induces in its star by measuring Doppler shifts in the star\'s spectrum. Favors massive, close-in planets.'},
+    {name:'Direct Imaging',icon:'🔭',pct:1,desc:'Directly photographs the planet by blocking starlight. Only works for very large, young planets far from dim stars.'},
+    {name:'Microlensing',icon:'🌀',pct:3,desc:'Uses gravity as a lens: when a planet\'s star passes in front of a distant star, it magnifies its light in a detectable pattern.'},
+    {name:'Astrometry',icon:'📏',pct:1,desc:'Detects tiny positional shifts in a star\'s position caused by a companion planet. Now possible with Gaia satellite precision.'},
+  ];
+  cont.innerHTML=methods.map(m=>`
+    <div class="deep-fact" onclick="addScore(5,mx,my)">
+      <div class="fact-icon" style="font-size:1.6rem;">${m.icon}</div>
+      <div class="fact-body">
+        <div class="fact-title">${m.name} <span style="color:var(--gold);font-size:.75rem;">· ${m.pct}% of discoveries</span></div>
+        <div class="fact-text">${m.desc}</div>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+function switchStudio(id, btn){
+  document.querySelectorAll('.studio-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.studio-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('studio-'+id).classList.add('active');
+  btn.classList.add('active');
+  addScore(5,mx,my);
+  if(id==='address')buildCosmicAddress();
+  if(id==='birthday')findBirthdayStar();
+  if(id==='planetage')calcPlanetAges();
+  if(id==='calendar')drawCosmicCalendar();
+  if(id==='patch'){buildPatchSymbols();drawMissionPatch();}
+  if(id==='golden')buildGoldenSlots();
+  if(id==='marscrew')buildMarsCrew();
+}
+function initCreativeStudio(){
+  buildCosmicAddress();
+  buildGoldenSlots();
+  buildMarsCrew();
+  buildPatchSymbols();
+  drawMissionPatch();
+  calcPlanetAges();
+  drawCosmicCalendar();
+}
+
+
+function buildCosmicAddress(){
+  const el=document.getElementById('cosmic-address-display');if(!el)return;
+  const levels=[
+    {icon:'🌌',label:'Observable Universe',value:'The Cosmos',scale:'~93 billion light-years across',color:'var(--violet)',info:'Everything we can see from Earth — bound by the speed of light and the age of the universe.'},
+    {icon:'🕸️',label:'Supercluster',value:'Laniakea Supercluster',scale:'520 million light-years',color:'var(--pink)',info:'Our home supercluster, containing the Milky Way and ~100,000 other galaxies, mapped in 2014.'},
+    {icon:'🌐',label:'Galaxy Group',value:'Local Group',scale:'~10 million light-years',color:'#60a5fa',info:'A group of ~80 galaxies including the Milky Way, Andromeda, and Triangulum.'},
+    {icon:'🌌',label:'Galaxy',value:'Milky Way',scale:'~100,000 light-years',color:'#a855f7',info:'A barred spiral galaxy containing 100–400 billion stars. We\'re 26,000 light-years from its centre.'},
+    {icon:'💫',label:'Galactic Arm',value:'Orion Arm (Spur)',scale:'~3,500 light-years wide',color:'var(--neon)',info:'A minor spiral arm between the Perseus and Sagittarius arms, where our solar system resides.'},
+    {icon:'☀️',label:'Solar System',value:'Sol System',scale:'~100,000 AU (Oort Cloud)',color:'var(--gold)',info:'Our Sun and its 8 planets, ~4.6 billion years old, located 26,000 light-years from the galactic centre.'},
+    {icon:'🌍',label:'Planet',value:'Earth',scale:'12,742 km diameter',color:'#4a90e2',info:'The third planet from the Sun. The only known inhabited world. One of ~8.7 million known species live here.'},
+    {icon:'📍',label:'You',value:'Your Location',scale:'~1.7 m tall',color:'var(--green)',info:'You — made of atoms forged in ancient stars, alive in the one brief moment of cosmic time.'},
+  ];
+  el.innerHTML=levels.map(l=>`
+    <div class="ca-level" style="border-left-color:${l.color};" onclick="addScore(5,mx,my);toast('${l.value}!')">
+      <span class="ca-icon">${l.icon}</span>
+      <div style="flex:1;">
+        <div class="ca-label">${l.label}</div>
+        <div class="ca-value">${l.value}</div>
+        <div class="ca-scale">${l.scale} · ${l.info}</div>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+const birthdayStars=[
+  {dist:1,name:'Proxima Centauri',type:'Red Dwarf',mag:11.1,notes:'Too faint to see naked-eye, but the closest star to us.'},
+  {dist:4,name:'Alpha Centauri A',type:'G-Type',mag:-0.1,notes:'The brightest star of our closest stellar system, similar to our Sun.'},
+  {dist:11,name:'Tau Ceti',type:'G-Type',mag:3.5,notes:'A Sun-like star with a large debris disk, a favourite in science fiction.'},
+  {dist:16,name:'Epsilon Eridani',type:'K-Type',mag:3.7,notes:'A young, active star with a confirmed planetary system.'},
+  {dist:25,name:'Vega',type:'A-Type',mag:0.03,notes:'The first star to be photographed (1850) and the standard for stellar magnitude 0.'},
+  {dist:34,name:'Altair',type:'A-Type',mag:0.77,notes:'Rotating so fast it\'s visibly flattened at the poles — 20% wider than tall.'},
+  {dist:43,name:'Arcturus',type:'K-Giant',mag:-0.05,notes:'The brightest star in the northern celestial hemisphere. A red giant star.'},
+  {dist:52,name:'Capella',type:'G-Giant',mag:0.08,notes:'A binary system of two bright yellow giant stars orbiting each other.'},
+  {dist:65,name:'Pollux',type:'K-Giant',mag:1.16,notes:'A red giant with a confirmed exoplanet, making it a planet-hosting giant.'},
+  {dist:78,name:'Sirius',type:'A-Type',mag:-1.46,notes:'The brightest star in the night sky. Has a white dwarf companion, Sirius B.'},
+  {dist:100,name:'Regulus',type:'B-Type',mag:1.35,notes:'The heart of the constellation Leo. Rotating near its break-up speed.'},
+  {dist:139,name:'Spica',type:'B-Type',mag:1.04,notes:'A binary system of two hot, massive stars orbiting extremely close together.'},
+  {dist:170,name:'Aldebaran',type:'K-Giant',mag:0.87,notes:'A massive red giant — the eye of Taurus. ~44 times the Sun\'s diameter.'},
+  {dist:200,name:'Acrux',type:'B-Type',mag:0.77,notes:'The brightest star in the Southern Cross constellation.'},
+  {dist:250,name:'Rigel',type:'B-Supergiant',mag:0.13,notes:'A blue supergiant 70 times the Sun\'s size, destined to explode as a supernova.'},
+  {dist:300,name:'Hadar',type:'B-Giant',mag:0.61,notes:'A triple star system — the two closest stars are so similar they\'re nearly twins.'},
+  {dist:430,name:'Betelgeuse',type:'M-Supergiant',mag:0.42,notes:'The famous red supergiant — when it explodes, it will be visible in daylight!'},
+  {dist:500,name:'Deneb',type:'A-Supergiant',mag:1.25,notes:'So intrinsically luminous it would cast shadows if it replaced Sirius.'},
+  {dist:700,name:'Eta Carinae',type:'LBV',mag:5.0,notes:'One of the most massive and luminous stars known. A supernova candidate.'},
+  {dist:1000,name:'VY Canis Majoris',type:'M-Hypergiant',mag:6.5,notes:'One of the largest known stars — if placed at the Sun, it would engulf Jupiter.'},
+];
+function findBirthdayStar(){
+  const year=parseInt(document.getElementById('bday-year')?.value||1990);
+  const age=new Date().getFullYear()-year;
+  const s=birthdayStars.reduce((best,s)=>Math.abs(s.dist-age)<Math.abs(best.dist-age)?s:best,birthdayStars[0]);
+  const res=document.getElementById('bday-result');
+  if(!res)return; res.style.display='block';
+  res.innerHTML=`
+    <div class="bday-star">⭐</div>
+    <div style="font-family:'Orbitron',monospace;font-size:.82rem;color:var(--gold);text-align:center;margin-bottom:.5rem;">${s.name}</div>
+    <div style="text-align:center;font-size:.78rem;color:var(--dim);margin-bottom:.8rem;">${s.dist} light-years away · ${s.type} star · Magnitude ${s.mag}</div>
+    <div style="font-size:.84rem;line-height:1.8;color:var(--text);">
+      <strong style="color:var(--neon);">Right now, light that left ${s.name} when you were born is still ${Math.abs(s.dist-age)} light-years from Earth.</strong> 
+      If aliens around ${s.name} are watching Earth through a powerful telescope today, they're seeing ${year === new Date().getFullYear()-s.dist ? 'the very year you were born!' : `Earth as it was in ${new Date().getFullYear()-s.dist}.`}
+      <br><br>${s.notes}
+    </div>
+  `;
+  addScore(20,mx,my);toast('Birthday star found! +20');
+}
+ 
+function calcPlanetAges(){
+  const age=parseFloat(document.getElementById('earth-age-input')?.value||25);
+  const grid=document.getElementById('planet-age-grid');if(!grid)return;
+  const planets=[
+    {icon:'☿',name:'Mercury',year:0.2408,gravity:0.38},{icon:'♀',name:'Venus',year:0.6152,gravity:0.91},
+    {icon:'🌍',name:'Earth',year:1,gravity:1},{icon:'🔴',name:'Mars',year:1.881,gravity:0.38},
+    {icon:'♃',name:'Jupiter',year:11.86,gravity:2.34},{icon:'🪐',name:'Saturn',year:29.46,gravity:1.06},
+    {icon:'⛢',name:'Uranus',year:84.01,gravity:0.92},{icon:'♆',name:'Neptune',year:164.8,gravity:1.19},
+  ];
+  grid.innerHTML=planets.map(p=>{
+    const planetAge=(age/p.year).toFixed(1);
+    const weight=(70*p.gravity).toFixed(1);
+    return `<div class="planet-age-card">
+      <span class="planet-age-icon">${p.icon}</span>
+      <div class="planet-age-name">${p.name}</div>
+      <div class="planet-age-val">${planetAge} yrs</div>
+      <div style="font-size:.6rem;color:var(--dim);">70kg → ${weight}kg</div>
+    </div>`;
+  }).join('');
+  addScore(5,mx,my);
+}
+ 
+function drawCosmicCalendar(){
+  const canvas=document.getElementById('cosmic-cal-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  const events=[
+    {t:0,label:'Big Bang',color:'#ff4422',icon:'💥',desc:'The universe begins: 13.8 billion years ago. All space, time, and energy emerge from a single point.'},
+    {t:0.022,label:'First Stars',color:'#aabbff',icon:'⭐',desc:'Sept 22 — The first stars (Population III) ignite from pure hydrogen and helium, just 380 million years after the Big Bang.'},
+    {t:0.153,label:'Milky Way forms',color:'#a855f7',icon:'🌌',desc:'Mar 16 — Our Milky Way galaxy begins to take shape, about 13.2 billion years ago.'},
+    {t:0.666,label:'Solar System born',color:'#ffd700',icon:'☀️',desc:'Sept 2 — Our Sun and solar system form from a collapsing nebula, 4.6 billion years ago.'},
+    {t:0.679,label:'Earth forms',color:'#4a90e2',icon:'🌍',desc:'Sept 14 — The Earth coalesces from the solar protoplanetary disk.'},
+    {t:0.714,label:'First Life',color:'#4ade80',icon:'🦠',desc:'Sept 25 — Simple microbial life appears on Earth, about 3.8 billion years ago.'},
+    {t:0.849,label:'Photosynthesis',color:'#86efac',icon:'🌱',desc:'Oct 30 — Cyanobacteria evolve photosynthesis, transforming Earth\'s atmosphere with oxygen.'},
+    {t:0.929,label:'Complex cells',color:'#34d399',icon:'🔬',desc:'Nov 9 — Eukaryotic (complex) cells evolve, the foundation of all multicellular life.'},
+    {t:0.978,label:'Multicellular life',color:'#fbbf24',icon:'🐛',desc:'Nov 21 — The Cambrian explosion: most animal phyla appear in the fossil record.'},
+    {t:0.993,label:'Dinosaurs',color:'#f97316',icon:'🦕',desc:'Dec 25 — Dinosaurs rule the Earth for 165 million years.'},
+    {t:0.9993,label:'Mammals',color:'#fb923c',icon:'🐾',desc:'Dec 26 — After the asteroid impact 66 million years ago, mammals diversify.'},
+    {t:1-2.3e-4,label:'Homo sapiens',color:'#ff6b6b',icon:'👤',desc:'Dec 31, 11:52 PM — Modern humans evolve just 300,000 years ago — 0.002% of cosmic time.'},
+    {t:1-3e-7,label:'All recorded history',color:'#ff0000',icon:'📜',desc:'Dec 31, 11:59:55 PM — All of human written history: ~5,000 years, just 5 seconds on the cosmic calendar.'},
+  ];
+ 
+  const cx=W/2,cy=H*0.55,R=Math.min(W,H)*0.38;
+ 
+  ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();
+ 
+  for(let m=0;m<12;m++){
+    const ang=(m/12)*Math.PI*2-Math.PI/2;
+    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=m===0?2:.5;
+    ctx.beginPath();ctx.moveTo(cx+R*.85*Math.cos(ang),cy+R*.85*Math.sin(ang));
+    ctx.lineTo(cx+R*1.02*Math.cos(ang),cy+R*1.02*Math.sin(ang));ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.45)';ctx.font='8px Orbitron,monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+    const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    ctx.fillText(months[m],cx+R*1.12*Math.cos(ang),cy+R*1.12*Math.sin(ang));
+  }
+ 
+  events.forEach(ev=>{
+    const ang=(ev.t)*Math.PI*2-Math.PI/2;
+    const x=cx+R*Math.cos(ang),y=cy+R*Math.sin(ang);
+ 
+    const grd=ctx.createRadialGradient(x,y,0,x,y,12);
+    grd.addColorStop(0,ev.color+'88');grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,12,0,Math.PI*2);ctx.fill();
+ 
+    ctx.fillStyle=ev.color;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
+    
+    const lx=cx+(R+22)*Math.cos(ang),ly=cy+(R+22)*Math.sin(ang);
+    ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='7px Orbitron,monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+    if(ev.t>0.97){}else ctx.fillText(ev.label,lx,ly);
+  });
+ 
+  ctx.fillStyle='rgba(255,255,255,.8)';ctx.font='bold 11px Orbitron,monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('13.8',cx,cy-8);ctx.font='8px Orbitron,monospace';ctx.fillText('BILLION YEARS',cx,cy+5);ctx.fillText('= 1 YEAR',cx,cy+17);
+ 
+  canvas.onclick=e=>{
+    const rect=canvas.getBoundingClientRect();
+    const scX=W/rect.width,scY=H/rect.height;
+    const cx2=(e.clientX-rect.left)*scX,cy2=(e.clientY-rect.top)*scY;
+    let closest=null,minD=25;
+    events.forEach(ev=>{
+      const ang=(ev.t)*Math.PI*2-Math.PI/2;
+      const x=cx+R*Math.cos(ang),y=cy+R*Math.sin(ang);
+      const d=Math.sqrt((cx2-x)**2+(cy2-y)**2);
+      if(d<minD){minD=d;closest=ev;}
+    });
+    if(closest){
+      document.getElementById('cal-info').textContent=`${closest.icon} ${closest.label}: ${closest.desc}`;
+      addScore(8,e.clientX,e.clientY);
+    }
+  };
+}
+ 
+const patchSymbols=['🚀','⭐','🌍','🪐','☀️','🌙','🌌','🔭','🛸','☄️','💫','🌟','🛰️','🌠','⚡'];
+let selectedSymbol='🚀';
+function buildPatchSymbols(){
+  const cont=document.getElementById('patch-symbols');if(!cont)return;
+  cont.innerHTML=patchSymbols.map(s=>`<span onclick="selectedSymbol='${s}';drawMissionPatch();this.parentNode.querySelectorAll('span').forEach(x=>x.style.outline='none');this.style.outline='2px solid var(--gold)';" style="font-size:1.3rem;cursor:pointer;padding:3px;border-radius:6px;">${s}</span>`).join('');
+}
+function drawMissionPatch(){
+  const canvas=document.getElementById('mission-patch-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  const name=document.getElementById('patch-mission-name')?.value||'MISSION';
+  const bg=document.getElementById('patch-bg-color')?.value||'#000840';
+  const accent=document.getElementById('patch-accent-color')?.value||'#ffd700';
+  ctx.clearRect(0,0,W,H);
+ 
+  ctx.fillStyle=bg;ctx.beginPath();ctx.arc(W/2,H/2,W/2-4,0,Math.PI*2);ctx.fill();
+  
+  ctx.strokeStyle=accent;ctx.lineWidth=6;
+  ctx.beginPath();ctx.arc(W/2,H/2,W/2-5,0,Math.PI*2);ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(W/2,H/2,W/2-12,0,Math.PI*2);ctx.stroke();
+ 
+  for(let i=0;i<40;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.6+.1})`;ctx.beginPath();ctx.arc(Math.random()*W*.8+W*.1,Math.random()*H*.7+H*.15,Math.random()*1.5+.3,0,Math.PI*2);ctx.fill();}
+ 
+  ctx.font=`${W*.28}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(selectedSymbol,W/2,H/2-10);
+ 
+  ctx.save();ctx.translate(W/2,H/2);
+  const arcR=W/2-22;ctx.font=`bold ${Math.max(10,14-name.length*0.4)}px Orbitron,monospace`;ctx.fillStyle=accent;ctx.textAlign='center';
+  
+  const chars=name.toUpperCase().split('');
+  const totalAng=Math.min(Math.PI*0.7,chars.length*0.18);
+  chars.forEach((c,i)=>{const ang=-Math.PI/2-totalAng/2+(i/(Math.max(chars.length-1,1)))*totalAng;ctx.save();ctx.rotate(ang);ctx.translate(0,-arcR);ctx.rotate(ang+Math.PI/2);ctx.fillText(c,0,0);ctx.restore();});
+  ctx.restore();
+   
+  const year=new Date().getFullYear();
+  ctx.font='10px Orbitron,monospace';ctx.fillStyle='rgba(255,255,255,.6)';ctx.textAlign='center';
+  ctx.fillText(year,W/2,H-22);
+}
+function downloadPatch(){
+  const canvas=document.getElementById('mission-patch-canvas');
+  const a=document.createElement('a');a.download='mission-patch.png';a.href=canvas.toDataURL();a.click();
+  addScore(30,mx,my);toast('Patch downloaded! +30');unlockAch('Mission Designer');
+}
+ 
+const goldenCategories=[
+  {type:'Sound',prompt:'A sound from nature (e.g. rain, ocean waves, birdsong)…'},
+  {type:'Music',prompt:'A piece of music that represents humanity (e.g. Beethoven, jazz, folk)…'},
+  {type:'Language',prompt:'A greeting in your language…'},
+  {type:'Image',prompt:'An image that represents Earth (e.g. sunset, city, forest)…'},
+  {type:'Science',prompt:'A scientific achievement to share (e.g. DNA, mathematics, fire)…'},
+  {type:'Food',prompt:'A food or dish to represent human culture…'},
+  {type:'Emotion',prompt:'A universal human emotion or experience to convey…'},
+  {type:'Message',prompt:'Your personal message to aliens…'},
+];
+function buildGoldenSlots(){
+  const cont=document.getElementById('golden-slots');if(!cont)return;
+  cont.innerHTML=goldenCategories.map((g,i)=>`
+    <div class="record-slot">
+      <span class="record-slot-num">${(i+1).toString().padStart(2,'0')}</span>
+      <span class="record-slot-type">${g.type}</span>
+      <input class="record-slot-input" id="golden-slot-${i}" placeholder="${g.prompt}" oninput="addScore(2,mx,my)">
+    </div>
+  `).join('');
+}
+function resetGoldenRecord(){goldenCategories.forEach((_,i)=>{const el=document.getElementById('golden-slot-'+i);if(el)el.value='';});document.getElementById('golden-ai-summary').style.display='none';}
+async function generateGoldenRecord(){
+  const entries=goldenCategories.map((g,i)=>({type:g.type,value:document.getElementById('golden-slot-'+i)?.value||'(not filled)'}));
+  const resultEl=document.getElementById('golden-ai-summary');
+  resultEl.style.display='block';
+  resultEl.innerHTML='<div style="text-align:center;padding:1rem;color:var(--dim);">🤖 Composing your Golden Record transmission…</div>';
+  addScore(30,mx,my);unlockAch('Golden Recorder');
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:400,
+        system:'You are a creative space communication expert. Write a vivid, poetic 3-4 sentence transmission based on a human\'s Golden Record entries. Make it feel like a genuine message to the cosmos. Be imaginative and specific about what their choices reveal about humanity.',
+        messages:[{role:'user',content:`My Golden Record entries: ${entries.map(e=>`${e.type}: "${e.value}"`).join(' | ')}`}]
+      })
+    });
+    const data=await res.json();
+    const reply=data.content?.map(c=>c.text||'').join('')||'Your record is a beautiful tapestry of human experience — a message that will travel the stars.';
+    resultEl.innerHTML=`<div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--gold);margin-bottom:.6rem;">💿 YOUR COSMIC TRANSMISSION</div><div style="font-size:.85rem;line-height:1.8;color:var(--text);font-style:italic;">"${reply}"</div>`;
+  } catch(e) {
+    resultEl.innerHTML=`<div style="font-family:'Orbitron',monospace;font-size:.65rem;color:var(--gold);margin-bottom:.6rem;">💿 YOUR COSMIC TRANSMISSION</div><div style="font-size:.85rem;line-height:1.8;color:var(--text);font-style:italic;">"To whomever finds this record: we were a species of contradictions — violent and gentle, curious and fearful, alone yet desperately reaching. These sounds and stories are the best of what we were. We hope the universe is kind."</div>`;
+  }
+}
+ 
+function buildMarsCrew(){
+  const cont=document.getElementById('mars-crew-builder');if(!cont)return;
+  const roles=['Commander','Pilot','Geologist','Biologist','Engineer','Physician'];
+  cont.innerHTML=roles.map((r,i)=>`
+    <div class="mars-crew-slot">
+      <h4>CREW ${i+1}: ${r.toUpperCase()}</h4>
+      <input class="crew-input" id="mars-crew-name-${i}" placeholder="Astronaut name…">
+      <input class="crew-input" id="mars-crew-nation-${i}" placeholder="Nationality…">
+      <select class="crew-role-sel" id="mars-crew-skill-${i}">
+        <option>Mission Specialist</option><option>Flight Engineer</option><option>Science Officer</option>
+        <option>Medical Officer</option><option>Systems Engineer</option><option>Geoscientist</option>
+      </select>
+    </div>
+  `).join('');
+}
+async function generateMissionBriefing(){
+  const name=document.getElementById('mars-mission-name')?.value||'ARES I';
+  const duration=document.getElementById('mars-duration')?.value||'500 days';
+  const site=document.getElementById('mars-site')?.value||'Jezero Crater';
+  const crew=Array.from({length:6},(_,i)=>({
+    name:document.getElementById('mars-crew-name-'+i)?.value||`Astronaut ${i+1}`,
+    role:['Commander','Pilot','Geologist','Biologist','Engineer','Physician'][i],
+    nation:document.getElementById('mars-crew-nation-'+i)?.value||'International'
+  }));
+  const resEl=document.getElementById('mars-briefing-result');
+  const textEl=document.getElementById('mars-briefing-text');
+  resEl.style.display='block';
+  textEl.textContent='🚀 Generating mission briefing…';
+  addScore(50,mx,my);unlockAch('Mars Commander');launchConfetti();
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:500,
+        system:'You are a NASA/ESA mission planner writing a realistic, exciting mission briefing. Include mission objectives, key risks, science goals, and a motivational sign-off. Be specific and authoritative, 4-5 sentences.',
+        messages:[{role:'user',content:`Mission: ${name}. Duration: ${duration}. Landing site: ${site}. Crew: ${crew.map(c=>`${c.name} (${c.role}, ${c.nation})`).join(', ')}. Write the mission briefing.`}]
+      })
+    });
+    const data=await res.json();
+    textEl.innerHTML=data.content?.map(c=>c.text||'').join('')||'Mission parameters accepted. Crew cleared for launch.';
+  } catch(e) {
+    textEl.innerHTML=`<strong>MISSION ${name} — FLIGHT READINESS REVIEW</strong><br><br>Crew of six cleared for transit to Mars via ${site}. Primary science objectives: geological sample collection, biosignature search, and ISRU validation. Mission duration: ${duration}. Crew health protocols and radiation shielding are nominal. The world is watching. Godspeed.`;
+  }
+}
+ 
+let slingShotState={planets:[],ship:null,dragging:false,dragStart:null,level:1,starsTotal:0,won:false,target:null,trails:[]};
+let slingshotAF=null;
+function resetSlingshot(){
+  cancelAnimationFrame(slingshotAF);
+  const s=slingShotState;
+  const W=600,H=380;
+  s.level=Math.min(s.level,5);s.won=false;s.trails=[];
+  const configs=[
+    {planets:[{x:300,y:190,m:8000,r:22,color:'#fb923c',name:'Sun-like'}],target:{x:540,y:60},shipStart:{x:60,y:320}},
+    {planets:[{x:200,y:200,m:6000,r:18,color:'#f472b6',name:'Pink Giant'},{x:420,y:160,m:4000,r:14,color:'#60a5fa',name:'Blue Dwarf'}],target:{x:560,y:50},shipStart:{x:50,y:350}},
+    {planets:[{x:300,y:190,m:9000,r:25,color:'#fbbf24',name:'Yellow Giant'},{x:150,y:100,m:3000,r:12,color:'#a855f7',name:'Violet'}],target:{x:520,y:310},shipStart:{x:40,y:40}},
+    {planets:[{x:180,y:250,m:7000,r:20,color:'#34d399',name:'Green Giant'},{x:400,y:120,m:5000,r:16,color:'#fb923c',name:'Orange'},{x:480,y:290,m:3500,r:13,color:'#60a5fa',name:'Blue'}],target:{x:100,y:50},shipStart:{x:300,y:360}},
+    {planets:[{x:300,y:190,m:12000,r:30,color:'#ffd700',name:'Massive Star'},{x:100,y:100,m:4000,r:14,color:'#f472b6',name:'Pink'},{x:500,y:100,m:4000,r:14,color:'#86efac',name:'Lime'},{x:100,y:300,m:3000,r:11,color:'#818cf8',name:'Indigo'}],target:{x:550,y:350},shipStart:{x:280,y:30}},
+  ];
+  const cfg=configs[(s.level-1)%configs.length];
+  s.planets=JSON.parse(JSON.stringify(cfg.planets));
+  s.target={...cfg.target,r:15};
+  s.ship={x:cfg.shipStart.x,y:cfg.shipStart.y,vx:0,vy:0,active:false};
+  s.dragStart={x:cfg.shipStart.x,y:cfg.shipStart.y};
+  drawSlingshot();
+  const canvas=document.getElementById('slingshot-canvas');
+  canvas.onmousedown=e=>{
+    const rect=canvas.getBoundingClientRect();
+    const sx=(e.clientX-rect.left)*(W/rect.width),sy=(e.clientY-rect.top)*(H/rect.height);
+    if(!s.ship.active&&Math.sqrt((sx-s.dragStart.x)**2+(sy-s.dragStart.y)**2)<30){s.dragging=true;s.ship.x=sx;s.ship.y=sy;}
+  };
+  canvas.onmousemove=e=>{
+    if(!s.dragging)return;
+    const rect=canvas.getBoundingClientRect();
+    s.ship.x=(e.clientX-rect.left)*(W/rect.width);s.ship.y=(e.clientY-rect.top)*(H/rect.height);
+    drawSlingshot();
+  };
+  canvas.onmouseup=e=>{
+    if(!s.dragging)return;s.dragging=false;
+    const dx=s.dragStart.x-s.ship.x,dy=s.dragStart.y-s.ship.y;
+    s.ship.x=s.dragStart.x;s.ship.y=s.dragStart.y;
+    s.ship.vx=dx*0.07;s.ship.vy=dy*0.07;s.ship.active=true;s.trails=[];
+    runSlingshot();
+  };
+}
+function drawSlingshot(){
+  const canvas=document.getElementById('slingshot-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;const s=slingShotState;
+  ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
+  
+  for(let i=0;i<80;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.5+.05})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+  
+  s.trails.forEach((t,i)=>{ctx.fillStyle=`rgba(0,247,255,${i/s.trails.length*0.5})`;ctx.beginPath();ctx.arc(t.x,t.y,1.5,0,Math.PI*2);ctx.fill();});
+  
+  s.planets.forEach(p=>{
+    const pg=ctx.createRadialGradient(p.x-p.r*.3,p.y-p.r*.3,0,p.x,p.y,p.r);
+    pg.addColorStop(0,'#fff');pg.addColorStop(0.3,p.color);pg.addColorStop(1,p.color+'44');
+    ctx.fillStyle=pg;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+   
+    ctx.strokeStyle=p.color+'18';ctx.lineWidth=.5;
+    [p.r*2,p.r*3.5,p.r*5].forEach(gr=>{ctx.beginPath();ctx.arc(p.x,p.y,gr,0,Math.PI*2);ctx.stroke();});
+    ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='8px Orbitron,monospace';ctx.textAlign='center';ctx.fillText(p.name,p.x,p.y+p.r+12);
+  }); 
+  const ts=s.target;
+  const tg=ctx.createRadialGradient(ts.x,ts.y,0,ts.x,ts.y,ts.r*3);
+  tg.addColorStop(0,'rgba(255,215,0,.9)');tg.addColorStop(1,'transparent');
+  ctx.fillStyle=tg;ctx.beginPath();ctx.arc(ts.x,ts.y,ts.r*3,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ffd700';ctx.font=`${ts.r*1.8}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('⭐',ts.x,ts.y);
+ 
+  if(!s.ship.active){
+   
+    ctx.strokeStyle='rgba(0,247,255,.25)';ctx.lineWidth=1;ctx.setLineDash([3,4]);
+    ctx.beginPath();ctx.moveTo(s.dragStart.x,s.dragStart.y);ctx.lineTo(s.ship.x,s.ship.y);ctx.stroke();
+    const dx=s.dragStart.x-s.ship.x,dy=s.dragStart.y-s.ship.y;
+    ctx.strokeStyle='rgba(0,247,255,.15)';
+    ctx.beginPath();ctx.moveTo(s.dragStart.x,s.dragStart.y);ctx.lineTo(s.dragStart.x+dx*3,s.dragStart.y+dy*3);ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  ctx.font='18px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('🚀',s.ship.x,s.ship.y);
+ 
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='9px Orbitron,monospace';ctx.textAlign='left';ctx.textBaseline='top';
+  ctx.fillText(`LEVEL ${s.level} — Reach the star!`,8,8);
+  if(!s.ship.active){ctx.fillStyle='rgba(0,247,255,.7)';ctx.fillText('DRAG the rocket then release to launch',8,22);}
+}
+function runSlingshot(){
+  const s=slingShotState;const canvas=document.getElementById('slingshot-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;const G=500;
+  function step(){
+    if(!s.ship.active)return;
+    s.planets.forEach(p=>{
+      const dx=p.x-s.ship.x,dy=p.y-s.ship.y,dist2=dx*dx+dy*dy;
+      const force=G*p.m/(dist2*Math.sqrt(dist2));
+      s.ship.vx+=force*dx;s.ship.vy+=force*dy;
+      if(Math.sqrt(dist2)<p.r+8){s.ship.active=false;drawSlingshot();ctx.fillStyle='rgba(248,113,113,.9)';ctx.font='bold 18px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('CRASHED! Try again',W/2,H/2);setTimeout(()=>{s.ship.active=false;resetSlingshot();},2000);return;}
+    });
+    s.ship.x+=s.ship.vx;s.ship.y+=s.ship.vy;
+    s.trails.push({x:s.ship.x,y:s.ship.y});if(s.trails.length>80)s.trails.shift();
+ 
+    const td=Math.sqrt((s.ship.x-s.target.x)**2+(s.ship.y-s.target.y)**2);
+    if(td<s.target.r+14){s.ship.active=false;s.starsTotal++;s.level++;document.getElementById('sling-level').textContent=s.level;document.getElementById('sling-stars').textContent=s.starsTotal;drawSlingshot();ctx.fillStyle='rgba(255,215,0,.95)';ctx.font='bold 20px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('🌟 TARGET REACHED! 🌟',W/2,H/2);addScore(50,mx,my);launchConfetti();unlockAch('Slingshot Master');toast('+50 — Level '+(s.level-1)+' complete!');setTimeout(resetSlingshot,2000);return;}
+    if(s.ship.x<-50||s.ship.x>W+50||s.ship.y<-50||s.ship.y>H+50){s.ship.active=false;drawSlingshot();ctx.fillStyle='rgba(168,85,247,.9)';ctx.font='bold 18px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('Lost in space! Try again',W/2,H/2);setTimeout(resetSlingshot,1800);return;}
+    drawSlingshot();slingshotAF=requestAnimationFrame(step);
+  }
+  slingshotAF=requestAnimationFrame(step);
+}
+ 
+const planetElements=[
+  {name:'💧 Water',color:'#60a5fa',tag:'water'},{name:'🔥 Magma',color:'#f97316',tag:'magma'},
+  {name:'🌬️ Nitrogen',color:'#a5b4fc',tag:'nitrogen'},{name:'☁️ CO₂',color:'#d1d5db',tag:'co2'},
+  {name:'🧊 Ice',color:'#bae6fd',tag:'ice'},{name:'🏔️ Rock',color:'#9ca3af',tag:'rock'},
+  {name:'🌡️ Heat',color:'#fbbf24',tag:'heat'},{name:'⚡ Lightning',color:'#fde047',tag:'lightning'},
+  {name:'🧪 Methane',color:'#86efac',tag:'methane'},{name:'☢️ Radiation',color:'#a3e635',tag:'radiation'},
+];
+const planetRecipes=[
+  {needs:['water','nitrogen'],result:{icon:'🌍',name:'Habitable World',desc:'A beautiful blue-green world with oceans, atmosphere, and the conditions for life! Similar to Earth.'}},
+  {needs:['magma','rock'],result:{icon:'🌋',name:'Volcanic Planet',desc:'A hellscape of erupting volcanoes and rivers of lava. The surface is constantly remade by geological fury.'}},
+  {needs:['ice','nitrogen'],result:{icon:'❄️',name:'Frozen World',desc:'A frigid ice giant with nitrogen geysers. Like Pluto or Triton — beautiful but brutally cold.'}},
+  {needs:['co2','heat'],result:{icon:'🔴',name:'Runaway Greenhouse',desc:'Like Venus! Thick CO₂ traps heat until temperatures exceed 400°C — hot enough to melt lead.'}},
+  {needs:['methane','ice'],result:{icon:'🟤',name:'Titan-like Moon',desc:'Lakes and rivers of liquid methane under an orange haze. Cold but potentially habitable for exotic life.'}},
+  {needs:['water','magma','nitrogen'],result:{icon:'🏝️',name:'Young Earth',desc:'A primordial world of churning oceans, volcanic islands, and lightning storms — the setting for life\'s origin!'}},
+  {needs:['rock','radiation'],result:{icon:'☢️',name:'Irradiated Wasteland',desc:'Bombarded by cosmic rays without any magnetosphere or thick atmosphere to protect it. Hostile and bare.'}},
+  {needs:['lightning','methane','water'],result:{icon:'🧬',name:'Prebiotic World',desc:'Electric storms over methane-rich seas — the Miller-Urey experiment at planetary scale. Life could begin here!'}},
+  {needs:['ice','radiation','water'],result:{icon:'🌊',name:'Subsurface Ocean World',desc:'Like Europa or Enceladus! A thick ice shell protects a liquid ocean below — possibly teeming with life.'}},
+  {needs:['heat','rock','co2','magma'],result:{icon:'💀',name:'Dead Rock',desc:'Too hot, too volcanic, too airless. A scorched, barren world with no chance of biology.'}},
+];
+let selectedElements=new Set();
+function buildElementPalette(){
+  const pal=document.getElementById('element-palette');if(!pal)return;
+  pal.innerHTML=planetElements.map(e=>`
+    <div class="element-chip" id="elem-${e.tag}" onclick="toggleElement('${e.tag}',this)" style="color:${e.color};border-color:${e.color}44;">${e.name}</div>
+  `).join('');
+}
+function toggleElement(tag,el){
+  if(selectedElements.has(tag)){selectedElements.delete(tag);el.style.background='transparent';el.style.boxShadow='none';}
+  else if(selectedElements.size<4){selectedElements.add(tag);el.style.background=`${planetElements.find(e=>e.tag===tag)?.color}22`;el.style.boxShadow=`0 0 12px ${planetElements.find(e=>e.tag===tag)?.color}55`;}
+  else{toast('Max 4 elements! Remove one first.');}
+}
+function buildPlanet(){
+  const sel=[...selectedElements];
+  if(sel.length<2){toast('Select at least 2 elements!');return;}
+  let bestRecipe=null,bestMatch=0;
+  planetRecipes.forEach(r=>{
+    const matches=r.needs.filter(n=>sel.includes(n)).length;
+    const score=matches/r.needs.length - (r.needs.length-matches)*0.3;
+    if(matches>=r.needs.length*.5&&score>bestMatch){bestMatch=score;bestRecipe=r;}
+  });
+  if(!bestRecipe)bestRecipe={result:{icon:'🪨',name:'Mundane Rock',desc:'A plain rocky body with no interesting chemistry. It might have some mineral value, but nothing special geologically or biologically.'}};
+  const display=document.getElementById('planet-result-display');
+  display.style.display='block';
+  document.getElementById('planet-result-visual').textContent=bestRecipe.result.icon;
+  document.getElementById('planet-result-name').textContent=bestRecipe.result.name;
+  document.getElementById('planet-result-desc').textContent=bestRecipe.result.desc;
+  addScore(25,mx,my);toast('Planet built! +25');launchConfetti();
+}
+function resetPlanetBuilder(){selectedElements.clear();document.querySelectorAll('.element-chip').forEach(e=>{e.style.background='transparent';e.style.boxShadow='none';});document.getElementById('planet-result-display').style.display='none';}
+ 
+async function loadLeaderboard(){
+  const cont=document.getElementById('leaderboard-rows');if(!cont)return;
+  try {
+    const result=await window.storage.get('leaderboard',true);
+    const scores=result?JSON.parse(result.value):[];
+    renderLeaderboard(scores);
+  } catch(e){
+    renderLeaderboard([]);
+  }
+}
+function renderLeaderboard(scores){
+  const cont=document.getElementById('leaderboard-rows');if(!cont)return;
+  const sorted=[...scores].sort((a,b)=>b.score-a.score).slice(0,10);
+  if(sorted.length===0){cont.innerHTML='<div style="text-align:center;padding:1.2rem;color:var(--dim);font-size:.78rem;">No explorers yet — be the first!</div>';return;}
+  const medals=['gold','silver','bronze'];
+  cont.innerHTML=sorted.map((s,i)=>`
+    <div class="lb-row">
+      <span class="lb-rank ${medals[i]||''}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</span>
+      <span class="lb-name">${s.name}</span>
+      <span style="font-size:.65rem;color:var(--dim);margin-right:.3rem;">Level ${s.level}</span>
+      <span class="lb-score">${s.score.toLocaleString()} ✨</span>
+    </div>
+  `).join('');
+}
+async function submitToLeaderboard(){
+  const nameEl=document.getElementById('lb-name-input');
+  const name=(nameEl?.value||'').trim();
+  if(!name){toast('Enter your name first!');return;}
+  try {
+    const existing=await window.storage.get('leaderboard',true).catch(()=>null);
+    const scores=existing?JSON.parse(existing.value):[];
+    const existingIdx=scores.findIndex(s=>s.name===name);
+    const entry={name,score:cosmicScore,level,date:new Date().toLocaleDateString()};
+    if(existingIdx>=0){if(cosmicScore>scores[existingIdx].score)scores[existingIdx]=entry;}
+    else scores.push(entry);
+    await window.storage.set('leaderboard',JSON.stringify(scores),true);
+    renderLeaderboard(scores);
+    addScore(20,mx,my);launchConfetti();toast(`${name} added to leaderboard! +20`);
+  } catch(e){toast('Leaderboard unavailable — try again!');}
+}
+ 
+function initLiveData(){
+  drawISSMap(51.6,0);
+  refreshSolar();
+  buildSpaceWeatherGrid();
+  addScore(5,mx,my);
+}
+ 
+window.addEventListener('load',()=>{
+  resetSlingshot();
+  buildElementPalette();
+  loadLeaderboard();
+  findBirthdayStar();
+});
+ 
+const _navOrig2 = navigateTo;
+navigateTo = function(page){
+  _navOrig2(page);
+  if(page==='deepdive') initDeepDive();
+  if(page==='moregames') initMoreGames();
+};
+document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigateTo(a.dataset.page);}));
+
+function initDeepDive(){
+  initLensing(); drawNucleo(); calcRocketEq(); updateDoppler(); buildDrakeGrid(); buildLunarCalendar(); drawLagrange(); drawTidalLock(); calcDilation(); initTransit();
+  addScore(5,mx,my);
+}
+function initMoreGames(){
+  newWordleGame(); resetOrbitGame(); initIdleGame(); generateNebula(); generatePostcard(); buildAlienResult();
+  const d=document.getElementById('horoscope-date'); if(d)d.value=new Date().toISOString().split('T')[0];
+  addScore(5,mx,my);
+}
+ 
+function switchDeepDive(id,btn){
+  document.querySelectorAll('.deepdive-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.deepdive-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('dd-'+id).classList.add('active');
+  btn.classList.add('active');
+  addScore(3,mx,my);
+  if(id==='lensing')initLensing();
+  if(id==='nucleosynthesis')drawNucleo();
+  if(id==='rocketEq')calcRocketEq();
+  if(id==='doppler')updateDoppler();
+  if(id==='drake')buildDrakeGrid();
+  if(id==='lunar')buildLunarCalendar();
+  if(id==='lagrange')drawLagrange();
+  if(id==='tidalock')drawTidalLock();
+  if(id==='dilation')calcDilation();
+  if(id==='transit')initTransit();
+}
+ 
+let lensingBH={x:300,y:170,dragging:false}, lensingStars=[], lensingAF2=null;
+function initLensing(){
+  const canvas=document.getElementById('lensing-canvas');if(!canvas)return;
+  const W=600,H=340;
+  lensingStars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.3,a:Math.random()*.8+.2,hue:Math.random()<.15?(Math.random()<.5?220:30):0}));
+  canvas.onmousedown=e=>{const r=canvas.getBoundingClientRect();const x=(e.clientX-r.left)*(W/r.width),y=(e.clientY-r.top)*(H/r.height);if(Math.sqrt((x-lensingBH.x)**2+(y-lensingBH.y)**2)<30)lensingBH.dragging=true;};
+  canvas.onmousemove=e=>{if(!lensingBH.dragging)return;const r=canvas.getBoundingClientRect();lensingBH.x=(e.clientX-r.left)*(W/r.width);lensingBH.y=(e.clientY-r.top)*(H/r.height);drawLensing();};
+  canvas.onmouseup=()=>lensingBH.dragging=false;
+  drawLensing();
+}
+function updateLensing(){document.getElementById('lens-mass-val').textContent=' '+document.getElementById('lens-mass').value+' M';drawLensing();}
+function resetLensing(){const canvas=document.getElementById('lensing-canvas');if(!canvas)return;const W=600,H=340;lensingStars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.3,a:Math.random()*.8+.2,hue:Math.random()<.15?(Math.random()<.5?220:30):0}));drawLensing();}
+function drawLensing(){
+  const canvas=document.getElementById('lensing-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=340;
+  const mass=parseFloat(document.getElementById('lens-mass')?.value||120);
+  ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
+  const bx=lensingBH.x,by=lensingBH.y,bhR=mass*.08;
+  
+  lensingStars.forEach(s=>{
+    const dx=s.x-bx,dy=s.y-by,dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<bhR+5)return;
+    const einsteinR=mass*1.2;
+    const lensStr=einsteinR*einsteinR/(dist*dist+1);
+    
+    const angle=Math.atan2(dy,dx);
+    const deflect=lensStr*0.9;
+    const nx=s.x+Math.cos(angle+Math.PI)*deflect,ny=s.y+Math.sin(angle+Math.PI)*deflect;
+    const brightness=Math.min(1,(1+lensStr*.3)*s.a);
+    const col=s.hue?`hsla(${s.hue},80%,75%,${brightness})`:`rgba(255,255,255,${brightness})`;
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(nx,ny,s.r*(1+lensStr*.15),0,Math.PI*2);ctx.fill();
+   
+    if(dist<einsteinR*2.5&&dist>bhR*2){
+      const ringFrac=(1-dist/(einsteinR*2.5));
+      ctx.strokeStyle=`rgba(255,255,255,${ringFrac*.4})`;ctx.lineWidth=s.r*.8;
+      ctx.beginPath();ctx.arc(bx,by,dist*.85,angle-.4,angle+.4);ctx.stroke();
+    }
+  });
+ 
+  const gradient=ctx.createRadialGradient(bx,by,0,bx,by,bhR*3);
+  gradient.addColorStop(0,'rgba(0,0,0,1)');gradient.addColorStop(0.5,'rgba(0,0,0,.95)');gradient.addColorStop(0.8,'rgba(100,50,200,.3)');gradient.addColorStop(1,'transparent');
+  ctx.fillStyle=gradient;ctx.beginPath();ctx.arc(bx,by,bhR*3,0,Math.PI*2);ctx.fill();
+ 
+  ctx.strokeStyle='rgba(255,150,50,.6)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(bx,by,bhR*1.5,0,Math.PI*2);ctx.stroke();
+
+  ctx.fillStyle='#000';ctx.beginPath();ctx.arc(bx,by,bhR,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='rgba(255,200,100,.8)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(bx,by,bhR,0,Math.PI*2);ctx.stroke();
+
+  ctx.fillStyle='rgba(255,215,0,.6)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('⚫ Drag black hole',bx,by+bhR*3+14);
+}
+
+const nucleoLayers=[
+  {elem:'H → He',process:'Proton-proton chain',temp:'15M K',color:'#ffd700',r:140,elements:'Hydrogen → Helium',desc:'Core: The Sun fuses 620 million tonnes of hydrogen per second into helium, releasing energy via E=mc². This is the main-sequence phase.'},
+  {elem:'He → C',process:'Triple-alpha process',temp:'100M K',color:'#fb923c',r:108,elements:'Helium → Carbon',desc:'After hydrogen depletes, helium fuses into carbon via the triple-alpha process. Requires 3 helium nuclei colliding almost simultaneously.'},
+  {elem:'C → Ne',process:'Carbon burning',temp:'500M K',color:'#f87171',r:80,elements:'Carbon → Neon + Magnesium',desc:'Carbon fuses to produce neon and magnesium. Only stars >8 solar masses reach this stage. Duration: ~600 years.'},
+  {elem:'Ne → O',process:'Neon photodisint.',temp:'1.2B K',color:'#c084fc',r:57,elements:'Neon → Oxygen + Magnesium',desc:'High-energy photons break apart neon nuclei. The fragments then fuse. Duration: only ~1 year in stellar time.'},
+  {elem:'O → Si',process:'Oxygen burning',temp:'2B K',color:'#60a5fa',r:38,elements:'Oxygen → Silicon + Sulfur',desc:'Oxygen fuses into silicon and sulfur. This stage lasts only ~6 months. The star is running out of fuel rapidly.'},
+  {elem:'Si → Fe',process:'Silicon burning',temp:'3B K',color:'#34d399',r:22,elements:'Silicon → Iron (end!)',desc:'Silicon fuses into iron — the final stage. Iron cannot release energy through fusion. The core collapses in milliseconds, triggering a supernova!'},
+];
+let nucleoAnimFrame=null;
+function drawNucleo(){
+  cancelAnimationFrame(nucleoAnimFrame);
+  const canvas=document.getElementById('nucleo-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;const cx=W/2,cy=H/2+10;
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  nucleoLayers.forEach((l,i)=>{
+    const grd=ctx.createRadialGradient(cx,cy,i===0?0:nucleoLayers[i-1].r,cx,cy,l.r);
+    grd.addColorStop(0,l.color+'44');grd.addColorStop(1,l.color+'11');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,l.r,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle=l.color+'88';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,l.r,0,Math.PI*2);ctx.stroke();
+ 
+    const ang=-Math.PI/2+(i/nucleoLayers.length)*Math.PI*2*.7;
+    const lx=cx+(l.r+28)*Math.cos(ang),ly=cy+(l.r+28)*Math.sin(ang);
+    ctx.fillStyle=l.color;ctx.font='bold 9px Orbitron,monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(l.elem,lx,ly);
+    ctx.fillStyle='rgba(255,255,255,.35)';ctx.font='7.5px Space Grotesk,sans-serif';
+    ctx.fillText(l.temp,lx,ly+12);
+  });
+  ctx.fillStyle='#fff';ctx.font='bold 10px Orbitron,monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('IRON CORE',cx,cy);ctx.fillText('☠',cx,cy+14);
+
+  canvas.onclick=e=>{
+    const rect=canvas.getBoundingClientRect();
+    const scX=W/rect.width,scY=H/rect.height;
+    const mx2=(e.clientX-rect.left)*scX-cx,my2=(e.clientY-rect.top)*scY-cy;
+    const d=Math.sqrt(mx2*mx2+my2*my2);
+    const hit=nucleoLayers.find(l=>d<=l.r);
+    if(hit){document.getElementById('nucleo-info').textContent=`${hit.elements}: ${hit.desc}`;addScore(8,e.clientX,e.clientY);}
+  };
+}
+function animateNucleo(){
+  const canvas=document.getElementById('nucleo-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;const cx=W/2,cy=H/2+10;
+  let frame=0;
+  function step(){
+    drawNucleo();
+    const layer=nucleoLayers[Math.floor(frame/40)%nucleoLayers.length];
+    if(!layer){nucleoAnimFrame=requestAnimationFrame(step);return;}
+
+    for(let i=0;i<3;i++){
+      const ang=Math.random()*Math.PI*2;const spd=1+Math.random()*2;
+      const px=cx+layer.r*Math.cos(ang),py=cy+layer.r*Math.sin(ang);
+      ctx.fillStyle=layer.color;ctx.beginPath();ctx.arc(px+Math.sin(frame*.1+i)*5,py+Math.cos(frame*.1+i)*5,2,0,Math.PI*2);ctx.fill();
+    }
+    frame++;nucleoAnimFrame=requestAnimationFrame(step);
+    if(frame>240){cancelAnimationFrame(nucleoAnimFrame);addScore(20,mx,my);toast('Nucleosynthesis complete! +20');}
+  }
+  nucleoAnimFrame=requestAnimationFrame(step);
+}
+
+function calcRocketEq(){
+  const ve=parseFloat(document.getElementById('rk-ve')?.value||4400);
+  const mr=parseFloat(document.getElementById('rk-mr')?.value||2);
+  const dv=ve*Math.log(mr);
+  const veK=(ve/1000).toFixed(1);
+  if(document.getElementById('rk-ve-val'))document.getElementById('rk-ve-val').textContent=ve.toLocaleString()+' m/s';
+  if(document.getElementById('rk-mr-val'))document.getElementById('rk-mr-val').textContent=parseFloat(mr).toFixed(1)+' : 1';
+  if(document.getElementById('rocket-eq-formula'))document.getElementById('rocket-eq-formula').textContent=`Δv = ${veK}km/s × ln(${mr.toFixed(1)}) = ${(dv/1000).toFixed(2)} km/s`;
+  if(document.getElementById('rocket-eq-result'))document.getElementById('rocket-eq-result').textContent=`Δv = ${Math.round(dv).toLocaleString()} m/s`;
+  const comps=[['LEO orbit','7,800 m/s'],['Moon transfer','3,130 m/s'],['Mars transfer','4,300 m/s'],['Solar escape','12,300 m/s']];
+  const c=comps.find(([,v])=>dv>=parseFloat(v))||null;
+  if(document.getElementById('rocket-eq-compare'))document.getElementById('rocket-eq-compare').textContent=dv>=7800?`✅ Can reach LEO and beyond!`:dv>=3130?`🌙 Enough for a lunar transfer orbit`:dv>=1000?`🚀 Suborbital — not enough for orbit yet`:`⚠️ Too low even for suborbital flight`;
+  drawRocketViz(ve,mr,dv);
+  addScore(2,mx,my);
+}
+function drawRocketViz(ve,mr,dv){
+  const canvas=document.getElementById('rocket-viz-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  const milestones=[{v:7800,label:'LEO',color:'#4ade80'},{v:11200,label:'Escape Earth',color:'#fbbf24'},{v:14000,label:'Mars',color:'#f87171'},{v:42000,label:'Star probe',color:'#a855f7'}];
+  const maxDV=50000;
+  ctx.fillStyle='rgba(0,247,255,.1)';ctx.fillRect(0,H*.3,Math.min(W,dv/maxDV*W),H*.4);
+  ctx.strokeStyle='rgba(0,247,255,.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(dv/maxDV*W,0);ctx.lineTo(dv/maxDV*W,H);ctx.stroke();
+  milestones.forEach(m=>{const x=m.v/maxDV*W;ctx.strokeStyle=m.color+'66';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=m.color;ctx.font='8px Orbitron,monospace';ctx.textAlign='center';ctx.fillText(m.label,x,H-4);});
+  ctx.fillStyle='rgba(0,247,255,.9)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('Current Δv: '+(dv/1000).toFixed(2)+'km/s',dv/maxDV*W,H*.25);
+}
+ 
+let dopplerAnimAF=null,dopplerV=0,dopplerStarX=300;
+function updateDoppler(){
+  dopplerV=parseFloat(document.getElementById('doppler-vel')?.value||0);
+  const pct=(dopplerV*100).toFixed(1);
+  if(document.getElementById('doppler-vel-val'))document.getElementById('doppler-vel-val').textContent=' '+(dopplerV>=0?'+':'')+pct+'% c';
+  drawDoppler();
+}
+function drawDoppler(){
+  const canvas=document.getElementById('doppler-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=300;
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  const v=dopplerV; 
+  const shift=Math.sqrt((1+v)/(1-v));
+ 
+  const lines=[{nm:656,name:'Hα'},{nm:486,name:'Hβ'},{nm:434,name:'Hγ'},{nm:410,name:'Hδ'}];
+
+  const specGrad=ctx.createLinearGradient(40,0,W-40,0);
+  specGrad.addColorStop(0,'rgba(148,0,211,.8)');specGrad.addColorStop(.15,'rgba(0,0,255,.8)');
+  specGrad.addColorStop(.3,'rgba(0,255,0,.8)');specGrad.addColorStop(.5,'rgba(255,255,0,.8)');
+  specGrad.addColorStop(.7,'rgba(255,165,0,.8)');specGrad.addColorStop(1,'rgba(255,0,0,.8)');
+  ctx.fillStyle=specGrad;ctx.fillRect(40,40,W-80,60);
+ 
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='9px Orbitron,monospace';ctx.textAlign='right';ctx.fillText('REST FRAME',35,75);
+ 
+  lines.forEach(l=>{const x=40+(l.nm-380)/(700-380)*(W-80);ctx.strokeStyle='rgba(0,0,0,.9)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,40);ctx.lineTo(x,100);ctx.stroke();ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='7px Orbitron,monospace';ctx.textAlign='center';ctx.fillText(l.name,x,110);});
+ 
+  ctx.fillStyle=specGrad;ctx.fillRect(40,140,W-80,60);
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='9px Orbitron,monospace';ctx.textAlign='right';ctx.fillText(v>0?'REDSHIFTED':v<0?'BLUESHIFTED':'OBSERVED',35,175);
+ 
+  lines.forEach(l=>{
+    const shiftedNm=l.nm*shift;const x=40+(shiftedNm-380)/(700-380)*(W-80);
+    if(x<40||x>W-40)return;
+    ctx.strokeStyle='rgba(0,0,0,.9)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,140);ctx.lineTo(x,200);ctx.stroke();
+  });
+ 
+  if(Math.abs(v)>0.01){
+    const refLine=lines[0];const origX=40+(refLine.nm-380)/(700-380)*(W-80);const shiftX=40+(refLine.nm*shift-380)/(700-380)*(W-80);
+    ctx.strokeStyle=v>0?'rgba(255,100,100,.8)':'rgba(100,100,255,.8)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(origX,105);ctx.lineTo(shiftX,135);ctx.stroke();ctx.setLineDash([]);
+  }
+ 
+  const starX=W/2+v*200;
+  ctx.font='28px serif';ctx.textAlign='center';ctx.fillText('⭐',starX,250);
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='9px Orbitron,monospace';ctx.fillText('Earth 🌍',W/2,285);
+ 
+  const zFactor=((shift-1)*100).toFixed(1);
+  if(document.getElementById('doppler-info'))document.getElementById('doppler-info').textContent=v===0?'At rest — no Doppler shift':v>0?`Moving away: wavelengths stretched by ${zFactor}% (redshift z=${((shift-1)).toFixed(3)})`:`Approaching: wavelengths compressed by ${Math.abs(zFactor)}% (blueshift)`;
+}
+ 
+const drakeParams=[
+  {id:'drake-rstar',label:'R* — Star formation rate (per year)',min:.1,max:10,step:.1,value:3,unit:'stars/yr',desc:'Number of new stars forming in the Milky Way per year. Current estimate: 1–3 solar masses/yr.'},
+  {id:'drake-fp',label:'fp — Fraction with planets',min:.01,max:1,step:.01,value:.9,unit:'',desc:'Fraction of stars that have planetary systems. Kepler suggests this is very high — up to 100%.'},
+  {id:'drake-ne',label:'ne — Habitable planets per system',min:.01,max:5,step:.01,value:.4,unit:'',desc:'Average number of planets in the habitable zone per star with planets.'},
+  {id:'drake-fl',label:'fl — Fraction where life emerges',min:.001,max:1,step:.001,value:.13,unit:'',desc:'Fraction of habitable planets where life actually appears. Deeply uncertain — ranges from near 0 to near 1.'},
+  {id:'drake-fi',label:'fi — Fraction developing intelligence',min:.001,max:1,step:.001,value:.01,unit:'',desc:'Fraction of planets with life that develops intelligent life. Evolution of intelligence may be rare.'},
+  {id:'drake-fc',label:'fc — Fraction communicating',min:.001,max:1,step:.001,value:.01,unit:'',desc:'Fraction of intelligent civilizations that develop detectable communication technology.'},
+  {id:'drake-L',label:'L — Civilization lifespan (years)',min:100,max:1000000,step:100,value:10000,unit:'yrs',desc:'How long a civilization remains detectable. The great unknown — from 100 to millions of years.'},
+];
+function buildDrakeGrid(){
+  const grid=document.getElementById('drake-grid');if(!grid)return;
+  grid.innerHTML=drakeParams.map(p=>`
+    <div class="drake-card">
+      <label>${p.label}</label>
+      <div style="font-size:.68rem;color:var(--dim);line-height:1.5;margin-bottom:.5rem;">${p.desc}</div>
+      <input type="range" id="${p.id}" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.value}" class="slider-gold" style="width:100%;" oninput="calcDrake()">
+      <div style="display:flex;justify-content:space-between;margin-top:.3rem;">
+        <span style="font-size:.6rem;color:var(--dim);">${p.min}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold);" id="${p.id}-val">${p.value}${p.unit}</span>
+        <span style="font-size:.6rem;color:var(--dim);">${p.max}</span>
+      </div>
+    </div>
+  `).join('');
+  calcDrake();
+}
+function calcDrake(){
+  const vals=drakeParams.map(p=>{const el=document.getElementById(p.id);const v=parseFloat(el?.value||p.value);const valEl=document.getElementById(p.id+'-val');if(valEl)valEl.textContent=v.toLocaleString()+(p.unit?' '+p.unit:'');return v;});
+  const N=vals.reduce((a,b)=>a*b,1);
+  const result=document.getElementById('drake-result');if(result)result.textContent=N<1?N.toFixed(4):N<1000?Math.round(N).toLocaleString():N.toExponential(2);
+  const interp=document.getElementById('drake-interpretation');
+  if(interp){
+    if(N<0.01)interp.textContent='We are almost certainly alone in the observable universe. A sobering result — cherish what we have.';
+    else if(N<1)interp.textContent='Civilizations are exceptionally rare. We may be the only one in the Milky Way right now.';
+    else if(N<100)interp.textContent='A handful of civilizations may exist in our galaxy, but they\'re separated by thousands of light-years — contact is essentially impossible.';
+    else if(N<10000)interp.textContent='There could be thousands of civilizations in the Milky Way. The silence of the cosmos becomes puzzling — the Fermi Paradox intensifies.';
+    else interp.textContent='The galaxy could be teeming with intelligent life. Their silence is deeply mysterious — perhaps they\'re hiding, or we\'re not looking right.';
+  }
+  addScore(2,mx,my);
+}
+ 
+function getLunarPhase(date){
+  const known=new Date('2000-01-06T18:14:00Z');const synodic=29.53058867;
+  const diff=(date-known)/(1000*60*60*24);const cycle=((diff%synodic)+synodic)%synodic;
+  return cycle/synodic;
+}
+function phaseToIcon(phase){
+  if(phase<.033||phase>.967)return{icon:'🌑',name:'New Moon'};
+  if(phase<.133)return{icon:'🌒',name:'Waxing Crescent'};
+  if(phase<.2)return{icon:'🌓',name:'First Quarter'};
+  if(phase<.367)return{icon:'🌔',name:'Waxing Gibbous'};
+  if(phase<.467)return{icon:'🌕',name:'Full Moon'};
+  if(phase<.533)return{icon:'🌖',name:'Waning Gibbous'};
+  if(phase<.633)return{icon:'🌗',name:'Last Quarter'};
+  if(phase<.867)return{icon:'🌘',name:'Waning Crescent'};
+  return{icon:'🌑',name:'New Moon'};
+}
+function buildLunarCalendar(){
+  const grid=document.getElementById('lunar-grid');if(!grid)return;
+  const now=new Date();const year=now.getFullYear(),month=now.getMonth();
+  const label=document.getElementById('lunar-month-label');
+  if(label)label.textContent=now.toLocaleString('default',{month:'long',year:'numeric'}).toUpperCase()+' LUNAR PHASES';
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const firstDay=new Date(year,month,1).getDay();
+  let html='';
+  for(let i=0;i<firstDay;i++)html+='<div></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    const date=new Date(year,month,d);const phase=getLunarPhase(date);const{icon,name}=phaseToIcon(phase);
+    const isToday=d===now.getDate();
+    html+=`<div class="lunar-day${isToday?' ':"'"}${isToday?'style="border-color:rgba(255,215,0,.5);background:rgba(255,215,0,.08)"':''}" onclick="showLunarDetail(${d},${phase.toFixed(4)},'${name}','${icon}')">
+      <span class="moon-icon">${icon}</span>
+      <div class="moon-date">${d}${isToday?' ◀':''}</div>
+    </div>`;
+  }
+  grid.innerHTML=html;
+}
+function showLunarDetail(day,phase,name,icon){
+  const det=document.getElementById('lunar-detail');if(!det)return;
+  const illumination=Math.round(Math.abs(Math.cos(phase*Math.PI*2)*-50+50));
+  det.innerHTML=`<strong style="color:var(--gold);font-family:'Orbitron',monospace;">${icon} Day ${day}: ${name}</strong><br>Phase: ${(phase*100).toFixed(1)}% through cycle · Illumination: ~${illumination}% · ${name==='Full Moon'?'Tidal forces are at their peak — the Moon appears largest when near the horizon due to the Moon illusion.':name==='New Moon'?'The Moon is between Earth and Sun — perfect for stargazing with dark skies!':'The Moon is visible and illumination is changing. Spring tides occur near new and full moons.'}`;
+  addScore(5,mx,my);
+} 
+
+const lagrangePoints=[
+  {name:'L1',x:.6,y:.5,desc:'Between Earth and Sun. SOHO and DSCOVR spacecraft observe the Sun from here. Unstable — requires station-keeping.'},
+  {name:'L2',x:.77,y:.5,desc:'On the far side of Earth from the Sun. James Webb Space Telescope orbits here! Stays in Earth\'s shadow for passive cooling.'},
+  {name:'L3',x:.22,y:.5,desc:'On the opposite side of the Sun from Earth. Perpetually hidden from us — a popular location in science fiction.'},
+  {name:'L4',x:.44,y:.22,desc:'60° ahead of Earth in its orbit. The "Trojan" point. Jupiter has thousands of asteroids here. Stable equilibrium!'},
+  {name:'L5',x:.44,y:.78,desc:'60° behind Earth in its orbit. Also stable. Proposed location for future space colonies (O\'Neill cylinders).'},
+];
+function drawLagrange(){
+  const canvas=document.getElementById('lagrange-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=360;
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  
+  const sg=ctx.createRadialGradient(W*.2,H*.5,0,W*.2,H*.5,35);
+  sg.addColorStop(0,'#fff');sg.addColorStop(.3,'#ffd700');sg.addColorStop(1,'rgba(255,150,0,.1)');
+  ctx.fillStyle=sg;ctx.beginPath();ctx.arc(W*.2,H*.5,20,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('☀️ Sun',W*.2,H*.5+32);
+
+  ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=.5;ctx.beginPath();ctx.arc(W*.2,H*.5,H*.3,0,Math.PI*2);ctx.stroke();
+
+  const ex=W*.2+H*.3,ey=H*.5;
+  ctx.fillStyle='#4a90e2';ctx.beginPath();ctx.arc(ex,ey,10,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('🌍 Earth',ex,ey+22);
+ 
+  lagrangePoints.forEach(lp=>{
+    const x=lp.x*W,y=lp.y*H;
+    const grd=ctx.createRadialGradient(x,y,0,x,y,18);
+    grd.addColorStop(0,'rgba(0,247,255,.4)');grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,18,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(0,247,255,.8)';ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(0,247,255,.9)';ctx.font='bold 9px Orbitron,monospace';ctx.textAlign='center';
+    ctx.fillText(lp.name,x,y-14);
+  
+    lp.px=x;lp.py=y;
+  });
+  
+  ctx.strokeStyle='rgba(74,222,128,.2)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.arc(ex,ey,25,Math.PI/3,Math.PI*2/3);ctx.stroke();
+  ctx.beginPath();ctx.arc(ex,ey,25,-Math.PI*2/3,-Math.PI/3);ctx.stroke();
+  ctx.setLineDash([]);
+  canvas.onclick=e=>{
+    const rect=canvas.getBoundingClientRect();const scX=W/rect.width,scY=H/rect.height;
+    const cx=(e.clientX-rect.left)*scX,cy=(e.clientY-rect.top)*scY;
+    let hit=lagrangePoints.find(lp=>Math.sqrt((cx-lp.px)**2+(cy-lp.py)**2)<22);
+    if(hit){document.getElementById('lagrange-info').textContent=`${hit.name}: ${hit.desc}`;addScore(8,e.clientX,e.clientY);}
+  };
+}
+ 
+let tidalAF=null,tidalT=0,tidalLocked=true,tidalSpeed=1,tidalRotOffset=0;
+function drawTidalLock(){
+  cancelAnimationFrame(tidalAF);
+  const canvas=document.getElementById('tidalock-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=320;const cx=W*.35,cy=H*.5;const orbitR=130;
+  function frame(){
+    ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+    
+    const pg=ctx.createRadialGradient(cx,cy,0,cx,cy,28);
+    pg.addColorStop(0,'#5599ff');pg.addColorStop(.6,'#2266cc');pg.addColorStop(1,'#0033aa');
+    ctx.fillStyle=pg;ctx.beginPath();ctx.arc(cx,cy,28,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='10px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('🌍',cx,cy+38);
+   
+    const moonAngle=tidalT;const mx2=cx+orbitR*Math.cos(moonAngle),my2=cy+orbitR*Math.sin(moonAngle);
+    
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=.5;ctx.beginPath();ctx.arc(cx,cy,orbitR,0,Math.PI*2);ctx.stroke();
+   
+    const moonRotation=tidalLocked?moonAngle:tidalRotOffset;
+    ctx.save();ctx.translate(mx2,my2);ctx.rotate(moonRotation);
+    const mg=ctx.createRadialGradient(-4,-4,0,0,0,16);
+    mg.addColorStop(0,'#ddd');mg.addColorStop(.5,'#999');mg.addColorStop(1,'#555');
+    ctx.fillStyle=mg;ctx.beginPath();ctx.arc(0,0,16,0,Math.PI*2);ctx.fill();
+ 
+    ctx.fillStyle='rgba(0,0,0,.5)';ctx.beginPath();ctx.arc(7,0,5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.8)';ctx.font='12px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('👁',7,0);  
+    ctx.restore();
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='9px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('🌙 Moon',mx2,my2+26);
+  
+    const infoX=W*.72,infoY=H*.2;
+    ctx.fillStyle='rgba(0,0,20,.8)';ctx.fillRect(infoX-90,infoY-10,180,120);
+    ctx.strokeStyle='rgba(0,247,255,.2)';ctx.lineWidth=1;ctx.strokeRect(infoX-90,infoY-10,180,120);
+    ctx.fillStyle='var(--neon)';ctx.font='bold 9px Orbitron,monospace';ctx.textAlign='center';
+    ctx.fillStyle='rgba(0,247,255,.8)';ctx.fillText(tidalLocked?'TIDALLY LOCKED':'NOT LOCKED',infoX,infoY+10);
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='7.5px Space Grotesk,sans-serif';
+    ctx.fillText(tidalLocked?'Same face always toward Earth':'Moon spins freely — we\'d',infoX,infoY+28);
+    ctx.fillText(tidalLocked?'(just like our Moon does!)':'see all sides of the Moon',infoX,infoY+42);
+    ctx.fillText('Orbit period = rotation period',infoX,infoY+70);
+    ctx.fillText('is the definition of tidal lock',infoX,infoY+84);
+    const info=document.getElementById('tidal-info');
+    if(info)info.textContent=tidalLocked?'✅ Tidally locked: The 👁 always faces Earth. This is why we only ever see one side of the Moon!':'🔄 Unlocked: The Moon rotates faster than it orbits, so different faces point toward Earth.';
+    tidalT+=tidalSpeed*0.015;
+    if(!tidalLocked)tidalRotOffset+=tidalSpeed*0.04;
+    tidalAF=requestAnimationFrame(frame);
+  }
+  tidalAF=requestAnimationFrame(frame);
+}
+function toggleTidalLock(){tidalLocked=!tidalLocked;if(!tidalLocked)tidalRotOffset=tidalT;toast(tidalLocked?'🔒 Tidal locking enabled!':'🔓 Lock released — Moon now spins freely');addScore(10,mx,my);}
+function updateTidalSpeed(){tidalSpeed=parseFloat(document.getElementById('tidal-speed')?.value||1);}
+ 
+function calcDilation(){
+  const vPct=parseFloat(document.getElementById('dilation-speed')?.value||50);
+  const Tyrs=parseFloat(document.getElementById('dilation-time')?.value||10);
+  if(document.getElementById('dilation-speed-val'))document.getElementById('dilation-speed-val').textContent=vPct+'% c';
+  if(document.getElementById('dilation-time-val'))document.getElementById('dilation-time-val').textContent=Tyrs+' yrs';
+  const v=vPct/100;const gamma=1/Math.sqrt(1-v*v);
+  const travelerTime=Tyrs/gamma;
+  if(document.getElementById('dilation-traveler'))document.getElementById('dilation-traveler').textContent=travelerTime.toFixed(3)+' yrs';
+  if(document.getElementById('dilation-earth'))document.getElementById('dilation-earth').textContent=Tyrs+' yrs';
+  const diff=Tyrs-travelerTime;
+  if(document.getElementById('dilation-info'))document.getElementById('dilation-info').textContent=`Lorentz factor γ = ${gamma.toFixed(4)} · Traveler ages ${travelerTime.toFixed(2)} years while Earth ages ${Tyrs} years. The traveler returns ${diff.toFixed(2)} years younger than they would have been!${vPct>95?' At this speed, the traveler could reach the center of the Milky Way (26,000 ly) in about '+Math.round(26000/gamma)+' years of personal time.':''}`;
+  drawDilationCanvas(v,gamma,Tyrs);
+  addScore(3,mx,my);
+}
+function drawDilationCanvas(v,gamma,T){
+  const canvas=document.getElementById('dilation-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  ctx.fillStyle='#000612';ctx.fillRect(0,0,W,H);
+  const speeds=[.1,.3,.5,.7,.9,.99,.999];
+  speeds.forEach((s,i)=>{
+    const g=1/Math.sqrt(1-s*s);const x=i*(W/(speeds.length-1));
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=.5;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='7px Orbitron,monospace';ctx.textAlign='center';ctx.fillText(s*100+'%',x,H-4);
+  });
+  // Gamma curve
+  ctx.strokeStyle='rgba(0,247,255,.6)';ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=100;i++){const vs=i/100*.999;const gs=1/Math.sqrt(1-vs*vs);const x=i*(W/100);const y=H-(Math.min(gs,50)/50)*H*.9-10;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+  ctx.stroke();
+  // Current position
+  const curX=v/.999*W;const curY=H-(Math.min(gamma,50)/50)*H*.9-10;
+  ctx.fillStyle='rgba(255,215,0,.9)';ctx.beginPath();ctx.arc(curX,curY,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(0,247,255,.7)';ctx.font='8px Orbitron,monospace';ctx.textAlign='left';ctx.fillText('γ curve (time dilation factor)',10,16);
+}
+ 
+let transitAF=null,transitT=0,transitPlanetX=0,lightCurveData=[];
+function initTransit(){cancelAnimationFrame(transitAF);transitT=0;lightCurveData=[];runTransit();}
+function updateTransit(){lightCurveData=[];}
+function runTransit(){
+  const canvas=document.getElementById('transit-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=260;
+  const size=parseFloat(document.getElementById('transit-size')?.value||20);
+  const orbit=parseFloat(document.getElementById('transit-orbit')?.value||80);
+  const speed=parseFloat(document.getElementById('transit-speed')?.value||1);
+  const starX=W/2,starY=H*.38,starR=55;
+  const planetX=((transitT*.8*speed)%(W+size*2))-size;
+  const planetY=starY+Math.sin(transitT*.02*speed)*(orbit*.2);
+ 
+  const overlap=Math.abs(planetX-starX)<starR+size&&Math.abs(planetY-starY)<size*.8;
+  const overlapFrac=overlap?Math.max(0,(1-Math.sqrt((planetX-starX)**2+(planetY-starY)**2)/(starR+size)))*.8:0;
+  const brightness=1-overlapFrac*(size/starR)*(size/starR)*.7;
+  lightCurveData.push(brightness);if(lightCurveData.length>W)lightCurveData.shift();
+  ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
+ 
+  const sg=ctx.createRadialGradient(starX,starY,0,starX,starY,starR*2);
+  sg.addColorStop(0,'#fff');sg.addColorStop(.2,'#fffde0');sg.addColorStop(.5,'rgba(255,200,50,.5)');sg.addColorStop(1,'transparent');
+  ctx.fillStyle=sg;ctx.beginPath();ctx.arc(starX,starY,starR*2,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(starX,starY,starR,0,Math.PI*2);ctx.fill();
+  
+  ctx.fillStyle='#334466';ctx.beginPath();ctx.arc(planetX,planetY,size,0,Math.PI*2);ctx.fill();
+  
+  const lcY=H*.72,lcH=H*.2;
+  ctx.fillStyle='rgba(0,0,0,.4)';ctx.fillRect(0,lcY-lcH*.5,W,lcH*1.5);
+  ctx.strokeStyle='rgba(0,247,255,.3)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,lcY);ctx.lineTo(W,lcY);ctx.stroke();
+  ctx.strokeStyle='rgba(255,215,0,.9)';ctx.lineWidth=1.5;ctx.beginPath();
+  lightCurveData.forEach((b,i)=>{const x=i,y=lcY-(b-1)*lcH*5;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='8px Orbitron,monospace';ctx.textAlign='left';ctx.fillText('LIGHT CURVE',5,lcY-lcH*.4-2);
+  ctx.textAlign='right';ctx.fillText(`brightness: ${(brightness*100).toFixed(1)}%`,W-5,lcY-lcH*.4-2);
+  transitT+=1;transitAF=requestAnimationFrame(runTransit);
+}
+ 
+const spaceWords=[
+  {word:'NEBULA',hint:'A cloud of gas and dust in space'},
+  {word:'PULSAR',hint:'A rapidly rotating neutron star'},
+  {word:'QUASAR',hint:'The most luminous objects in the universe'},
+  {word:'CORONA',hint:'The Sun\'s outer atmosphere'},
+  {word:'PHOTON',hint:'A particle of light'},
+  {word:'PARSEC',hint:'A unit of cosmic distance (3.26 light-years)'},
+  {word:'FUSION',hint:'The process powering stars'},
+  {word:'BOLIDE',hint:'A very bright meteor fireball'},
+  {word:'ZENITH',hint:'The point directly above the observer'},
+  {word:'ALBEDO',hint:'How reflective a surface is'},
+  {word:'AURORA',hint:'Northern or Southern Lights'},
+  {word:'BINARY',hint:'Two stars orbiting each other'},
+  {word:'COMET',hint:'Icy body with a glowing tail (5 letters)'},
+  {word:'PLANET',hint:'Orbits a star, cleared its orbit'},
+  {word:'METEOR',hint:'A shooting star'},
+  {word:'GALAXY',hint:'A vast system of billions of stars'},
+  {word:'PHOTOSPHERE',hint:'The visible surface of the Sun (11 letters)'},
+  {word:'APOGEE',hint:'Farthest point of an orbit from Earth'},
+  {word:'SYZYGY',hint:'Alignment of 3 celestial bodies'},
+  {word:'UMBRA',hint:'The darkest part of a shadow (5 letters)'},
+];
+let wordleAnswer='', wordleGuesses=[], wordleCurrentGuess='', wordleGameOver=false, wordleStreak=0;
+const wordleRows=6;
+function newWordleGame(){
+  const w=spaceWords[Math.floor(Math.random()*spaceWords.length)];
+  wordleAnswer=w.word;
+  wordleGuesses=[];wordleCurrentGuess='';wordleGameOver=false;
+  buildWordleGrid(w.word.length);
+  buildWordleKeyboard();
+  const msg=document.getElementById('wordle-message');
+  if(msg)msg.textContent=`Hint: ${w.hint} (${w.word.length} letters)`;
+  document.onkeydown=e=>{if(!wordleGameOver)handleWordleKey(e.key);};
+}
+function buildWordleGrid(len){
+  const grid=document.getElementById('wordle-grid');if(!grid)return;
+  grid.style.gridTemplateColumns=`repeat(${len},1fr)`;
+  grid.innerHTML=Array(wordleRows*len).fill(0).map((_,i)=>`<div class="wordle-cell" id="wc-${Math.floor(i/len)}-${i%len}"></div>`).join('');
+}
+function buildWordleKeyboard(){
+  const kb=document.getElementById('wordle-keyboard');if(!kb)return;
+  const rows=[['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['ENTER','Z','X','C','V','B','N','M','⌫']];
+  kb.innerHTML=rows.map(row=>`<div class="wordle-key-row">${row.map(k=>`<div class="wordle-key" id="wk-${k}" onclick="handleWordleKey('${k==='⌫'?'Backspace':k==='ENTER'?'Enter':k}')">${k}</div>`).join('')}</div>`).join('');
+}
+function handleWordleKey(key){
+  if(wordleGameOver)return;
+  const len=wordleAnswer.length;
+  if(key==='Backspace'||key==='⌫'){if(wordleCurrentGuess.length>0){wordleCurrentGuess=wordleCurrentGuess.slice(0,-1);updateWordleDisplay();}return;}
+  if(key==='Enter'){if(wordleCurrentGuess.length===len)submitWordleGuess();return;}
+  if(/^[A-Za-z]$/.test(key)&&wordleCurrentGuess.length<len){wordleCurrentGuess+=key.toUpperCase();updateWordleDisplay();}
+}
+function updateWordleDisplay(){
+  const row=wordleGuesses.length;const len=wordleAnswer.length;
+  for(let c=0;c<len;c++){const cell=document.getElementById(`wc-${row}-${c}`);if(cell){cell.textContent=wordleCurrentGuess[c]||'';cell.className='wordle-cell'+(wordleCurrentGuess[c]?' current':'');}}
+}
+function submitWordleGuess(){
+  const guess=wordleCurrentGuess;const answer=wordleAnswer;const len=answer.length;const row=wordleGuesses.length;
+  const result=Array(len).fill('absent');const answerCount={};
+  for(let c of answer)answerCount[c]=(answerCount[c]||0)+1;
+ 
+  for(let i=0;i<len;i++){if(guess[i]===answer[i]){result[i]='correct';answerCount[guess[i]]--;}}
+  
+  for(let i=0;i<len;i++){if(result[i]!=='correct'&&answerCount[guess[i]]>0){result[i]='present';answerCount[guess[i]]--;}}
+  wordleGuesses.push({guess,result});
+ 
+  result.forEach((r,c)=>{const cell=document.getElementById(`wc-${row}-${c}`);if(cell){cell.className=`wordle-cell ${r}`;cell.textContent=guess[c];}});
+  
+  result.forEach((r,c)=>{const key=document.getElementById('wk-'+guess[c]);if(key){const cur=key.className;if(!cur.includes('correct')&&(r==='correct'||(r==='present'&&!cur.includes('present'))))key.classList.add(r);}});
+  wordleCurrentGuess='';
+  if(guess===answer){wordleGameOver=true;wordleStreak++;document.getElementById('wordle-streak').textContent=wordleStreak;document.getElementById('wordle-message').textContent=`🌟 Solved in ${wordleGuesses.length} tries! +${wordleGuesses.length<=3?50:30} XP`;addScore(wordleGuesses.length<=3?50:30,mx,my);launchConfetti();unlockAch('Word Wizard');
+  }else if(wordleGuesses.length>=wordleRows){wordleGameOver=true;wordleStreak=0;document.getElementById('wordle-streak').textContent=0;document.getElementById('wordle-message').textContent=`The word was: ${answer}. Better luck next time!`;}
+}
+ 
+let orbitShip={x:300,y:60,vx:2,vy:0,fuel:100,trail:[]},orbitAF2=null,orbitRunning=false;
+function resetOrbitGame(){
+  cancelAnimationFrame(orbitAF2);orbitRunning=false;
+  orbitShip={x:300,y:60,vx:2.2,vy:0,fuel:100,trail:[]};
+  document.getElementById('orbit-fuel').textContent=100;
+  document.getElementById('orbit-status').textContent='Suborbital';
+  drawOrbitStatic();
+}
+function drawOrbitStatic(){
+  const canvas=document.getElementById('orbit-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;const px=W/2,py=H/2;
+  ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
+  for(let i=0;i<60;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.4+.05})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+  const pg=ctx.createRadialGradient(px,py,0,px,py,50);
+  pg.addColorStop(0,'#4466ff');pg.addColorStop(.6,'#2244cc');pg.addColorStop(1,'rgba(0,0,100,.3)');
+  ctx.fillStyle=pg;ctx.beginPath();ctx.arc(px,py,40,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='10px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🌍',px,py);
+  [80,130,180].forEach(r=>{ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=.5;ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);ctx.stroke();});
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='8px Orbitron,monospace';ctx.textAlign='center';ctx.fillText('LEO',px+82,py);ctx.fillText('MEO',px+133,py);
+  ctx.font='16px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🚀',orbitShip.x,orbitShip.y);
+}
+function applyOrbitalThrust(dir){
+  if(orbitShip.fuel<=0){toast('Out of fuel!');return;}
+  const px=300,py=190;
+  const dx=orbitShip.x-px,dy=orbitShip.y-py;
+  const ang=Math.atan2(dy,dx);
+  const thrust=0.4;
+  if(dir==='prograde'){orbitShip.vx+=Math.cos(ang+Math.PI/2)*thrust;orbitShip.vy+=Math.sin(ang+Math.PI/2)*thrust;}
+  else if(dir==='retrograde'){orbitShip.vx-=Math.cos(ang+Math.PI/2)*thrust;orbitShip.vy-=Math.sin(ang+Math.PI/2)*thrust;}
+  else if(dir==='normal'){orbitShip.vx+=Math.cos(ang)*thrust*.5;orbitShip.vy+=Math.sin(ang)*thrust*.5;}
+  orbitShip.fuel=Math.max(0,orbitShip.fuel-5);
+  document.getElementById('orbit-fuel').textContent=orbitShip.fuel;
+  if(!orbitRunning)runOrbitGame();
+  addScore(5,mx,my);
+}
+function runOrbitGame(){
+  orbitRunning=true;
+  const canvas=document.getElementById('orbit-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;const px=300,py=190;const G=30000,R=40;
+  function step(){
+    const dx=px-orbitShip.x,dy=py-orbitShip.y,dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<R+5){orbitRunning=false;drawOrbitStatic();toast('💥 Crashed! Reset and try again');document.getElementById('orbit-status').textContent='CRASHED';return;}
+    if(dist>250){orbitRunning=false;drawOrbitStatic();toast('🌌 Lost in space! Reset and try again');document.getElementById('orbit-status').textContent='LOST';return;}
+    const force=G/(dist*dist);orbitShip.vx+=force*(dx/dist)*.016;orbitShip.vy+=force*(dy/dist)*.016;
+    orbitShip.x+=orbitShip.vx;orbitShip.y+=orbitShip.vy;
+    orbitShip.trail.push({x:orbitShip.x,y:orbitShip.y});if(orbitShip.trail.length>120)orbitShip.trail.shift();
+   
+    const speed=Math.sqrt(orbitShip.vx**2+orbitShip.vy**2);const circSpeed=Math.sqrt(G/dist)/10;
+    const ratio=speed/circSpeed;
+    let status=ratio<0.7?'Suborbital':ratio<0.9?'Elliptical':ratio<1.1?'🌟 STABLE ORBIT!':ratio<1.4?'High Elliptical':'Escape';
+    document.getElementById('orbit-status').textContent=status;
+    if(status.includes('STABLE')){addScore(3,mx,my);}
+    ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
+    for(let i=0;i<60;i++){ctx.fillStyle=`rgba(255,255,255,.04)`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1);}
+   
+    ctx.strokeStyle='rgba(0,247,255,.4)';ctx.lineWidth=1;ctx.beginPath();
+    orbitShip.trail.forEach((t,i)=>{ctx.globalAlpha=i/orbitShip.trail.length;i===0?ctx.moveTo(t.x,t.y):ctx.lineTo(t.x,t.y);});
+    ctx.stroke();ctx.globalAlpha=1;
+   
+    const pg=ctx.createRadialGradient(px,py,0,px,py,45);pg.addColorStop(0,'#4466ff');pg.addColorStop(.6,'#2244cc');pg.addColorStop(1,'transparent');
+    ctx.fillStyle=pg;ctx.beginPath();ctx.arc(px,py,40,0,Math.PI*2);ctx.fill();
+    [80,130,180].forEach(r=>{ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=.5;ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);ctx.stroke();});
+    ctx.font='16px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🌍',px,py);ctx.fillText('🚀',orbitShip.x,orbitShip.y);
+    orbitAF2=requestAnimationFrame(step);
+  }
+  orbitAF2=requestAnimationFrame(step);
+}
+ 
+let idleResources={iron:0,titanium:0,ice:0,energy:0};let idleRates={iron:.5,titanium:.1,ice:.2,energy:.05};let idleUpgrades={miner:{level:0,cost:50,name:'Mining Drone',desc:'Auto-mine iron',effect:'iron'},ice:{level:0,cost:80,name:'Ice Harvester',desc:'Collect water ice',effect:'ice'},solar:{level:0,cost:120,name:'Solar Array',desc:'Generate energy',effect:'energy'},refinery:{level:0,cost:200,name:'Refinery',desc:'Titanium extraction',effect:'titanium'},warp:{level:0,cost:500,name:'Warp Gate',desc:'Unlock distant asteroids',effect:'all'}};let idleInterval=null;
+function initIdleGame(){
+  buildIdleUI();
+  if(idleInterval)clearInterval(idleInterval);
+  idleInterval=setInterval(()=>{
+    idleResources.iron+=idleRates.iron;idleResources.titanium+=idleRates.titanium;
+    idleResources.ice+=idleRates.ice;idleResources.energy+=idleRates.energy;
+    updateIdleUI();
+  },1000);
+}
+function buildIdleUI(){
+  const res=document.getElementById('idle-resources');const upg=document.getElementById('idle-upgrades');if(!res||!upg)return;
+  res.innerHTML=[['iron','⛏️ Iron',idleRates.iron.toFixed(2)],['titanium','🔩 Titanium',idleRates.titanium.toFixed(2)],['ice','🧊 Ice',idleRates.ice.toFixed(2)],['energy','⚡ Energy',idleRates.energy.toFixed(2)]].map(([k,n,r])=>`
+    <div class="idle-res"><div class="idle-res-name">${n}</div><div class="idle-res-val" id="idle-${k}">0</div><div class="idle-res-rate">+${r}/s</div></div>
+  `).join('');
+  upg.innerHTML=Object.entries(idleUpgrades).map(([k,u])=>`
+    <div class="idle-upgrade ${u.level>=5?'locked':''}" id="idle-upg-${k}" onclick="buyIdleUpgrade('${k}')">
+      <div class="idle-upgrade-name">${u.name} (Lv ${u.level})</div>
+      <div class="idle-upgrade-cost">Cost: ${Math.round(u.cost*Math.pow(1.5,u.level))} iron</div>
+      <div class="idle-upgrade-desc">${u.desc}</div>
+    </div>
+  `).join('');
+}
+function updateIdleUI(){
+  ['iron','titanium','ice','energy'].forEach(k=>{const el=document.getElementById('idle-'+k);if(el)el.textContent=idleResources[k].toFixed(1);});
+}
+function idleManualMine(){idleResources.iron+=1+idleUpgrades.miner.level;updateIdleUI();addScore(1,mx,my);}
+function buyIdleUpgrade(key){
+  const u=idleUpgrades[key];const cost=Math.round(u.cost*Math.pow(1.5,u.level));
+  if(idleResources.iron<cost){toast('Not enough iron!');return;}
+  idleResources.iron-=cost;u.level++;
+  if(u.effect==='all'){Object.keys(idleRates).forEach(k=>idleRates[k]*=1.5);}
+  else idleRates[u.effect]*=(1.5+u.level*.1);
+  buildIdleUI();updateIdleUI();addScore(20,mx,my);toast(`${u.name} upgraded to Level ${u.level}! +20`);
+  if(u.level>=5)unlockAch('Mining Baron');
+}
+function resetIdleGame(){clearInterval(idleInterval);idleResources={iron:0,titanium:0,ice:0,energy:0};idleRates={iron:.5,titanium:.1,ice:.2,energy:.05};Object.keys(idleUpgrades).forEach(k=>idleUpgrades[k].level=0);initIdleGame();}
+ 
+const alienAvatars={
+  'Red Dwarf':['🦑','👾','🐙'],  'Sun-like':['👽','🤖','🧿'],
+  'Hot Blue':['💫','🌟','✨'], 'Binary Stars':['🔮','⚡','🌀'],
+  'Neutron Star':['🕳️','☢️','⚫']
+};
+const alienNames=['Xel\'thar','Vryn-9','Korath','Ziluun','Mev\'sol','Drath','Kethara','Nul-Vex','Syros','Qar\'an'];
+function buildAlienResult(){
+ 
+}
+async function generateAlien(){
+  const star=document.getElementById('alien-star')?.value||'Sun-like';
+  const atmo=document.getElementById('alien-atmo')?.value||'Nitrogen/Oxygen';
+  const surface=document.getElementById('alien-surface')?.value||'Liquid Oceans';
+  const gravity=document.getElementById('alien-gravity')?.value||'Earth-like';
+  const result=document.getElementById('alien-result');if(!result)return;
+  result.innerHTML='<div style="text-align:center;padding:1rem;color:var(--dim);">🧬 Evolving alien life…</div>';
+  addScore(30,mx,my);unlockAch('Xenobiologist');
+  const avatarList=alienAvatars[star.split('(')[0].trim()]||['👽'];
+  const avatar=avatarList[Math.floor(Math.random()*avatarList.length)];
+  const name=alienNames[Math.floor(Math.random()*alienNames.length)];
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:350,
+        system:'You are a xenobiologist. Given environmental conditions, invent a fascinating alien species. Describe: their appearance (2 sentences), their unique evolutionary adaptations (2 sentences), their society/communication (1 sentence). Be creative and scientifically grounded. No intro phrases.',
+        messages:[{role:'user',content:`Planet conditions: Star=${star}, Atmosphere=${atmo}, Surface=${surface}, Gravity=${gravity}. Species name: ${name}. Describe the alien species.`}]
+      })
+    });
+    const data=await res.json();
+    const desc=data.content?.map(c=>c.text||'').join('')||'A mysterious lifeform adapted to its harsh environment.';
+    result.innerHTML=`<span class="alien-avatar">${avatar}</span><div class="alien-name">The ${name}</div><div style="font-size:.8rem;line-height:1.75;color:var(--text);margin-top:.5rem;">${desc}</div>`;
+  } catch(e) {
+    result.innerHTML=`<span class="alien-avatar">${avatar}</span><div class="alien-name">The ${name}</div><div style="font-size:.8rem;line-height:1.75;color:var(--text);margin-top:.5rem;">A remarkable species adapted to ${surface.toLowerCase()} environments under a ${star.toLowerCase()} star. Their biology is shaped by ${gravity.toLowerCase()} gravity and a ${atmo.toLowerCase()} atmosphere, resulting in unique sensory organs and communication methods far beyond human comprehension.</div>`;
+  }
+}
+ 
+function generateNebula(){
+  const canvas=document.getElementById('nebula-gen-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=340;
+  const c1=document.getElementById('nebula-color1')?.value||'#00f7ff';
+  const c2=document.getElementById('nebula-color2')?.value||'#a855f7';
+  const density=parseInt(document.getElementById('nebula-density')?.value||35);
+  ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
+  
+  const numClouds=8+Math.floor(Math.random()*8);
+  for(let i=0;i<numClouds;i++){
+    const x=Math.random()*W,y=Math.random()*H;const r=60+Math.random()*120;
+    const useC1=Math.random()>.5;
+    const col=useC1?c1:c2;
+    const alpha=.04+Math.random()*.08;
+    const grd=ctx.createRadialGradient(x,y,0,x,y,r);
+    grd.addColorStop(0,col+Math.floor(alpha*255).toString(16).padStart(2,'0'));
+    grd.addColorStop(.5,col+Math.floor(alpha*.5*255).toString(16).padStart(2,'0'));
+    grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.ellipse(x,y,r,r*(0.5+Math.random()),Math.random()*Math.PI,0,Math.PI*2);ctx.fill();
+  }
+ 
+  for(let i=0;i<15;i++){
+    const x1=Math.random()*W,y1=Math.random()*H;const x2=x1+(Math.random()-.5)*200,y2=y1+(Math.random()-.5)*150;
+    const col=Math.random()>.5?c1:c2;
+    const grad=ctx.createLinearGradient(x1,y1,x2,y2);grad.addColorStop(0,'transparent');
+    grad.addColorStop(.5,col+'33');grad.addColorStop(1,'transparent');
+    ctx.strokeStyle=grad;ctx.lineWidth=2+Math.random()*4;ctx.beginPath();
+    ctx.bezierCurveTo(x1,y1,x1+(Math.random()-.5)*100,y1+(Math.random()-.5)*100,x2,y2);ctx.stroke();
+  }
+ 
+  for(let i=0;i<density*5;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.9+.1})`;ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H,Math.random()*1.5+.3,0,Math.PI*2);ctx.fill();}
+ 
+  for(let i=0;i<5;i++){const x=Math.random()*W,y=Math.random()*H;const sg=ctx.createRadialGradient(x,y,0,x,y,8);sg.addColorStop(0,'rgba(255,255,255,.9)');sg.addColorStop(1,'transparent');ctx.fillStyle=sg;ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fill();}
+  
+  canvas.onclick=e=>{
+    const rect=canvas.getBoundingClientRect();const cx=(e.clientX-rect.left)*(W/rect.width),cy=(e.clientY-rect.top)*(H/rect.height);
+    const col=Math.random()>.5?c1:c2;const r=40+Math.random()*60;
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+    grd.addColorStop(0,col+'44');grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+    for(let i=0;i<20;i++){ctx.fillStyle='rgba(255,255,255,'+Math.random()*.8+')';ctx.beginPath();ctx.arc(cx+(Math.random()-.5)*r*2,cy+(Math.random()-.5)*r*2,.8+Math.random()*1.2,0,Math.PI*2);ctx.fill();}
+    addScore(3,e.clientX,e.clientY);
+  };
+  addScore(10,mx,my);
+}
+function downloadNebula(){
+  const canvas=document.getElementById('nebula-gen-canvas');
+  const a=document.createElement('a');a.download='my-nebula.png';a.href=canvas.toDataURL();a.click();
+  addScore(15,mx,my);toast('Nebula downloaded! +15');
+}
+ 
+async function loadSpaceNews(){
+  const feed=document.getElementById('news-feed');if(!feed)return;
+  feed.innerHTML='<div style="text-align:center;padding:1rem;color:var(--dim);">📡 Fetching transmissions from space agencies…</div>';
+  
+  const news=[
+    {source:'NASA',title:'James Webb Space Telescope Reveals Most Distant Galaxy Ever Observed',date:'2025',url:'https://www.nasa.gov'},
+    {source:'ESA',title:'Gaia Mission Completes Most Detailed 3D Map of the Milky Way',date:'2024',url:'https://www.esa.int'},
+    {source:'NASA/JPL',title:'Perseverance Rover Caches 23 Rock Samples for Future Mars Sample Return Mission',date:'2025',url:'https://www.nasa.gov'},
+    {source:'SpaceX',title:'Starship Completes First Full Orbital Test Flight with Successful Booster Catch',date:'2024',url:'https://www.spacex.com'},
+    {source:'NASA',title:'Artemis III Mission to Land First Woman and First Person of Color on the Moon',date:'2026 (planned)',url:'https://www.nasa.gov'},
+    {source:'JAXA',title:'Hayabusa2 Sample Analysis Reveals Complex Organic Molecules in Asteroid Ryugu',date:'2024',url:'https://www.jaxa.jp'},
+    {source:'Event Horizon Telescope',title:'New Black Hole Image Released Showing Sgr A* at Unprecedented Resolution',date:'2024',url:'https://eventhorizontelescope.org'},
+    {source:'ESA/NASA',title:'Solar Orbiter Captures Closest-Ever Images of the Sun\'s South Pole',date:'2025',url:'https://www.esa.int'},
+    {source:'NASA',title:'TESS Discovers New Earth-Sized Planet in Habitable Zone of Nearby Star',date:'2025',url:'https://www.nasa.gov'},
+    {source:'Roscosmos/China',title:'Chang\'e-6 Returns Far Side Moon Samples — First in History',date:'2024',url:'https://www.cnsa.gov.cn'},
+    {source:'NASA',title:'Voyager 1 Signal Restored After 5 Months of Garbled Data from 24 Billion km Away',date:'2024',url:'https://www.nasa.gov'},
+    {source:'LHC/CERN',title:'New Subatomic Particle May Help Explain Dark Matter Composition',date:'2025',url:'https://home.cern'},
+  ];
+  setTimeout(()=>{
+    feed.innerHTML=news.map(n=>`
+      <div class="news-item" onclick="addScore(5,mx,my);window.open('${n.url}','_blank')">
+        <div class="news-source">${n.source}</div>
+        <div class="news-title">${n.title}</div>
+        <div class="news-date">${n.date}</div>
+      </div>
+    `).join('');
+    addScore(10,mx,my);toast('Space news loaded! +10');
+  },800);
+}
+ 
+const postcardData={
+  'Kepler-186f':{bg:'#0a1a2f',sky:'#1a3a5f',planet:'#4a7a3a',planetColor:'#66aa44',tagline:'VISIT THE EDGE OF THE HABITABLE ZONE',feature:'Earth-sized • 500 Light-Years Away'},
+  'TRAPPIST-1e':{bg:'#1a0a2f',sky:'#3a1a5f',planet:'#3a5a7a',planetColor:'#445566',tagline:'SEVEN WORLDS. ONE SYSTEM.',feature:'Ultra-cool Star • Tidally Locked'},
+  'Proxima b':{bg:'#2f0a0a',sky:'#5f1a1a',planet:'#4a7a3a',planetColor:'#558844',tagline:'OUR NEAREST NEIGHBOR',feature:'4.24 Light-Years • Habitable Zone'},
+  'HD 40307g':{bg:'#0a2f1a',sky:'#1a5f3a',planet:'#4a6a8a',planetColor:'#5577aa',tagline:'A SUPER-EARTH JUST 42 LIGHT-YEARS AWAY',feature:'7× Earth\'s Mass • Possible Seasons'},
+  'Kepler-442b':{bg:'#1a1a0a',sky:'#3a3a1a',planet:'#6a8a3a',planetColor:'#88aa44',tagline:'85% EARTH SIMILARITY INDEX',feature:'K-type Star • Goldilocks Zone'},
+  'TOI 700 d':{bg:'#0a0a2f',sky:'#1a1a5f',planet:'#3a6a4a',planetColor:'#4a8855',tagline:'DISCOVERED BY TESS IN 2020',feature:'Earth-Sized • 101 Light-Years'},
+  'HD 189733b':{bg:'#0a1030',sky:'#1a2060',planet:'#2244cc',planetColor:'#3366ee',tagline:'WHERE IT RAINS MOLTEN GLASS',feature:'Wind Speed: 8,700 km/h • Blue Planet'},
+  '51 Pegasi b':{bg:'#2a1000',sky:'#5a2000',planet:'#cc6600',planetColor:'#ee8800',tagline:'THE FIRST EXOPLANET EVER FOUND',feature:'Hot Jupiter • 4-Day Year'},
+};
+function generatePostcard(){
+  const canvas=document.getElementById('postcard-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=600,H=380;
+  const planet=document.getElementById('postcard-planet')?.value||'Kepler-186f';
+  const d=postcardData[planet]||postcardData['Kepler-186f'];
+  ctx.fillStyle=d.bg;ctx.fillRect(0,0,W,H);
+ 
+  const skyGrad=ctx.createLinearGradient(0,0,0,H*.7);skyGrad.addColorStop(0,d.sky);skyGrad.addColorStop(1,d.bg+'88');
+  ctx.fillStyle=skyGrad;ctx.fillRect(0,0,W,H*.7);
+ 
+  for(let i=0;i<120;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.7+.2})`;ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H*.6,Math.random()*1.5+.3,0,Math.PI*2);ctx.fill();}
+  
+  const hsg=ctx.createRadialGradient(W*.85,H*.12,0,W*.85,H*.12,80);hsg.addColorStop(0,'rgba(255,220,150,.9)');hsg.addColorStop(.3,'rgba(255,180,80,.4)');hsg.addColorStop(1,'transparent');
+  ctx.fillStyle=hsg;ctx.beginPath();ctx.arc(W*.85,H*.12,80,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,240,200,.95)';ctx.beginPath();ctx.arc(W*.85,H*.12,12,0,Math.PI*2);ctx.fill();
+  
+  const pg=ctx.createRadialGradient(W*.35,H*.45,0,W*.35,H*.45,90);
+  pg.addColorStop(0,'rgba(255,255,255,.1)');pg.addColorStop(.3,d.planetColor);pg.addColorStop(1,d.planet);
+  ctx.fillStyle=pg;ctx.beginPath();ctx.arc(W*.35,H*.45,88,0,Math.PI*2);ctx.fill();
+ 
+  const atg=ctx.createRadialGradient(W*.35,H*.45,80,W*.35,H*.45,110);atg.addColorStop(0,'transparent');atg.addColorStop(.6,d.planetColor+'33');atg.addColorStop(1,'transparent');
+  ctx.fillStyle=atg;ctx.beginPath();ctx.arc(W*.35,H*.45,110,0,Math.PI*2);ctx.fill();
+ 
+  const groundGrad=ctx.createLinearGradient(0,H*.68,0,H);groundGrad.addColorStop(0,d.planet+'cc');groundGrad.addColorStop(1,d.bg);
+  ctx.fillStyle=groundGrad;ctx.fillRect(0,H*.68,W,H*.32);
+ 
+  ctx.strokeStyle='rgba(255,215,0,.6)';ctx.lineWidth=4;ctx.strokeRect(8,8,W-16,H-16);
+  ctx.strokeStyle='rgba(255,215,0,.2)';ctx.lineWidth=1;ctx.strokeRect(14,14,W-28,H-28);
+  
+  ctx.fillStyle='rgba(255,215,0,.9)';ctx.font='bold 11px Orbitron,monospace';ctx.textAlign='center';
+  ctx.fillText('EXOPLANET TRAVEL BUREAU — VISIT THE UNIVERSE',W/2,35);
+  ctx.fillStyle='rgba(255,255,255,.95)';ctx.font='bold 26px Orbitron,monospace';ctx.fillText(planet.toUpperCase(),W/2,H-70);
+  ctx.font='10px Orbitron,monospace';ctx.fillStyle='rgba(255,215,0,.8)';
+  ctx.fillText(d.tagline,W/2,H-48);
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='9px Space Grotesk,sans-serif';ctx.fillText(d.feature,W/2,H-28);
+  addScore(8,mx,my);
+}
+function downloadPostcard(){
+  const canvas=document.getElementById('postcard-canvas');
+  const a=document.createElement('a');a.download='exoplanet-postcard.png';a.href=canvas.toDataURL();a.click();
+  addScore(20,mx,my);toast('Postcard downloaded! +20');unlockAch('Space Tourist');
+}
+
+async function generateHoroscope(){
+  const dateVal=document.getElementById('horoscope-date')?.value;
+  if(!dateVal){toast('Pick a date first!');return;}
+  const result=document.getElementById('horoscope-result');
+  result.style.display='block';result.innerHTML='🔮 Consulting the cosmos…';
+  addScore(20,mx,my);
+  const date=new Date(dateVal);const month=date.toLocaleString('default',{month:'long'});const day=date.getDate();
+  const year=date.getFullYear();
+
+  const lunarPhase=getLunarPhase(date);const{name:moonName}=phaseToIcon(lunarPhase);
+  const signs=['Aquarius','Pisces','Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn'];
+  const sign=signs[Math.floor(((date.getMonth()+date.getDate()/31)*12/12+0)%12)];
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:300,
+        system:'You are a witty cosmic fortune teller who blends real space science with playful personality readings. Reference actual astronomical facts. Keep it fun, specific, 3-4 sentences. Include one real space fact relevant to the date.',
+        messages:[{role:'user',content:`Give a cosmic horoscope/personality reading for someone born on ${month} ${day}, ${year}. The Moon was in the ${moonName} phase that day. Their star sign region is ${sign}. Make it creative and space-science-themed.`}]
+      })
+    });
+    const data=await res.json();
+    result.innerHTML=data.content?.map(c=>c.text||'').join('')||'The cosmos speaks in starlight — your destiny is written in the fusion reactions of ancient suns.';
+  } catch(e) {
+    result.innerHTML=`Born under the ${moonName}, your soul carries the wavelength of starlight from ${Math.floor(Math.random()*500+50)} light-years away. The cosmic background radiation that reached Earth on your birthday has been traveling since 380,000 years after the Big Bang. Your ${sign} energy resonates with the orbital mechanics of distant worlds — patient, precise, and pulled by forces greater than gravity alone.`;
+  }
+}
+ 
+
+window.addEventListener('load',()=>{
+ 
+  Object.assign(typeof achEmoji!=='undefined'?achEmoji:{},{
+    'Word Wizard':'📝','Mining Baron':'⛏️','Xenobiologist':'👽','Space Tourist':'🎴'
+  });
+});
+
 </script>
 </body>
 </html>
